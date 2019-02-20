@@ -17,6 +17,7 @@
  */
 package org.wso2.carbon.esb.connector.auth;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.MessageContext;
@@ -110,10 +111,15 @@ public class AmazonLambdaConnector extends AbstractConnector {
         FORMAT_FOR_DATE_ONLY.setTimeZone(timeZone);
         final String dateOnly = FORMAT_FOR_DATE_ONLY.format(date);
 
+
         //final Map<String, String> parameterNamesMap = getParameterNamesMap();
         final Map<String, String> queryParametersValueMap = getParametersValueMap.getQueryValueHashMap();
         final Map<String, String> headerParametersValueMap = getParametersValueMap.getHeadersValueHashMap();
         final Map<String, String> payloadParametersValueMap = getParametersValueMap.getPayloadsValueHashMap();
+
+        log.info("============================== DEBUG MESSAGE CONTEXT ==============================");
+        log.info("444444444444444444444444444444444444444444444444");
+        log.info("===================================================================");
 
         try {
 
@@ -133,18 +139,22 @@ public class AmazonLambdaConnector extends AbstractConnector {
 
             //APPENDING CANONICAL QUERY STRING
 
+
+//            /* ================================================================================================== */
+//
             final StringBuilder canonicalQueryString = new StringBuilder();
-//
-//            final Map<String, String> queryParametersMap = GetParameterNamesMap.query();
-//            for (Map.Entry<String, String> entry : queryParametersMap.entrySet()) {
-//
-//                String tempParam = queryParametersValueMap.get(entry.getKey());
-//
-//                if (!tempParam.isEmpty()) {
-//                    queryParamsMap.put(entry.getValue(),
-//                            tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
-//                }
-//            }
+            final Map<String, String> queryParametersMap = GetParameterNamesMap.query();
+
+            for (Map.Entry<String, String> entry : queryParametersMap.entrySet()) {
+
+                String key = entry.getKey();
+                String tempParam = queryParametersValueMap.get(key);
+                if (StringUtils.isNotEmpty((tempParam))) {
+                    queryParamsMap.put(queryParametersMap.get(key), tempParam);
+                }
+            }
+//            /* ================================================================================================== */
+
 
             System.out.println("hellow world outside loop");
 

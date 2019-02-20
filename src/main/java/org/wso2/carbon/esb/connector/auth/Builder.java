@@ -18,14 +18,17 @@
 
 package org.wso2.carbon.esb.connector.auth;
 
-//import org.apache.commons.logging.Log;
-//import org.apache.commons.logging.LogFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Builder {
 
-    //private static final Log LOG = LogFactory.getLog(Builder.class);
+    private static final Log LOG = LogFactory.getLog(Builder.class);
 
     private final MessageContext messageContext;
     private final String functionCode;
@@ -47,218 +50,144 @@ public class Builder {
 
     }
 
+//    private boolean isFunctionCodeNotEmpty(Object code) {
+//
+//        return code != null && !((String) code).trim().isEmpty();
+//    }
+
     private String functionCode() {
+
+        Map<String, Object> codes = new HashMap<>();
+
+        codes.put("S3Bucket", messageContext.getProperty(AmazonLambdaConstants.S3_BUCKET));
+        codes.put("S3Key", messageContext.getProperty(AmazonLambdaConstants.S3_KEY));
+        codes.put("S3ObjectVersion", messageContext.getProperty(AmazonLambdaConstants.S3_OBJECT_VERSION));
 
         StringBuilder codeBuilder = new StringBuilder();
 
-        if (messageContext.getProperty(AmazonLambdaConstants.S3_BUCKET) != null) {
-            codeBuilder.append('"')
-                    .append("S3Bucket")
-                    .append('"')
-
-                    .append(':')
-
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.S3_BUCKET).toString())
-                    .append('"')
-                    .append(',');
+        Object zipFile = messageContext.getProperty(AmazonLambdaConstants.S3_ZIP_FILE);
+        if (zipFile != null && ((String) zipFile).trim().isEmpty()) {
+            codeBuilder.append(String.format("%s:%s", "ZipFile", zipFile));
+            codeBuilder.append(",");
         }
 
-        if (messageContext.getProperty(AmazonLambdaConstants.S3_KEY) != null) {
-            codeBuilder.append('"')
-                    .append("S3Key")
-                    .append('"')
-
-                    .append(':')
-
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.S3_KEY).toString())
-                    .append('"')
-                    .append(',');
+        for (Map.Entry<String, Object> entry : codes.entrySet()) {
+            if (entry.getValue() == null || ((String) entry.getValue()).trim().isEmpty()) {
+                continue;
+            }
+            codeBuilder.append(String.format("\"%s\":\"%s\"", entry.getKey(), entry.getValue()));
+            codeBuilder.append(",");
+        }
+        if (codeBuilder.length() == 0) {
+            return "";
         }
 
-        if (messageContext.getProperty(AmazonLambdaConstants.S3_OBJECT_VERSION) != null) {
-            codeBuilder.append('"')
-                    .append("S3ObjectVersion")
-                    .append('"')
+        codeBuilder.setLength(codeBuilder.length() - 1);
 
-                    .append(':')
-
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.S3_OBJECT_VERSION).toString())
-                    .append('"')
-                    .append(',');
-        }
-        if (messageContext.getProperty(AmazonLambdaConstants.S3_ZIP_FILE) != null) {
-            codeBuilder.append('"')
-                    .append("ZipFile")
-                    .append('"')
-
-                    .append(':')
-
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.S3_ZIP_FILE))
-                    .append('"')
-                    .append(',');
-        }
-        String builtCode = "";
-        if (codeBuilder.length() > 0) {
-            builtCode = "{" + codeBuilder.substring(0, codeBuilder.length() - 1) + "}";
-        }
-        return builtCode;
+        return codeBuilder.append(String.format("{%s}", codeBuilder.toString())).toString();
     }
 
     private String deadLetterConfig() {
 
-        StringBuilder deadLetterConfigBuilder = new StringBuilder();
-        if (messageContext.getProperty(AmazonLambdaConstants.TARGET_ARN) != null) {
-            deadLetterConfigBuilder.append('"')
-                    .append("TargetArn")
-                    .append('"')
+        Object targetArnObj = messageContext.getProperty(AmazonLambdaConstants.TARGET_ARN);
 
-                    .append(':')
-
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.TARGET_ARN).toString())
-                    .append('"')
-                    .append(',');
-
+        if (targetArnObj == null) {
+            return "";
         }
-        String builtDeadLetterConfig = "";
-        if (deadLetterConfigBuilder.length() > 0) {
-            builtDeadLetterConfig = "{" + deadLetterConfigBuilder.substring(0, deadLetterConfigBuilder.length() - 1) + "}";
+
+        String targetArnStr = (String) targetArnObj;
+
+        if (targetArnStr.trim().isEmpty()) {
+            return "";
         }
-        return builtDeadLetterConfig;
+
+        return String.format("{\"TargetArn\":\"%s\"}", targetArnStr);
     }
 
     private String environment() {//check for setting variables, use of " " is not needed
-        StringBuilder environmentBuilder = new StringBuilder();
+        Object envVarObj = messageContext.getProperty(AmazonLambdaConstants.ENVIRONMENT_VARIABLES);
 
-        if (messageContext.getProperty(AmazonLambdaConstants.ENVIRONMENT_VARIABLES) != null) {
-            environmentBuilder.append('"')
-                    .append("Variables")
-                    .append('"')
-
-                    .append(':')
-
-                    //.append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.ENVIRONMENT_VARIABLES).toString())
-                    //.append('"')
-                    .append(',');
-
+        if (envVarObj == null) {
+            return "";
         }
-        String builtEnvironment = "";
-        if (environmentBuilder.length() > 0) {
-            builtEnvironment = "{" + environmentBuilder.substring(0, environmentBuilder.length() - 1) + "}";
+
+        String environmentVariableStr = (String) envVarObj;
+
+        if (environmentVariableStr.trim().isEmpty()) {
+            return "";
         }
-        return builtEnvironment;
+
+        return String.format("{\"Variables\":%s}", environmentVariableStr);
     }
 
     private String tracingConfig() {
 
-        StringBuilder tracingConfigBuilder = new StringBuilder();
-        if (messageContext.getProperty(AmazonLambdaConstants.MODE) != null) {
-            tracingConfigBuilder.append('"')
-                    .append("Mode")
-                    .append('"')
+        Object modeObj = messageContext.getProperty(AmazonLambdaConstants.MODE);
 
-                    .append(':')
-
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.MODE).toString())
-                    .append('"')
-                    .append(',');
-
+        if (modeObj == null) {
+            return "";
         }
-        String builtTracingConfig = "";
-        if (tracingConfigBuilder.length() > 0) {
-            builtTracingConfig = "{" + tracingConfigBuilder.substring(0, tracingConfigBuilder.length() - 1) + "}";
+
+        String modeStr = (String) modeObj;
+
+        if (modeStr.trim().isEmpty()) {
+            return "";
         }
-        return builtTracingConfig;
+
+        return String.format("{\"Mode\":\"%s\"}", modeStr);
     }
 
     private String vpcConfig() {
 
         StringBuilder vpcConfigBuilder = new StringBuilder();
-        if (messageContext.getProperty(AmazonLambdaConstants.SECURITY_GROUP_IDS) != null) {
-            vpcConfigBuilder.append('"')
-                    .append("SecurityGroupIds")
-                    .append('"')
 
-                    .append(':')
+        Object securityGroupIdsObj = messageContext.getProperty(AmazonLambdaConstants.SECURITY_GROUP_IDS);
+        Object subnetIdsObj = messageContext.getProperty(AmazonLambdaConstants.SUBNET_IDS);
 
-                    .append("[ ")
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.SECURITY_GROUP_IDS).toString())
-                    .append('"')
-                    .append(" ]")
-                    .append(',');
+        String securityGroupIdsStr = "";
+        String subnetIdsStr = "";
 
+        if (securityGroupIdsObj != null && !((String) securityGroupIdsObj).trim().isEmpty()) {
+            securityGroupIdsStr = ((String) securityGroupIdsObj).trim();
+        }
+        if (subnetIdsObj != null && !((String) subnetIdsObj).trim().isEmpty()) {
+            subnetIdsStr = ((String) subnetIdsObj).trim();
         }
 
-        if (messageContext.getProperty(AmazonLambdaConstants.SUBNET_IDS) != null) {
-            vpcConfigBuilder.append('"')
-                    .append("SubnetIds")
-                    .append('"')
+        if (securityGroupIdsStr != "" || subnetIdsStr != "") {
+            vpcConfigBuilder.append('{');
 
-                    .append(':')
+            if (securityGroupIdsStr != "") {
+                vpcConfigBuilder = vpcConfigBuilder.append(String.format("{\"SecurityGroupIds\":[\"%s\"]}", securityGroupIdsStr))
+                        .append(',');
+            }
 
-                    .append("[ ")
-                    .append('"')
-                    .append(messageContext.getProperty(AmazonLambdaConstants.SUBNET_IDS).toString())
-                    .append('"')
-                    .append(" ]")
-                    .append(',');
+            if (subnetIdsStr != "") {
+                vpcConfigBuilder = vpcConfigBuilder.append(String.format("{\"SubnetIds\":[\"%s\"]}", subnetIdsStr));
 
+            }
+            vpcConfigBuilder.append('}');
+
+            return vpcConfigBuilder.toString();
         }
-        String builtVpcConfig = "";
-        if (vpcConfigBuilder.length() > 0) {
-            builtVpcConfig = "{" + vpcConfigBuilder.substring(0, vpcConfigBuilder.length() - 1) + "}";
-        }
-        return builtVpcConfig;
+        return "";
     }
-
-//        private String routingConfig(){
-//            StringBuilder routingConfigBuilder = new StringBuilder();
-//            LOG.info("============================== DEBUG ==============================");
-//            LOG.info(messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS));
-//            LOG.info("===================================================================");
-//            if(messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS) != null) {
-//                (String) messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
-//                routingConfigBuilder.append('"')
-//                        .append("AdditionalVersionWeights")
-//                        .append('"')
-//
-//                        .append(':')
-//
-//                        //.append('"')
-//                        .append(messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS).toString())//string and number are there might need separete implementation
-//                        //.append('"')
-//                        .append(',');
-//
-//            }
-//            String builtRoutingConfig="";
-//            if(routingConfigBuilder.length()>0){
-//                builtRoutingConfig= "{" + routingConfigBuilder.substring(0, routingConfigBuilder.length()-1) + "}";
-//            }
-//            return builtRoutingConfig;
-//        }
 
     public String routingConfig() {
 
-        Object o = messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
+        Object additionalVersionWeightsObj = messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
 
-        if (o == null) {
+        if (additionalVersionWeightsObj == null) {
             return "";
         }
 
-        String versionWeight = (String) o;
+        String additonalVersionWeightStr = (String) additionalVersionWeightsObj;
 
-        if (versionWeight.trim().isEmpty()) {
+        if (additonalVersionWeightStr.trim().isEmpty()) {
             return "";
         }
 
-        return String.format("{\"AdditionalVersionWeights\": %s}", versionWeight);
+        return String.format("{\"AdditionalVersionWeights\": %s}", additonalVersionWeightStr);
     }
 
     public String getFunctionCode() {
@@ -291,4 +220,5 @@ public class Builder {
         return routingConfig;
     }
 }
+
 

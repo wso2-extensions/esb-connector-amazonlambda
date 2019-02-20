@@ -18,6 +18,9 @@
 
 package org.wso2.carbon.esb.connector.auth;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 
@@ -25,6 +28,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GetParametersValueMap {
+
+
+    private static Log log = LogFactory.getLog(GetParametersValueMap.class);
 
     private final MessageContext messageContext;
     private final Map<String, String> headersParametersValueMap;
@@ -56,17 +62,28 @@ public class GetParametersValueMap {
     }
 
     private Map<String, String> queryHashMap() {
-
-        String[] keys = GetKeys.query();
         Map<String, String> parametersMap = new HashMap<>();
-        for (String key : keys) {
-            String paramValue =
-                    (messageContext.getProperty(key) != null) ? (String) messageContext
-                            .getProperty(key) : AmazonLambdaConstants.EMPTY_STR;
-            parametersMap.put(key, paramValue);
-        }
-        return parametersMap;
 
+        for (String key : GetKeys.query()) {
+            Object property = messageContext.getProperty(key);
+            log.info(String.valueOf(property));
+            log.info("============================== DEBUG MESSAGE CONTEXT ==============================");
+            log.info("===================================================================");
+            if (property == null) {
+                parametersMap.put(key, "");
+                continue;
+            }
+
+            String value = (String) property;
+
+            if (StringUtils.isEmpty(value)) {
+                parametersMap.put(key, "");
+            } else {
+                parametersMap.put(key, value);
+            }
+        }
+
+        return parametersMap;
     }
 
     private Map<String, String> payloadHashMap() {
