@@ -188,7 +188,7 @@ public class AmazonLambdaConnector extends AbstractConnector {
             final StringBuilder canonicalHeaders = new StringBuilder();
             final StringBuilder signedHeader = new StringBuilder();
 
-            headersParamsMap.put(AmazonLambdaConstants.X_AMZ_DATE, amz);
+            headersParamsMap.put(AmazonLambdaConstants.API_X_AMZ_DATE, amz);
             for (Map.Entry<String, String> entry : headerParametersMap.entrySet()) {
                 String key = entry.getKey();
                 String tempParam = headerParametersValueMap.get(key);
@@ -202,7 +202,7 @@ public class AmazonLambdaConnector extends AbstractConnector {
             for (String key : headerKeys) {
                 String headerValues = headersParamsMap.get(key);
                 canonicalHeaders.append(key.toLowerCase()).append(AmazonLambdaConstants.COLON)
-                        .append(headerValues).append(AmazonLambdaConstants.NEW_LINE);
+                        .append(headerValues.toLowerCase()).append(AmazonLambdaConstants.NEW_LINE); //changed into lowercase, wasn't this way before
                 signedHeader.append(key.toLowerCase());
                 signedHeader.append(AmazonLambdaConstants.SEMI_COLON);
             }

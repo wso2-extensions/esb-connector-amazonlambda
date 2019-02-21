@@ -246,7 +246,7 @@ public class AmazonLambdaConstants {
 
     public static final String X_AMZ_LOG_TYPE = "logType";
 
-    public static final String API_X_AMZ_LOG_TYPE = "X-Amz-Log-Typ";
+    public static final String API_X_AMZ_LOG_TYPE = "X-Amz-Log-Type";
 
     public static final String X_AMZ_CLIENT_CONTEXT = "clientContext";
 
