@@ -66,8 +66,8 @@ public class Builder {
         StringBuilder codeBuilder = new StringBuilder();
 
         Object zipFile = messageContext.getProperty(AmazonLambdaConstants.S3_ZIP_FILE);
-        if (zipFile != null && ((String) zipFile).trim().isEmpty()) {
-            codeBuilder.append(String.format("%s:%s", "ZipFile", zipFile));
+        if (zipFile != null && !((String) zipFile).trim().isEmpty()) {
+            codeBuilder.append(String.format("\"%s\":%s", "ZipFile", zipFile));
             codeBuilder.append(",");
         }
 
@@ -84,7 +84,7 @@ public class Builder {
 
         codeBuilder.setLength(codeBuilder.length() - 1);
 
-        return codeBuilder.append(String.format("{%s}", codeBuilder.toString())).toString();
+        return String.format("{%s}", codeBuilder.toString());
     }
 
     private String deadLetterConfig() {

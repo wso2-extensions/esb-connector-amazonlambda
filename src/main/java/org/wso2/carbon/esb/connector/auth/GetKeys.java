@@ -34,7 +34,9 @@ public class GetKeys {
     public static String[] query() {
 
         return new String[]{
-                AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.URI_QUALIFIER
+                AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.URI_QUALIFIER,
+                AmazonLambdaConstants.URI_MAX_ITEM, AmazonLambdaConstants.URI_MASTER_REGION,
+                AmazonLambdaConstants.URI_MARKER, AmazonLambdaConstants.URI_FUNCTION_VERSION,
         };
     }
 

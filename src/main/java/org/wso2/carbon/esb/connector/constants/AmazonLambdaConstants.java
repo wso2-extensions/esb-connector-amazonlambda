@@ -433,6 +433,6 @@ public class AmazonLambdaConstants {
 
     public static final String ADDITIONAL_VERSION_WEIGHTS = "payloadAdditionalVersionWeights";
 
-    public static final String S3_ZIP_FILE = "payloadS3ZipFile";
+    public static final String S3_ZIP_FILE = "payloadZipFile";
 
 }
