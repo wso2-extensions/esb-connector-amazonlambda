@@ -16,39 +16,19 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<component name="sample" type="synapse/template">
+<component name="function" type="synapse/template">
     <subComponents>
-        <component name="addLayerVersionPermission">
-            <file>addLayerVersionPermission.xml</file>
-            <description>Adds permission to the resource-based policy of a version of an AWS Lambda layer</description>
-        </component>
         <component name="addPermission">
             <file>addPermission.xml</file>
-            <description>Grants an AWS service or another account permission to use a function</description>
-        </component>
-        <component name="createAlias">
-            <file>createAlias.xml</file>
-            <description>Create an alias for a lambda function version.</description>
+            <description>Grants an AWS service or another account permission to use a function.</description>
         </component>
         <component name="createFunction">
             <file>createFunction.xml</file>
             <description>Creates a lambda function.</description>
         </component>
-        <component name="deleteAlias">
-            <file>deleteAlias.xml</file>
-            <description>Deletes a Lambda function alias.</description>
-        </component>
         <component name="deleteFunction">
             <file>deleteFunction.xml</file>
             <description>Deletes a Lambda function.</description>
-        </component>
-        <component name="getAccountSettings">
-            <file>getAccountSettings.xml</file>
-            <description>get the settings of account</description>
-        </component>
-        <component name="getAlias">
-            <file>getAlias.xml</file>
-            <description>Returns details about a Lambda function alias.</description>
         </component>
         <component name="getFunction">
             <file>getFunction.xml</file>
@@ -66,18 +46,9 @@
             <file>listFunctions.xml</file>
             <description>Returns a list of Lambda functions.</description>
         </component>
-        <component name="removeLayerVersionPermission">
-            <file>removeLayerVersionPermission.xml</file>
-            <description>Removes a statement from the permissions policy for a version of an AWS Lambda layer.
-            </description>
-        </component>
         <component name="removePermission">
             <file>removePermission.xml</file>
             <description>Removes function use permission from an AWS service or another account.</description>
-        </component>
-        <component name="updateAlias">
-            <file>updateAlias.xml</file>
-            <description>Updates the configuration of a Lambda function alias.</description>
         </component>
     </subComponents>
 </component>

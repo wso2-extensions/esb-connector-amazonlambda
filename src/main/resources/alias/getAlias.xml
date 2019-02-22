@@ -17,14 +17,15 @@
   ~ under the License.
   -->
 
-<template xmlns="http://ws.apache.org/ns/synapse" name="deleteAlias">
+<template xmlns="http://ws.apache.org/ns/synapse" name="getAlias">
     <parameter name="functionName" description="Name of the Lambda function"/>
     <parameter name="aliasName" description="The name of the alias"/>
 
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.aliasName" expression="$func:aliasName"/>
-        <property name="httpMethod" value="DELETE"/>
+        <property name="httpMethod" value="GET"/>
+
 
         <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
@@ -44,14 +45,14 @@
             <then>
                 <call blocking="true">
                     <endpoint>
-                        <http method="DELETE" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
+                        <http method="GET" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
                     </endpoint>
                 </call>
             </then>
             <else>
                 <call>
                     <endpoint>
-                        <http method="DELETE" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
+                        <http method="GET" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
                     </endpoint>
                 </call>
             </else>

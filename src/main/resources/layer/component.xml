@@ -16,14 +16,16 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<connector>
-    <component name="awslambda" package="org.wso2.carbon.connector">
-        <dependency component="account"/>
-        <dependency component="alias"/>
-        <dependency component="config"/>
-        <dependency component="function"/>
-        <dependency component="layer"/>
-        <description>WSO2 AmazonLambda connector library</description>
-    </component>
-    <!-- <icon>icon/icon-small.gif</icon> -->
-</connector>
+<component name="layer" type="synapse/template">
+    <subComponents>
+        <component name="addLayerVersionPermission">
+            <file>addLayerVersionPermission.xml</file>
+            <description>Adds permission to the resource-based policy of a version of an AWS Lambda layer.</description>
+        </component>
+        <component name="removeLayerVersionPermission">
+            <file>removeLayerVersionPermission.xml</file>
+            <description>Removes a statement from the permissions policy for a version of an AWS Lambda layer.
+            </description>
+        </component>
+    </subComponents>
+</component>

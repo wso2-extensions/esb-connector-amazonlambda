@@ -17,45 +17,36 @@
   ~ under the License.
   -->
 
-<template xmlns="http://ws.apache.org/ns/synapse" name="addLayerVersionPermission">
+<template xmlns="http://ws.apache.org/ns/synapse" name="removeLayerVersionPermission">
     <parameter name="layerName" description="The name or Amazon Resource Name(ARN) of the layer."/>
     <parameter name="versionNumber" description="version number"/>
-    <parameter name="revisionId" description="to update the policy if the revision ID matcheds the ID specified"/>
-
-    <parameter name="action" description="the api action that grants access to the layer"/>
-    <parameter name="organizationId" description="organization id (optional)"/>
-    <parameter name="principal" description="An account ID, or * to grant permission to all AWS accounts."/>
-    <parameter name="statementId"
-               description="An identifier that distinguishes the policy from others on the same layer version."/>
+    <parameter name="statementId" description="The identifier that was specified when the statement was added."/>
+    <parameter name="revisionId" description="to update the policy if the revision ID matched the ID specified"/>
 
 
     <sequence>
         <property name="uri.var.layerName" expression="$func:layerName"/>
         <property name="uri.var.versionNumber" expression="$func:versionNumber"/>
+        <property name="uri.var.statementId" expression="$func:statementId"/>
         <property name="uri.var.revisionId" expression="$func:revisionId"/>
-
-        <property name="payloadAction" expression="$func:action"/>
-        <property name="payloadOrganizationId" expression="$func:organizationId"/>
-        <property name="payloadPrincipal" expression="$func:principal"/>
-        <property name="payloadStatementId" expression="$func:statementId"/>
-
-        <property name="httpMethod" value="POST"/>
+        <property name="httpMethod" value="DELETE"/>
 
 
         <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2018-10-31/layers/', $ctx:uri.var.layerName, '/versions/', $ctx:uri.var.versionNumber, '/policy')"/>
+                  expression="fn:concat('/2018-10-31/layers/', $ctx:uri.var.layerName, '/versions/', $ctx:uri.var.versionNumber, '/policy/', $ctx:uri.var.statementId)"/>
+
         <script language="js">
             <![CDATA[
             var queryParameter = '';
-            var revisionId = mc.getProperty('uri.var.revisionId');
 
+            var revisionId = mc.getProperty('uri.var.revisionId');
             if (revisionId != null && revisionId != "")
             {
                 queryParameter = "?RevisionId=" + encodeURIComponent(revisionId);
             }
 
-            mc.setProperty('uri.var.queryParameter', queryParameter.toString());
+            mc.setProperty('uri.var.queryParameter', queryParameter);
            ]]>
 
         </script>
@@ -64,21 +55,17 @@
 
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
-
         <payloadFactory media-type="json">
-            <format>
-                $1
-            </format>
-            <args>
-                <arg expression="$ctx:requestPayload"/>
-            </args>
+            <format/>
+            <args/>
         </payloadFactory>
         <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
+
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">
                     <endpoint>
-                        <http method="POST"
+                        <http method="DELETE"
                               uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
                     </endpoint>
                 </call>
@@ -86,7 +73,7 @@
             <else>
                 <call>
                     <endpoint>
-                        <http method="POST"
+                        <http method="DELETE"
                               uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
                     </endpoint>
                 </call>

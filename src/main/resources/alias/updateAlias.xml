@@ -17,14 +17,33 @@
   ~ under the License.
   -->
 
-<template xmlns="http://ws.apache.org/ns/synapse" name="getAlias">
-    <parameter name="functionName" description="Name of the Lambda function"/>
-    <parameter name="aliasName" description="The name of the alias"/>
+<template xmlns="http://ws.apache.org/ns/synapse" name="updateAlias">
+
+    <!-- URI request parameters-->
+    <parameter name="functionName" description="Name of the Lambda function."/>
+    <parameter name="aliasName" description="The name of the alias."/>
+
+
+    <!-- URI request parameters-->
+    <parameter name="description" description="The description of the alias."/>
+    <parameter name="functionVersion" description="The version of the function that the alias invokes."/>
+    <parameter name="revisionId"
+               description="Only update the alias if the revision ID matches the ID that's specified."/>
+    <!-- URI request parameters for RoutingConfig-->
+    <parameter name="additionalVersionWeights"
+               description="The name of the second alias, and the percentage of traffic that's routed to it. It has a value ranging from 0.0 to 1.0."/>
+
 
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.aliasName" expression="$func:aliasName"/>
-        <property name="httpMethod" value="GET"/>
+
+        <property name="payloadDescription" expression="$func:description"/>
+        <property name="payloadFunctionVersion" expression="$func:functionVersion"/>
+        <property name="payloadRevisionId" expression="$func:revisionId"/>
+        <property name="payloadAdditionalVersionWeights" expression="$func:additionalVersionWeights"/>
+
+        <property name="httpMethod" value="PUT"/>
 
 
         <property name="uri.var.uriRemainder" value=""/>
@@ -36,23 +55,27 @@
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
         <payloadFactory media-type="json">
-            <format/>
-            <args/>
+            <format>
+                $1
+            </format>
+            <args>
+                <arg expression="$ctx:requestPayload"/>
+            </args>
         </payloadFactory>
-        <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
 
+        <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">
                     <endpoint>
-                        <http method="GET" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
+                        <http method="PUT" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
                     </endpoint>
                 </call>
             </then>
             <else>
                 <call>
                     <endpoint>
-                        <http method="GET" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
+                        <http method="PUT" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
                     </endpoint>
                 </call>
             </else>

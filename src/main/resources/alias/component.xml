@@ -16,11 +16,23 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<component name="config" type="synapse/template">
+<component name="alias" type="synapse/template">
     <subComponents>
-        <component name="init">
-            <file>init.xml</file>
-            <description>Config operations with common parameters.</description>
+        <component name="createAlias">
+            <file>createAlias.xml</file>
+            <description>Create an alias for a lambda function version.</description>
+        </component>
+        <component name="deleteAlias">
+            <file>deleteAlias.xml</file>
+            <description>Deletes a Lambda function alias.</description>
+        </component>
+        <component name="getAlias">
+            <file>getAlias.xml</file>
+            <description>Returns details about a Lambda function alias.</description>
+        </component>
+        <component name="updateAlias">
+            <file>updateAlias.xml</file>
+            <description>Updates the configuration of a Lambda function alias.</description>
         </component>
     </subComponents>
 </component>

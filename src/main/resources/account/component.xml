@@ -16,14 +16,11 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<connector>
-    <component name="awslambda" package="org.wso2.carbon.connector">
-        <dependency component="account"/>
-        <dependency component="alias"/>
-        <dependency component="config"/>
-        <dependency component="function"/>
-        <dependency component="layer"/>
-        <description>WSO2 AmazonLambda connector library</description>
-    </component>
-    <!-- <icon>icon/icon-small.gif</icon> -->
-</connector>
+<component name="account" type="synapse/template">
+    <subComponents>
+        <component name="getAccountSettings">
+            <file>getAccountSettings.xml</file>
+            <description>Gets the settings of an account.</description>
+        </component>
+    </subComponents>
+</component>

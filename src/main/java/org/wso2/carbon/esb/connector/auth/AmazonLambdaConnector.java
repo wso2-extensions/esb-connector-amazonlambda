@@ -202,7 +202,7 @@ public class AmazonLambdaConnector extends AbstractConnector {
             for (String key : headerKeys) {
                 String headerValues = headersParamsMap.get(key);
                 canonicalHeaders.append(key.toLowerCase()).append(AmazonLambdaConstants.COLON)
-                        .append(headerValues).append(AmazonLambdaConstants.NEW_LINE); //changed into lowercase, wasn't this way before
+                        .append(headerValues).append(AmazonLambdaConstants.NEW_LINE);
                 signedHeader.append(key.toLowerCase());
                 signedHeader.append(AmazonLambdaConstants.SEMI_COLON);
             }

@@ -17,82 +17,63 @@
   ~ under the License.
   -->
 
-<template xmlns="http://ws.apache.org/ns/synapse" name="invoke">
-
-
-    <!-- CHECK FOR THE CANONICAL HEADER BUILDING WITH THE HEADERS PARAMETERS AND VALUE FOR THIS METHOD -->
-
-    <!-- URI request parameters-->
-    <parameter name="functionName" description="Name of the Lambda function."/>
-    <parameter name="qualifier"
-               description="Specify a version or alias to invoke a published version of the function."/>
-
-
-    <!-- Header parameters-->
-    <parameter name="x-amz-invocation-type" description="Invocation type."/>
-    <parameter name="x-amz-log-type" description="Set to Tail to include the execution log in the response."/>
-    <parameter name="x-amz-client-context"
-               description="Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context object."/>
-
-    <!-- Payloads-->
-    <parameter name="requestPayload" description="Payloads for the HTTP request."/>
-
+<template xmlns="http://ws.apache.org/ns/synapse" name="deleteFunction">
+    <parameter name="functionName" description="Name of the Lambda function to be deleted"/>
+    <parameter name="qualifier" description="version of function to delete the specified version"/>
 
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:qualifier"/>
-
-        <property name="invocationType" expression="$func:x-amz-invocation-type"/>
-        <property name="logType" expression="$func:x-amz-log-type"/>
-        <property name="clientContext" expression="$func:x-amz-client-context"/>
-
-        <property name="requestPayload" expression="$func:requestPayload"/>
-
-        <property name="httpMethod" value="POST"/>
-
+        <property name="httpMethod" value="DELETE"/>
 
         <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/invocations')"/>
+                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName)"/>
 
         <script language="js">
             <![CDATA[
             var queryParameter = '';
-
             var qualifier = mc.getProperty('uri.var.qualifier');
+
             if (qualifier != null && qualifier != "")
             {
                 queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
             }
 
-            mc.setProperty('uri.var.queryParameter', queryParameter);
+            mc.setProperty('uri.var.queryParameter', queryParameter.toString());
            ]]>
 
         </script>
 
+
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaConnector"/>
 
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
-        <!--<header name="X-Amz-Client-Context" scope="transport" expression="$ctx:clientContext"/>-->
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
-        <header name="X-Amz-Invocation-Type" scope="transport" expression="$ctx:invocationTypye"/>
-        <header name="X-Amz-Log-Type" scope="transport" expression="$ctx:logType"/>
+
 
         <payloadFactory media-type="json">
-            <format>
-                $1
-            </format>
-            <args>
-                <arg expression="$ctx:requestPayload"/>
-            </args>
+            <format/>
+            <args/>
         </payloadFactory>
         <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
-        <filter source="$ctx:amazonLambdaBlocking" regex="true">
 
+        <!--<log>-->
+        <!--<property name="****************proxy*****************"-->
+        <!--value="################################"/>-->
+        <!--<property expression="$ctx:uri.var.apiUrl" name="apiUrl"/>-->
+        <!--<property expression="$ctx:uri.var.uriRemainder" name="uriRemainder"/>-->
+        <!--<property expression="$ctx:uri.var.queryParameter" name="queryParameter"/>-->
+        <!--<property expression="$ctx:requestPayload" name="requestPayload"/>-->
+
+
+        <!--</log>-->
+        <!--<property name="FORCE_POST_PUT_NOBODY" value="true" scope="axis2" type="BOOLEAN"/>-->
+        <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">
                     <endpoint>
-                        <http method="POST"
+                        <http method="DELETE"
                               uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
                     </endpoint>
                 </call>
@@ -100,7 +81,7 @@
             <else>
                 <call>
                     <endpoint>
-                        <http method="POST"
+                        <http method="DELETE"
                               uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
                     </endpoint>
                 </call>

@@ -17,59 +17,46 @@
   ~ under the License.
   -->
 
-<template xmlns="http://ws.apache.org/ns/synapse" name="removePermission">
-    <parameter name="functionName" description="The name of the function."/>
-    <parameter name="statementId" description="Statement Id of the permission to remove"/>
-    <parameter name="qualifier"
-               description="Specify a version or alias to remove permissions from a published version of the function."/>
-    <parameter name="revisionId" description="To update the policy if the revision ID matched the ID specified"/>
-
+<template xmlns="http://ws.apache.org/ns/synapse" name="getFunction">
+    <parameter name="functionName" description="Name of the Lambda function."/>
+    <parameter name="qualifier" description="version to get the specified version"/>
 
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
-        <property name="uri.var.statementId" expression="$func:statementId"/>
         <property name="uri.var.qualifier" expression="$func:qualifier"/>
-        <property name="uri.var.revisionId" expression="$func:revisionId"/>
-
-        <property name="httpMethod" value="DELETE"/>
+        <property name="httpMethod" value="GET"/>
 
 
         <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/policy/', $ctx:uri.var.statementId)"/>
-
+                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName)"/>
         <script language="js">
-
             <![CDATA[
+            var queryParameter = '';
 
-            var queryParameters = '';
             var qualifier = mc.getProperty('uri.var.qualifier');
-            var revisionId = mc.getProperty('uri.var.revisionId');
-
             if (qualifier != null && qualifier != "")
             {
-                queryParameters = queryParameters + "Qualifier=" + encodeURIComponent(qualifier) + '&';
+                queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
             }
 
-            if (revisionId != null && revisionId != "")
-            {
-                queryParameters = queryParameters + "RevisionId=" + encodeURIComponent(revisionId) + '&';
-            }
-
-             if (queryParameters != "")
-            {
-                queryParameters = String(queryParameters);
-                queryParameters = '?' + queryParameters.substring(0, queryParameters.length - 1);
-            }
-
-            mc.setProperty('uri.var.queryParameter', queryParameters.toString());
+            mc.setProperty('uri.var.queryParameter', queryParameter);
            ]]>
 
         </script>
 
+
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaConnector"/>
+
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
+        <log level="custom">
+
+            <property name="11111111111111111111111111" value="211111111111111111111111111111111111111"/>
+            <property name="apiurl" expression="$ctx:uri.var.apiUrl"/>
+            <property name="uriRemainder" expression="$ctx:uri.var.uriRemainder"/>
+            <property name="queryParameter" expression="$ctx:uri.var.queryParameter"/>
+        </log>
         <payloadFactory media-type="json">
             <format/>
             <args/>
@@ -79,7 +66,7 @@
             <then>
                 <call blocking="true">
                     <endpoint>
-                        <http method="DELETE"
+                        <http method="GET"
                               uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
                     </endpoint>
                 </call>
@@ -87,7 +74,7 @@
             <else>
                 <call>
                     <endpoint>
-                        <http method="DELETE"
+                        <http method="GET"
                               uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
                     </endpoint>
                 </call>
