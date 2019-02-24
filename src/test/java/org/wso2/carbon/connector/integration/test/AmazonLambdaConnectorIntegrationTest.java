@@ -15,9 +15,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.carbon.connector.integration.test.awslambda;
+package org.wso2.carbon.connector.integration.test;
 
 import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.wso2.connector.integration.test.base.ConnectorIntegrationTestBase;
@@ -29,10 +30,11 @@ import java.util.Map;
 /**
  * Sample integration test
  */
-public class amazonlambdaConnectorIntegrationTest extends ConnectorIntegrationTestBase {
+public class AmazonLambdaConnectorIntegrationTest extends ConnectorIntegrationTestBase {
 
     private Map<String, String> eiRequestHeadersMap = new HashMap<String, String>();
     private Map<String, String> apiRequestHeadersMap = new HashMap<String, String>();
+    private static int SLEEP_TIME;
 
     @BeforeClass(alwaysRun = true)
     public void setEnvironment() throws Exception {
@@ -40,16 +42,26 @@ public class amazonlambdaConnectorIntegrationTest extends ConnectorIntegrationTe
         String connectorName = System.getProperty("connector_name") + "-connector-" +
                 System.getProperty("connector_version") + ".zip";
         init(connectorName);
+        getApiConfigProperties();
+
 
         eiRequestHeadersMap.put("Accept-Charset", "UTF-8");
         eiRequestHeadersMap.put("Content-Type", "application/json");
+        SLEEP_TIME = Integer.parseInt(connectorProperties.getProperty("sleepTime"));
     }
+    /**
+     * Positive test case for addPermission method with mandatory parameters.
+     *
+     */
 
-    @Test(enabled = true, groups = {"wso2.ei"}, description = "awslambda test case")
-    public void testSample() throws Exception {
 
-        log.info("Successfully tested");
+    @Test(groups = {"wso2.ei"})
+    public void testAddPermissionWithMandatoryParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:createTable");
         RestResponse<JSONObject> eiRestResponse =
-                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "sampleRequest.json");
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addPermission_mandatory.json");
+
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
+
     }
 }

@@ -129,6 +129,7 @@ public class AmazonLambdaConnector extends AbstractConnector {
             //APPENDING CANONICAL URI
 
             String urlRemainder = (String) messageContext.getProperty(AmazonLambdaConstants.URI_REMAINDER);
+            urlRemainder = URLEncoder.encode(urlRemainder, AmazonLambdaConstants.UTF_8);//UNDO THIS...UNDO THIS...UNDO THIS
             if (urlRemainder != null && !urlRemainder.isEmpty()) {
                 canonicalRequest.append(urlRemainder.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR))
                         .append(AmazonLambdaConstants.NEW_LINE);
