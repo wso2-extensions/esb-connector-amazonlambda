@@ -150,6 +150,7 @@
                 <case regex="urn:getAccountSettings">
                     <amazonlambda.getAccountSettings/>
                 </case>
+
                 <case regex="urn:getAlias">
                     <property expression="json-eval($.functionName)" name="functionName"/>
                     <property expression="json-eval($.aliasName)" name="aliasName"/>
@@ -203,7 +204,6 @@
                     <property expression="json-eval($.marker)" name="marker"/>
                     <property expression="json-eval($.masterRegion)" name="masterRegion"/>
                     <property expression="json-eval($.maxItems)" name="maxItems"/>
-
                     <!--listFunction implementation-->
                     <amazonlambda.listFunctions>
                         <functionVersion>{$ctx:functionVersion}</functionVersion>

@@ -1,0 +1,13 @@
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M55z8I0ZhP/pby8trP+MeyV",
+  "accessKeyId":"AKIAJHJXWUY7PFNBT4OQ",
+  "region":"us-east-1",
+  "blocking":"false",
+  "s3Bucket":"ajbuck8421",
+  "s3Key":"fnc.zip",
+  "s3ObjectVersion":"22ic0JWCGdaE6uWr5o1AAfowrZWYcv4T",
+  "functionName":"createdFunc",
+  "handler":"mdhandler",
+  "role":"arn:aws:iam::610968236798:role/aj@role8421",
+  "runtime":"python3.7"
+}
