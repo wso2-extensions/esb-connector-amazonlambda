@@ -9,12 +9,12 @@ For a sample proxy service that illustrates how to work with functions, see [Sam
 | ------------- |-------------|
 | [addPermission](#granting-permission-to-use-a-function-to-an-aws-service-or-another-account)    | Grants an AWS service or another account permission to use a function. |
 | [createFunction](#creating-a-lambda-function)      | Creates a new function.  |
-| [deleteFunction](#deleting-a-function)      | Deletes a Lambda function.  |
+| [deleteFunction](#deleting-a-lambda-function)      | Deletes a Lambda function.  |
 | [getFunction](#getting-details-about-the-function-or-function-version)     | Returns information about the function or function version.  |
 | [getFunctionConfiguration](#getting-the-version-specific-settings-of-a-lambda-function-or-version)     | Returns the version-specific settings of a Lambda function or version.  |
 | [invoke](#invoking-a-lambda-function)     | Invokes a Lambda function.  |
 | [listFunctions](#returning-a-list-of-functions)     | Returns a list of Lambda functions, with the version-specific configuration of each.  |
-| [removePermission](#revoking-function-use-permission-from-an-aws-service-or-another-account.)     | Revokes function-use permission from an AWS service or another account.  |
+| [removePermission](#revoking-permission-to-use-function-from-an-aws-service-or-another-account)     | Revokes function-use permission from an AWS service or another account.  |
 
 ## Operation details
 This section provides details on each of the operations.
@@ -43,7 +43,14 @@ The addPermission implementation of the POST operation grants an AWS service or 
 Following is a sample REST request that can be handled by the addPermission operation.
 ```json
 {
-
+    "secretAccessKey":"0b+fcboKq87Nf7mH6M55z8I*****************",
+    "accessKeyId":"AKIAJHJX************",
+    "region":"us-east-1",
+    "blocking":"false",
+    "functionName":"Fn",
+    "action":"lambda:addPermission",
+    "principal":"s3.amazonaws.com",
+    "statementId":"Permisssion_Added1443p"
 }
 ```
 
@@ -89,8 +96,8 @@ The createFunction operation creates a Lambda function. To create a function, yo
 ```
 
 **Properties**
-* functionName: The name of the Lambda function
-* description: Contains description of the function
+* functionName: The name of the Lambda function.
+* description: Contains description of the function.
 * s3Bucket: An Amazon S3 bucket name in the same region as your function.
 * s3Key: The Amazon S3 key of the deployment package.
 * s3ObjectVersion: For versioned objects, the version of the deployment package object to use.
@@ -103,7 +110,7 @@ The createFunction operation creates a Lambda function. To create a function, yo
 * memorySize: The amount of memory that your function has access to. Increasing the function's memory also increases it's CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
 * publish: Set to true to publish the first version of the function during creation.
 * role: The Amazon Resource Name (ARN) of the function’s execution role.
-* runtime: The runtime version for the function.Valid Values: nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 | 
+* runtime: The runtime version for the function.Valid Values: nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 |.
 * tags: The list of tags (key-value-pairs) assigned to the new function. For more information see Tagging Lambda Functions in the AWS Lambda Developer Guide.
 * timeout: The amount of time that Lambda allows a function to run before terminating it. The default is 3 seconds. The maximum allowed value is 900 seconds.
 * mode: Set Mode to Activate to sample and trace a subset of incoming requests with AWS X-Ray. The tracing mode to Activate to sample and trace a subset of incoming requests with AWS X-Ray.
@@ -115,7 +122,17 @@ The createFunction operation creates a Lambda function. To create a function, yo
 Following is a sample REST request that can be handled by the createFunction operation.
 ```json
 {
-
+    "secretAccessKey":"0b+fcboKq87Nf7mH6M55z8I*****************",
+    "accessKeyId":"AKIAJHJX************",
+    "region":"us-east-1",
+    "blocking":"false",
+    "s3Bucket":"bucketName",
+    "s3Key":"fnc.zip",
+    "s3ObjectVersion":"22ic0JWCGdaE6uWr5o******",
+    "functionName":"createdFunc",
+    "handler":"mdhandler",
+    "role":"arn:aws:iam::6********798:role/aj@role8421",
+    "runtime":"python3.7"
 }
 ```
 
@@ -131,3 +148,318 @@ Given below is a sample response for the createFunction operation.
 
 **Related Amazon Lambda documentation**
 https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html
+
+## Deleting a Lambda function
+Implementation of deleteFunction method deletes a Lambda function. To delete a specific function version, use the Qualifier parameter. Otherwise, all versions and aliases are deleted. To delete Lambda event source mappings that invoke a function, use [DeleteEventSourceMapping](https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteEventSourceMapping.html). For AWS services and resources that invoke your function directly, delete the trigger in the service where you originally configured it.
+
+**deleteFunction**
+```xml
+<amazonlambda.deleteFunction>
+    <functionName>{$ctx:functionName}</functionName>
+    <qualifier>{$ctx:qualifier}</qualifier>
+</amazonlambda.deleteFunction>
+```
+
+**Properties**
+* functionName: The name of the Lambda function.
+* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+
+**Sample request**
+
+Following is a sample REST request that can be handled by the deleteFunction operation.
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJX************",
+  "region":"us-east-1",
+  "blocking":"false",
+  "functionName":"func"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the deleteFunction operation.
+
+```json
+{
+
+}
+```
+
+**Related Amazon Lambda documentation**
+https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunction.html
+
+## Getting details about the function or function version
+Implementation of getFunction operation return information about the function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are returned.
+
+**getFunction**
+```xml
+<amazonlambda.getFunction>
+    <functionName>{$ctx:functionName}</functionName>
+    <qualifier>{$ctx:qualifier}</qualifier>
+</amazonlambda.getFunction>
+```
+
+**Properties**
+* functionName: The name of the Lambda function.
+* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+
+**Sample request**
+
+Following is a sample REST request that can be handled by the getFunction operation.
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJ*************",
+  "region":"us-east-1",
+  "blocking":"false",
+  "functionName":"Fn",
+  "qualifier":"$LATEST"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the getFunction operation.
+
+```json
+{
+
+}
+```
+
+**Related Amazon Lambda documentation**
+https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html
+
+## Getting the version specific settings of a Lambda function or version
+Implementation of getFunctionConfiguration operation returns the version-specific settings of a Lambda function or version. The output includes only option that can vary between versions of a function. To modify these settings, use [UpdateFunctionConfiguration](https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateFunctionConfiguration.html). To get all of a function's details, including function-level settings, use [GetFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html).
+
+**getFunctionConfiguration**
+```xml
+<amazonlambda.getFunctionConfiguration>
+    <functionName>{$ctx:functionName}</functionName>
+    <qualifier>{$ctx:qualifier}</qualifier>
+</amazonlambda.getFunctionConfiguration>
+```
+
+**Properties**
+* functionName: The name of the Lambda function.
+* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+
+**Sample request**
+
+Following is a sample REST request that can be handled by the getFunctionConfiguration operation.
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJ*************",
+  "region":"us-east-1",
+  "blocking":"false",
+  "functionName":"Fn",
+  "qualifier":"$LATEST"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the getFunctionConfiguration operation.
+
+```json
+{
+
+}
+```
+
+**Related Amazon Lambda documentation**
+https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html
+
+## Invoking a Lambda function
+Implementation of invoke operation invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set InvocationType to Event. For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the [execution log](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions.html) and trace. To record function errors for asynchronous invocations, configure your function with a [dead letter queue](https://docs.aws.amazon.com/lambda/latest/dg/dlq.html). The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, [limit errors](https://docs.aws.amazon.com/lambda/latest/dg/limits.html), or issues with your function's code and configuration. For example, Lambda returns TooManyRequestsException if executing the function would cause you to exceed a concurrency limit at either the account level (ConcurrentInvocationLimitExceeded) or function level (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. This operation requires permission for the lambda:InvokeFunction action.
+
+**invoke**
+```xml
+<amazonlambda.invoke>
+    <functionName>{$ctx:functionName}</functionName>
+    <qualifier>{$ctx:qualifier}</qualifier>
+    <x-amz-invocation-type>{$ctx:x-amz-invocation-type}</x-amz-invocation-type>
+    <x-amz-log-type>{$ctx:x-amz-log-type}</x-amz-log-type>
+    <x-amz-client-context>{$ctx:x-amz-client-context}</x-amz-client-context>
+    <requestPayload>{$ctx:requestPayload}</requestPayload>
+</amazonlambda.invoke>
+```
+
+**Properties**
+* functionName: The name of the Lambda function.
+* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+* x-amz-invocation-type: It specifies the way you want to invoke the function.
+        
+    Choose from the following options.
+        
+        i)    RequestResponse (default) - Invoke the function synchronously. Keep the connection open until the function returns a response or times out. The API response includes the function response and additional data.
+        
+        ii)   Event - Invoke the function asynchronously. Send events that fail multiple times to the function's dead-letter queue (if it's configured). The API response only includes a status code.
+        
+        iii)  DryRun - Validate parameter values and verify that the user or role has permission to invoke the function.
+        
+* x-amz-log-type: It specifies whether to include the execution log in the response. Set to Tail to include it in the response. Valid values are: None and Tail
+* x-amz-client-context: It's the base64-encoded data about the invoking client to pass to the function in the context object. It can be up to 3583 bytes. 
+* requestPayload: The JSON that you want to provide to your Lambda function as input.
+
+**Sample request**
+
+Following is a sample REST request that can be handled by the invoke operation.
+```json
+{
+	"secretAccessKey":"0b+fcboKq87Nf7m****************",
+	"accessKeyId":"AKIAJHJXWUY*********",
+	"region":"us-east-1",
+	"blocking":"false",
+	"functionName":"arn:aws:lambda:us-east-1:61*********:function:Fn",
+	"qualifier":"$LATEST",
+	"x-amz-invocation-type":"Event",
+	"x-amz-log-type":"Tail"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the invoke operation.
+
+```json
+{
+
+}
+```
+
+**Related Amazon Lambda documentation**
+https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html
+
+## Returning a list of functions
+The listMethod implementation returns a list of Lambda functions, with the version-specific configuration of each. Set FunctionVersion to ALL to include all published versions of each function in addition to the unpublished version. To get more information about a function or version, use [GetFunction](https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunction.html).
+
+**listFunctions**
+```xml
+<amazonlambda.listFunctions>
+    <functionVersion>{$ctx:functionVersion}</functionVersion>
+    <marker>{$ctx:marker}</marker>
+    <masterRegion>{$ctx:masterRegion}</masterRegion>
+    <maxItems>{$ctx:maxItems}</maxItems>
+</amazonlambda.listFunctions>
+```
+
+**Properties**
+* functionVersion: Version name which specifies the version to include in entries for each function. Set to ALL to include entries for all published versions of each function.
+* marker: It specifies the pagination token that is returned by a previous request to retrieve the next page of results.
+* masterRegion: For Lambda@Edge functions, the AWS Region of the master function. For example, us-east-2 or ALL. If specified, you must set FunctionVersion to ALL..
+* maxItems: It specifies the value, ranging from 1 to 10000, to limit the number of functions in the response. 
+
+**Sample request**
+
+Following is a sample REST request that can be handled by the listFunctions operation.
+```json
+{
+    "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+    "accessKeyId":"AKIAJHJ*************",
+    "region":"us-east-1",
+    "blocking":"false",
+    "functionVersion":"ALL",
+    "marker":"1",
+    "masterRegion":"us-east-1",
+    "maxItems":"3"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the listFunctions on operation.
+
+```json
+{
+
+}
+```
+
+**Related Amazon Lambda documentation**
+https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctions.html
+
+## Revoking permission to use function from an AWS service or another account
+The removePermission implementation of the DELETE method revokes function-use permission from an AWS service or another account. You can get the ID of the statement from the output of [GetPolicy](https://docs.aws.amazon.com/lambda/latest/dg/API_GetPolicy.html).
+
+**removePermission**
+```xml
+<amazonlambda.removePermission>
+    <functionName>{$ctx:functionName}</functionName>
+    <statementId>{$ctx:statementId}</statementId>
+    <qualifier>{$ctx:qualifier}</qualifier>
+    <revisionId>{$ctx:revisionId}</revisionId>
+</amazonlambda.removePermission>
+```
+
+**Properties**
+* functionName: Name of the Lambda function.
+* statementId: Statement ID of the permission to remove.
+* qualifier: It specifies a version or alias to remove permission from a published version of the function.
+* revisionId: It's a Id which allow to update the policy only if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
+
+**Sample request**
+
+Following is a sample REST request that can be handled by the removePermission operation.
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJ*************",
+  "region":"us-east-1",
+  "blocking":"false",
+  "functionName":"Fn",
+  "statementId":"Permisssion_Added1443p"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the removePermission on operation.
+
+```json
+{
+
+}
+```
+
+**Related Amazon Lambda documentation**
+https://docs.aws.amazon.com/lambda/latest/dg/API_RemovePermission.html
+
+### Sample configuration
+
+Following example illustrates how to connect to Amazon Lambda with the init operation and METHODNAME operation.
+
+1. Create a sample proxy as below :
+```xml
+<proxy/>
+```
+2. Create a json file named METHODNAME.json and copy the configurations given below to it:
+```json
+{
+    "secretAccessKey":"b+fcbf7mH6M*****************",
+    "accessKeyId":"AKIAJHJ**********",
+    "region":"us-east-1",
+    "blocking":"false"
+}
+```
+
+3. Replace the credentials with your values.
+
+4. Execute the following curl command:
+
+```bash
+CURL COMMAND HERE
+```
+5. Amazon Lambda returns a json response similar to the one shown below:
+ 
+```json
+{
+"RESPONSE":"BODY HERE"
+}
+```
+
+

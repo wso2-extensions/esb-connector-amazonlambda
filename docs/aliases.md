@@ -39,18 +39,26 @@ The createAlias implementation of the POST operation creates an alias for a Lamb
 **Sample request**
 
 Following is a sample REST request that can be handled by the createAlias operation.
-```xml
-<createAlias>
-    <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
-    <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
-    <region>{$ctx:region}</region>
-    <blocking>{$ctx:blocking}</blocking>
-    <functionName>{$ctx:functionName}</functionName>
-    <description>{$ctx:description}</description>
-    <functionVersion>{$ctx:functionVersion}</functionVersion>
-    <aliasName>{$ctx:aliasName}</aliasName>
-    <additionalVersionWeights>{$ctx:additionalVersionWeights}</additionalVersionWeights>
-</createAlias>
+```json
+{
+    "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+    "accessKeyId":"AKIAJHJ*************",
+    "region":"us-east-1",
+    "blocking":"false",
+    "functionName":"Fn",
+    "functionVersion":"$LATEST",
+    "aliasName":"alias2"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the createAlias operation.
+
+```json
+{
+
+}
 ```
 
 **Related Amazon Lambda documentation**
@@ -74,17 +82,26 @@ The deleteAlias implementation deletes a Lambda function alias.
 **Sample request**
 
 Following is a sample REST request that can be handled by the deleteAlias operation.
-```xml
-<deleteAlias>
-    <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
-    <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
-    <region>{$ctx:region}</region>
-    <blocking>{$ctx:blocking}</blocking>
-    <functionName>{$ctx:functionName}</functionName>
-    <aliasName>{$ctx:aliasName}</aliasName>
-</deleteAlias>
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJ*************",
+  "region":"us-east-1",
+  "blocking":"false",
+  "functionName":"Fn",
+  "aliasName":"alias2"
+}
 ```
 
+**Sample response**
+
+Given below is a sample response for the deleteAlias operation.
+
+```json
+{
+
+}
+```
 **Related Amazon Lambda documentation**
 [https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteAlias.html](https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteAlias.html)
 
@@ -106,15 +123,25 @@ The getAlias implementation of the GET operation returns details about a Lambda 
 **Sample request**
 
 Following is a sample REST request that can be handled by the getAlias operation.
-```xml
-<getAlias>
-    <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
-    <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
-    <region>{$ctx:region}</region>
-    <blocking>{$ctx:blocking}</blocking>
-    <functionName>{$ctx:functionName}</functionName>
-    <aliasName>{$ctx:aliasName}</aliasName>
-</getAlias>
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJ*************",
+  "region":"us-east-1",
+  "blocking":"false",
+  "functionName":"Fn",
+  "aliasName":"alias1"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the getAlias operation.
+
+```json
+{
+
+}
 ```
 
 **Related Amazon Lambda documentation**
@@ -144,18 +171,26 @@ The updateAlias method implementation updates the configuration of a Lambda func
 **Sample request**
 
 Following is a sample REST request that can be handled by the updateAlias operation.
-```xml
-<updateAlias>
-    <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
-    <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
-    <region>{$ctx:region}</region>
-    <blocking>{$ctx:blocking}</blocking>
-    <functionName>{$ctx:functionName}</functionName>
-    <description>{$ctx:description}</description>
-    <functionVersion>{$ctx:functionVersion}</functionVersion>
-    <aliasName>{$ctx:aliasName}</aliasName>
-    <additionalVersionWeights>{$ctx:additionalVersionWeights}</additionalVersionWeights>
-</updateAlias>
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJ*************",
+  "region":"us-east-1",
+  "blocking":"false",
+  "functionName":"Fn",
+  "aliasName":"alias1",
+  "functionVersion":"$LATEST"
+}
+```
+
+**Sample response**
+
+Given below is a sample response for the updateAlias operation.
+
+```json
+{
+
+}
 ```
 
 **Related Amazon Lambda documentation**
@@ -163,6 +198,8 @@ Following is a sample REST request that can be handled by the updateAlias operat
 
 ## Sample configuration
 Following is a sample proxy service that illustrates how to connect to Amazon Lambda with init operation and use the createAlias operation. The sample request for this proxy can be found in createAlias sample request. You can use this sample as a template for using other operations in this category.
+
+1. Create a sample proxy as below
     
 **Sample Proxy**
 ```xml
@@ -203,3 +240,32 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
    <description/>
 </proxy>
 ```
+2. Create a json file named createAlias.json and copy the configurations given below to it:
+```json
+{
+    "accessKeyId":"AKIAxxxxxxxxxxxx",
+    "secretAccessKey":"id4qxxxxxxxx",
+    "region":"us-east-1",
+    "blocking":"false",
+    "functionName":"Fn",
+    "functionVersion":"$LATEST",
+    "aliasName":"alias2"
+}
+```
+
+3. Replace the credentials with your values.
+
+4. Execute the following curl command:
+
+```bash
+give the curl command here
+```
+5. Amazon Lambda returns a json response similar to the one shown below:
+ 
+```json
+{
+
+   }
+
+```
+

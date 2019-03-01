@@ -13,37 +13,97 @@ For a sample proxy service that illustrates how to work with account, see [Sampl
 
 ### Operation details
 
-This section provides further details on the operations related to tables.
+This section provides further details on the operation related to account.
 
 #### Getting Account Settings
 
-The getAccountSettings retrieves details about your account's limits and usage in an AWS Region.
+The getAccountSettings operation retrieves details about your account's limits and usage in an AWS Region.
 
-**createTable**
+**getAccountSettings**
 ```xml
 <amazonlambda.getAccountSettings/>
 ```
 
 **Sample request**
 
-Following is a sample request that can be handled by the getAccountSettings operation.
-```xml
-<updateAlias>
-    <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
-    <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
-    <region>{$ctx:region}</region>
-    <blocking>{$ctx:blocking}</blocking>
-</updateAlias>
+Following is a sample REST request that can be handled by the getAccountSettings operation.
+```json
+{
+  "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
+  "accessKeyId":"AKIAJHJ*************",
+  "region":"us-east-1",
+  "blocking":"false"
+}
 ```
 
 **Sample response**
 
-Given below is a sample response for the createTable operation.
+Given below is a sample response for the getAccountSettings on operation.
 
 ```json
 {
 
 }
 ```
-**Related Amazon DynamoDB documentation**
-https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_CreateTable.html
+
+**Related Amazon Lambda documentation**
+https://docs.aws.amazon.com/lambda/latest/dg/API_GetAccountSettings.html
+
+### Sample configuration
+
+Following example illustrates how to connect to Amazon Lambda with the init operation and getAccountSettings operation.
+
+1. Create a sample proxy as below :
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+      name="awslambda_getAccountSettings"
+      startOnLoad="true"
+      statistics="disable"
+      trace="disable"
+      transports="https, http">
+  <target>
+     <inSequence>
+        <property expression="json-eval($.secretAccessKey)" name="secretAccessKey"/>
+        <property expression="json-eval($.accessKeyId)" name="accessKeyId"/>
+        <property expression="json-eval($.region)" name="region"/>
+        <property expression="json-eval($.blocking)" name="blocking"/>       
+        <awslambda.init>
+           <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
+           <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
+           <region>{$ctx:region}</region>
+           <blocking>{$ctx:blocking}</blocking>
+        </awslambda.init>
+        <awslambda.getAccountSettings/>           
+        <respond/>
+     </inSequence>
+  </target>
+  <description/>
+</proxy>
+```
+2. Create a json file named getAccountSettings.json and copy the configurations given below to it:
+
+```json
+{
+    "secretAccessKey":"b+fcbf7mH6M*****************",
+    "accessKeyId":"AKIAJHJ**********",
+    "region":"us-east-1",
+    "blocking":"false"
+}
+```
+
+3. Replace the credentials with your values.
+
+4. Execute the following curl command:
+
+```bash
+CURL COMMAND HERE
+```
+5. Amazon Lambda returns a json response similar to the one shown below:
+ 
+```json
+{
+"RESPONSE":"BODY HERE"
+}
+```
