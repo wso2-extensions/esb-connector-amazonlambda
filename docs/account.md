@@ -31,7 +31,7 @@ Following is a sample REST request that can be handled by the getAccountSettings
 {
   "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
   "accessKeyId":"AKIAJHJ*************",
-  "region":"us-east-1",
+  "region":"us-east-2",
   "blocking":"false"
 }
 ```
@@ -42,7 +42,21 @@ Given below is a sample response for the getAccountSettings on operation.
 
 ```json
 {
-
+    "AccountLimit": {
+        "CodeSizeUnzipped": 262144000,
+        "CodeSizeZipped": 52428800,
+        "ConcurrentExecutions": 1000,
+        "TotalCodeSize": 80530636800,
+        "UnreservedConcurrentExecutions": 1000,
+        "UnreservedConcurrentExecutionsMinimum": null
+    },
+    "AccountUsage": {
+        "FunctionCount": 1,
+        "TotalCodeSize": 176268666
+    },
+    "DeprecatedFeaturesAccess": null,
+    "HasFunctionWithDeprecatedRuntime": false,
+    "PreviewFeatures": null
 }
 ```
 

@@ -23,9 +23,9 @@ import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetParameterNamesMap {
+public class ParameterNamesMap {
 
-    public static Map<String, String> headers() {
+    public static Map<String, String> getHeaderParameterNamesMap() {
 
         final Map<String, String> headersMap = new HashMap<>();
 
@@ -39,7 +39,7 @@ public class GetParameterNamesMap {
         return headersMap;
     }
 
-    public static Map<String, String> query() {
+    public static Map<String, String> getQueryParameterNamesMap() {
 
         final Map<String, String> queryParametersMap = new HashMap<>();
         queryParametersMap.put(AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.API_URI_REVISION_ID);
@@ -53,7 +53,7 @@ public class GetParameterNamesMap {
         return queryParametersMap;
     }
 
-    public static Map<String, String> payload() {
+    public static Map<String, String> getPayloadParameterNamesMap() {
 
         final Map<String, String> payloadParametersMap = new HashMap<>();
 

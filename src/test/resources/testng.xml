@@ -28,7 +28,7 @@
     </listeners>
     <test name="awslambda-Connector-Test" preserve-order="true" verbose="2">
         <classes>
-            <class name="org.wso2.carbon.connector.integration.test.AmazonLambdaConnectorIntegrationTest"/>
+            <class name="org.wso2.carbon.connector.integration.test.AmazonLambdaAuthConnectorIntegrationTest"/>
         </classes>
     </test>
 </suite>

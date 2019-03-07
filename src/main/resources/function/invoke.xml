@@ -70,21 +70,17 @@
 
         </script>
 
-        <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaConnector"/>
+        <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
 
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <!--<header name="X-Amz-Client-Context" scope="transport" expression="$ctx:clientContext"/>-->
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
-        <header name="X-Amz-Invocation-Type" scope="transport" expression="$ctx:invocationTypye"/>
-        <header name="X-Amz-Log-Type" scope="transport" expression="$ctx:logType"/>
+        <!--<header name="X-Amz-Invocation-Type" scope="transport" expression="$ctx:invocationTypye"/>-->
+        <!--<header name="X-Amz-Log-Type" scope="transport" expression="$ctx:logType"/>-->
 
         <payloadFactory media-type="json">
-            <format>
-                $1
-            </format>
-            <args>
-                <arg expression="$ctx:requestPayload"/>
-            </args>
+            <format/>
+            <args/>
         </payloadFactory>
         <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
         <filter source="$ctx:amazonLambdaBlocking" regex="true">

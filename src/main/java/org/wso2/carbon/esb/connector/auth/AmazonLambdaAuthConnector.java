@@ -42,15 +42,23 @@ import java.util.TreeSet;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * Class AmazonLambdaAuthConnector which helps to generate authentication header for Amazon Lambda WSO2 ESB Connector
+ */
+public class AmazonLambdaAuthConnector extends AbstractConnector {
 
-public class AmazonLambdaConnector extends AbstractConnector {
+    private static Log log = LogFactory.getLog(AmazonLambdaAuthConnector.class);
 
-    private static Log log = LogFactory.getLog(AmazonLambdaConnector.class);
-
+    /**
+     * Connect method which is generating authentication of the connector for each request.
+     *
+     * @param messageContext
+     * @throws ConnectException
+     */
     @Override
     public void connect(MessageContext messageContext) throws ConnectException {
 
-        GetParametersValueMap getParametersValueMap = new GetParametersValueMap(messageContext);
+        ParametersValueMap parametersValueMap = new ParametersValueMap(messageContext);
 
         final StringBuilder canonicalRequest = new StringBuilder();
         final StringBuilder stringToSign = new StringBuilder();
@@ -60,7 +68,7 @@ public class AmazonLambdaConnector extends AbstractConnector {
         final Map<String, String> queryParamsMap = new HashMap<>();
         final Map<String, String> payloadParamsMap = new HashMap<>();
 
-        Builder builder = new Builder(messageContext);
+        InnerPayloadParameterBuilder builder = new InnerPayloadParameterBuilder(messageContext);
         final String code = builder.getFunctionCode();
         final String deadLetterConfig = builder.getDeadLetterConfig();
         final String environment = builder.getEnvironment();
@@ -68,7 +76,9 @@ public class AmazonLambdaConnector extends AbstractConnector {
         final String vpcConfig = builder.getVpcConfig();
         final String routingConfig = builder.getRoutingConfig();
 
-
+        /*
+        Checks whether any of the inner payload parameter has value and if it has value,
+         */
         if (code != null && !code.isEmpty()) {
             payloadParamsMap.put("Code", code);
 
@@ -94,28 +104,28 @@ public class AmazonLambdaConnector extends AbstractConnector {
 
         }
 
+        // Generates time-stamp which will be sent to API and to use in Signature generation.
         final Date date = new Date();
         final TimeZone timeZone = TimeZone.getTimeZone("GMT");
         final DateFormat dateFormat = new SimpleDateFormat(AmazonLambdaConstants.ISO8601_BASIC_DATE_FORMAT);
         dateFormat.setTimeZone(timeZone);
         final String amzDate = dateFormat.format(date);
-
+        //Setting amzDate to message context which can be later used by Connector to send it as header to every API request.
         messageContext.setProperty(AmazonLambdaConstants.X_AMZ_DATE, amzDate);
-
+//Delete this below three line.
         String amz = messageContext.getProperty(AmazonLambdaConstants.X_AMZ_DATE).toString();
-
         System.out.println("SYSTEM PRINTING AMAZON DATE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         System.out.println(amz);
 
+        //Generates date  in the yyyyMMdd.
         final DateFormat FORMAT_FOR_DATE_ONLY = new SimpleDateFormat(AmazonLambdaConstants.FORMAT_FOR_DATE_ONLY);
         FORMAT_FOR_DATE_ONLY.setTimeZone(timeZone);
         final String dateOnly = FORMAT_FOR_DATE_ONLY.format(date);
 
-
         //final Map<String, String> parameterNamesMap = getParameterNamesMap();
-        final Map<String, String> queryParametersValueMap = getParametersValueMap.getQueryValueHashMap();
-        final Map<String, String> headerParametersValueMap = getParametersValueMap.getHeadersValueHashMap();
-        final Map<String, String> payloadParametersValueMap = getParametersValueMap.getPayloadsValueHashMap();
+        final Map<String, String> queryParametersValueMap = parametersValueMap.getQueryValueHashMap();
+        final Map<String, String> headerParametersValueMap = parametersValueMap.getHeadersValueHashMap();
+        final Map<String, String> payloadParametersValueMap = parametersValueMap.getPayloadsValueHashMap();
 
         log.info("============================== DEBUG MESSAGE CONTEXT ==============================");
         log.info("444444444444444444444444444444444444444444444444");
@@ -123,28 +133,23 @@ public class AmazonLambdaConnector extends AbstractConnector {
 
         try {
 
+            //Appending HTTP method.
             canonicalRequest.append(messageContext.getProperty(AmazonLambdaConstants.HTTP_METHOD))
                     .append(AmazonLambdaConstants.NEW_LINE);
 
-            //APPENDING CANONICAL URI
-
-            String urlRemainder = (String) messageContext.getProperty(AmazonLambdaConstants.URI_REMAINDER);
-            //urlRemainder = URLEncoder.encode(urlRemainder, AmazonLambdaConstants.UTF_8);//UNDO THIS...UNDO THIS...UNDO THIS
-            if (urlRemainder != null && !urlRemainder.isEmpty()) {
-                canonicalRequest.append(urlRemainder.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR))
+            //Setting canonicalUri.
+            String canonicalUri = (String) messageContext.getProperty(AmazonLambdaConstants.URI_REMAINDER);
+            if (canonicalUri != null && !canonicalUri.isEmpty()) {
+                canonicalRequest.append(canonicalUri.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR))
                         .append(AmazonLambdaConstants.NEW_LINE);
             } else {
                 canonicalRequest.append(AmazonLambdaConstants.FORWARD_SLASH)
                         .append(AmazonLambdaConstants.NEW_LINE);
             }
 
-            //APPENDING CANONICAL QUERY STRING
-
-
-//            /* ================================================================================================== */
-//
+            //Setting canonicalQueryString
             final StringBuilder canonicalQueryString = new StringBuilder();
-            final Map<String, String> queryParametersMap = GetParameterNamesMap.query();
+            final Map<String, String> queryParametersMap = ParameterNamesMap.getQueryParameterNamesMap();
 
             for (Map.Entry<String, String> entry : queryParametersMap.entrySet()) {
 
@@ -154,8 +159,6 @@ public class AmazonLambdaConnector extends AbstractConnector {
                     queryParamsMap.put(queryParametersMap.get(key), tempParam);
                 }
             }
-//            /* ================================================================================================== */
-
 
             System.out.println("hellow world outside loop");
 
@@ -175,6 +178,7 @@ public class AmazonLambdaConnector extends AbstractConnector {
             System.out.println(x);
             System.out.println();
 
+            //Removes additional ampersand added at the end from canonicalQueryString and append to canonicalRequest.
             if (canonicalQueryString.length() > 0) {
 
                 canonicalRequest.append(canonicalQueryString.substring(0, canonicalQueryString.length() - 1))
@@ -183,10 +187,9 @@ public class AmazonLambdaConnector extends AbstractConnector {
                 canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
             }
 
-            //working with canonical header
-
-            final Map<String, String> headerParametersMap = GetParameterNamesMap.headers();
-            final StringBuilder canonicalHeaders = new StringBuilder();
+            //Setting canonicalHeader and signedHeader
+            final Map<String, String> headerParametersMap = ParameterNamesMap.getHeaderParameterNamesMap();
+            final StringBuilder canonicalHeader = new StringBuilder();
             final StringBuilder signedHeader = new StringBuilder();
 
             headersParamsMap.put(AmazonLambdaConstants.API_X_AMZ_DATE, amz);
@@ -202,44 +205,45 @@ public class AmazonLambdaConnector extends AbstractConnector {
             final SortedSet<String> headerKeys = new TreeSet<>(headersParamsMap.keySet());
             for (String key : headerKeys) {
                 String headerValues = headersParamsMap.get(key);
-                canonicalHeaders.append(key.toLowerCase()).append(AmazonLambdaConstants.COLON)
+                canonicalHeader.append(key.toLowerCase()).append(AmazonLambdaConstants.COLON)
                         .append(headerValues).append(AmazonLambdaConstants.NEW_LINE);
                 signedHeader.append(key.toLowerCase());
                 signedHeader.append(AmazonLambdaConstants.SEMI_COLON);
             }
-
+            //Remove the 2 lines code below.
             System.out.println("system printed value of canonical headers");
-            System.out.println(canonicalHeaders.toString());
-            canonicalRequest.append(canonicalHeaders.toString());
+            System.out.println(canonicalHeader.toString());
+
+            //Appending canonicalHeader to canonicalRequest.
+            canonicalRequest.append(canonicalHeader.toString());
             canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
 
             // Remove unwanted semi-colon at the end of the signedHeader string
-            // signedHeader.append(AmazonLambdaConstants.HOST);
             String signedHeaders = "";
             if (signedHeader.length() > 0) {
                 signedHeaders = signedHeader.substring(0, signedHeader.length() - 1);
             }
+            //Remove the below 2 lines code
             System.out.println("PRINTED VALUE OF SIGNEDHEADERS: ");
             System.out.println(signedHeaders);
+            //Appending signedHeaders to canonicalRequest.
             canonicalRequest.append(signedHeaders);
             canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
 
-            //PAYLOAD BUILDING AND APPENDING
-
+            //Payload Building from the payload parameter and value given by user.
             String requestPayload = "";
             Object requestPayLoad = messageContext.getProperty(AmazonLambdaConstants.REQUEST_PAYLOAD);
             if (requestPayLoad != null && !((String) requestPayLoad).trim().isEmpty()) {
                 requestPayload = (String) requestPayLoad;
-            }
-            else{
-                final Map<String, String> payloadParametersMap = GetParameterNamesMap.payload();
+            } else {
+                final Map<String, String> payloadParametersMap = ParameterNamesMap.getPayloadParameterNamesMap();
                 final StringBuilder payloadBuilder = new StringBuilder();
                 for (Map.Entry<String, String> entry : payloadParametersMap.entrySet()) {
                     String key = entry.getKey();
                     String tempParam = payloadParametersValueMap.get(key);
                     if (!tempParam.isEmpty()) {
                         payloadParamsMap.put(payloadParametersMap.get(key),
-                            tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
+                                tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
                     }
                 }
                 final SortedSet<String> payloadKeys = new TreeSet<>(payloadParamsMap.keySet());
@@ -250,15 +254,27 @@ public class AmazonLambdaConnector extends AbstractConnector {
                     payloadBuilder.append(key);
                     payloadBuilder.append('"');
                     payloadBuilder.append(':');
-
+                    /*
+                    Checks for "{" and "[", to omit putting payload value inside quotation mark, which represents either
+                     the value has nested-payload-like parameter or is an array. In both case the value need not to be
+                     inside the quotation mark.
+                     */
                     if (payloadValues.substring(0, 1).equals("{") || payloadValues.substring(0, 1).equals("[")) {
                         payloadBuilder.append(payloadValues)
                                 .append(',');
-                    } else if (key.equals(AmazonLambdaConstants.API_PUBLISH) ||
+                    }
+                    /*
+                    Checks for the parameter which contains integer value. If it is such parameters then it directly put the value without putting inside quotation mark while building the payload.
+                     */
+                    else if (key.equals(AmazonLambdaConstants.API_PUBLISH) ||
                             key.equals(AmazonLambdaConstants.API_TIMEOUT)) {
                         payloadBuilder.append(payloadValues)
                                 .append(',');
-                    } else {
+                    }
+                    /*
+                    If both conditions mentioned above fails then the values should be inside the quotation mark.This condition does so.
+                     */
+                    else {
                         payloadBuilder.append('"');
                         payloadBuilder.append(payloadValues);
                         payloadBuilder.append('"');
@@ -266,9 +282,11 @@ public class AmazonLambdaConnector extends AbstractConnector {
                         payloadBuilder.append(',');
                     }
                 }
+                //Checks the length of payload if it is greater than zero, meaning payload is not empty, it keeps all the appended payload's parameters and values within the "{}".
                 if (payloadBuilder.length() > 0) {
                     requestPayload = "{" + payloadBuilder.substring(0, payloadBuilder.length() - 1) + "}";
                 }
+                //Setting requestPayload to the message context which will be used by methods to send the payload while making the API request.
                 messageContext.setProperty(AmazonLambdaConstants.REQUEST_PAYLOAD, requestPayload);
             }
 
@@ -276,11 +294,10 @@ public class AmazonLambdaConnector extends AbstractConnector {
             log.info(requestPayload);
             log.info("===================================================================");
 
-            //HASHING AND MAKING IT LOWER CASE HEXADECIMAL STRING FOR APPENDING TO CANONICAL REQUEST
+            //Hashing and making it lowercase hexadecimal string for appending to canonical request.
             canonicalRequest.append(bytesToHex(hash(messageContext, requestPayload)).toLowerCase());
 
-            //BUILDING STRING TO SIGN//sign karney se pahele  ka building
-
+            //Creates stringToSign
             stringToSign.append(AmazonLambdaConstants.AWS4_HMAC_SHA_256);
             stringToSign.append(AmazonLambdaConstants.NEW_LINE);
             stringToSign.append(amzDate);
@@ -297,6 +314,7 @@ public class AmazonLambdaConnector extends AbstractConnector {
             stringToSign.append(AmazonLambdaConstants.NEW_LINE);
             stringToSign.append(bytesToHex(hash(messageContext, canonicalRequest.toString())).toLowerCase());
 
+            //Creates signingKey
             final byte[] signingKey =
                     getSignatureKey(messageContext,
                             messageContext.getProperty(AmazonLambdaConstants.SECRET_ACCESS_KEY).toString(),

@@ -45,12 +45,12 @@ Following is a sample REST request that can be handled by the addPermission oper
 {
     "secretAccessKey":"0b+fcboKq87Nf7mH6M55z8I*****************",
     "accessKeyId":"AKIAJHJX************",
-    "region":"us-east-1",
+    "region":"us-east-2",
     "blocking":"false",
-    "functionName":"Fn",
+    "functionName":"testFunction",
     "action":"lambda:addPermission",
     "principal":"s3.amazonaws.com",
-    "statementId":"Permisssion_Added1443p"
+    "statementId":"Permisssion_Added182p"
 }
 ```
 
@@ -58,9 +58,10 @@ Following is a sample REST request that can be handled by the addPermission oper
 
 Given below is a sample response for the addPermission operation.
 
+    Status: 201 Created
 ```json
 {
-
+    "Statement": "{\"Sid\":\"Permisssion_Added182p\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:addPermission\",\"Resource\":\"arn:aws:lambda:us-east-2:141896495686:function:testFunction\"}"
 }
 ```
 **Related Amazon Lambda documentation**
@@ -124,14 +125,14 @@ Following is a sample REST request that can be handled by the createFunction ope
 {
     "secretAccessKey":"0b+fcboKq87Nf7mH6M55z8I*****************",
     "accessKeyId":"AKIAJHJX************",
-    "region":"us-east-1",
+    "region":"us-east-2",
     "blocking":"false",
-    "s3Bucket":"bucketName",
+    "s3Bucket":"ajbuck8",
     "s3Key":"fnc.zip",
-    "s3ObjectVersion":"22ic0JWCGdaE6uWr5o******",
+    "s3ObjectVersion":"null",
     "functionName":"createdFunc",
     "handler":"mdhandler",
-    "role":"arn:aws:iam::6********798:role/aj@role8421",
+    "role":"arn:aws:iam::14*****:role/service-role/yfuj",
     "runtime":"python3.7"
 }
 ```
@@ -142,7 +143,28 @@ Given below is a sample response for the createFunction operation.
 
 ```json
 {
-
+    "CodeSha256": "tp34ACQUVOU5YVe84VQUQHsHWdfixrnP/mkMdtt6gEc=",
+    "CodeSize": 338,
+    "DeadLetterConfig": null,
+    "Description": "",
+    "Environment": null,
+    "FunctionArn": "arn:aws:lambda:us-east-2:141896495686:function:createdFunc",
+    "FunctionName": "createdFunc",
+    "Handler": "mdhandler",
+    "KMSKeyArn": null,
+    "LastModified": "2019-03-05T09:36:27.074+0000",
+    "Layers": null,
+    "MasterArn": null,
+    "MemorySize": 128,
+    "RevisionId": "acdf452b-5bf0-4203-9e22-728c200aa42a",
+    "Role": "arn:aws:iam::141896495686:role/service-role/yfuj",
+    "Runtime": "python3.7",
+    "Timeout": 3,
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    },
+    "Version": "$LATEST",
+    "VpcConfig": null
 }
 ```
 
@@ -181,11 +203,8 @@ Following is a sample REST request that can be handled by the deleteFunction ope
 
 Given below is a sample response for the deleteFunction operation.
 
-```json
-{
+    Status: 204 No Content
 
-}
-```
 
 **Related Amazon Lambda documentation**
 https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteFunction.html
@@ -212,7 +231,7 @@ Following is a sample REST request that can be handled by the getFunction operat
 {
   "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
   "accessKeyId":"AKIAJHJ*************",
-  "region":"us-east-1",
+  "region":"us-east-2",
   "blocking":"false",
   "functionName":"Fn",
   "qualifier":"$LATEST"
@@ -225,7 +244,48 @@ Given below is a sample response for the getFunction operation.
 
 ```json
 {
-
+    "Code": {
+        "Location": "https://awslambda-us-east-2-tasks.s3.us-east-2.amazonaws.com/snapshots/141896495686/test-9f25e193-f604-4d9e-83f1-1254f57e92bc?versionId=wGTdzzK2xtmCGZdt_kgFyy4dlBV8qr1N&X-Amz-Security-Token=FQoGZXIvYXdzEFoaDGu12sbFFNlw0JI6rCK3A6sbM%2FoxC7a2gKuwHXuKoacmpYJa0L%2FtR%2B52PUf9Pbxh2K4OOg5iffmAhfRV%2BpdhyLs32zWlkiYXRpZseDeZPAbofXMZSoLDWhtLVB0EmLTwz33gX8EQfrsvAJa2xWyM9bsebmNwHe9jTa56DvfaQzPEEa4QXpzWEKH8i5%2FSz9iNCrQhbRP%2B5dvclV%2FULql2gMPlxbwPIZNIYdF1xZuddIGcZInkrEHL3956%2B0kHag%2FL%2FoWzN81IGkySbjKNgRFeLxlDEn9ZpDiC%2FdrnNqJ%2FuBdgben7T1ZV3ck5ra0aT7XKaZhDtEN4jHv0sw3O9rORxvlne50TZ56aVePW%2FpUekHjTUiMgrwG%2B2J4uXl2ht2lTJQW3heAFFCoo1DawPlSG%2Fszht8Mt%2BhkHOrE7Re2GRTlnj0jEzEtqgp3JjuaYZU7dtbU4PhbvavF2LtxWFin9p0hWGkcMjKWuWDTaHLdj%2FzTSkS3qifkD9k34B6P%2BaQE1liduGSwK4CgNGNIP5PISt%2Fyoq2Gii1A3yIKyFgeL1W3cJ%2FuhVL9iC%2FsAN6AMkGMsNNjO%2BxvlclQ0YNK10sGhsc7A0z0Cvsgo0O344wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190305T090047Z&X-Amz-SignedHeaders=host&X-Amz-Expires=599&X-Amz-Credential=ASIARQRML75E7CY33SUO%2F20190305%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=e82c9ea475e1ba363b6e061c2eebeded0dfd8f275ad8313e16f42430a4f4819b",
+        "RepositoryType": "S3"
+    },
+    "Concurrency": null,
+    "Configuration": {
+        "CodeSha256": "pETr5sslHxypYmc5mm3M8j3RFMB2G5f5y8lQM/7ZVIs=",
+        "CodeSize": 262,
+        "DeadLetterConfig": null,
+        "Description": "",
+        "Environment": null,
+        "FunctionArn": "arn:aws:lambda:us-east-2:141896495686:function:test:$LATEST",
+        "FunctionName": "test",
+        "Handler": "index.handler",
+        "KMSKeyArn": null,
+        "LastModified": "2019-03-05T08:43:52.123+0000",
+        "Layers": [
+            {
+                "Arn": "arn:aws:lambda:us-east-2:141896495686:layer:ballerina-09903:1",
+                "CodeSize": 177304793,
+                "UncompressedCodeSize": 207173983
+            }
+        ],
+        "MasterArn": null,
+        "MemorySize": 128,
+        "RevisionId": "1da07f2e-469d-4981-a350-38bb01f19167",
+        "Role": "arn:aws:iam::141896495686:role/test-role",
+        "Runtime": "nodejs8.10",
+        "Timeout": 3,
+        "TracingConfig": {
+            "Mode": "PassThrough"
+        },
+        "Version": "$LATEST",
+        "VpcConfig": {
+            "SecurityGroupIds": [],
+            "SubnetIds": [],
+            "VpcId": "",
+            "VpcSetupStatus": null,
+            "VpcSetupStatusReason": null
+        }
+    },
+    "Tags": null
 }
 ```
 
@@ -254,9 +314,9 @@ Following is a sample REST request that can be handled by the getFunctionConfigu
 {
   "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
   "accessKeyId":"AKIAJHJ*************",
-  "region":"us-east-1",
+  "region":"us-east-2",
   "blocking":"false",
-  "functionName":"Fn",
+  "functionName":"test",
   "qualifier":"$LATEST"
 }
 ```
@@ -265,9 +325,43 @@ Following is a sample REST request that can be handled by the getFunctionConfigu
 
 Given below is a sample response for the getFunctionConfiguration operation.
 
+    Status: 200 OK
 ```json
 {
-
+    "CodeSha256": "pETr5sslHxypYmc5mm3M8j3RFMB2G5f5y8lQM/7ZVIs=",
+    "CodeSize": 262,
+    "DeadLetterConfig": null,
+    "Description": "",
+    "Environment": null,
+    "FunctionArn": "arn:aws:lambda:us-east-2:141896495686:function:test:$LATEST",
+    "FunctionName": "test",
+    "Handler": "index.handler",
+    "KMSKeyArn": null,
+    "LastModified": "2019-03-05T08:43:52.123+0000",
+    "Layers": [
+        {
+            "Arn": "arn:aws:lambda:us-east-2:141896495686:layer:ballerina-09903:1",
+            "CodeSize": 177304793,
+            "UncompressedCodeSize": 207173983
+        }
+    ],
+    "MasterArn": null,
+    "MemorySize": 128,
+    "RevisionId": "1da07f2e-469d-4981-a350-38bb01f19167",
+    "Role": "arn:aws:iam::141896495686:role/test-role",
+    "Runtime": "nodejs8.10",
+    "Timeout": 3,
+    "TracingConfig": {
+        "Mode": "PassThrough"
+    },
+    "Version": "$LATEST",
+    "VpcConfig": {
+        "SecurityGroupIds": [],
+        "SubnetIds": [],
+        "VpcId": "",
+        "VpcSetupStatus": null,
+        "VpcSetupStatusReason": null
+    }
 }
 ```
 
@@ -418,32 +512,67 @@ Following is a sample REST request that can be handled by the removePermission o
 
 **Sample response**
 
-Given below is a sample response for the removePermission on operation.
+Given below is a sample response for the removePermission operation.
 
-```json
-{
-
-}
-```
+    Status: 204 No Content
 
 **Related Amazon Lambda documentation**
 https://docs.aws.amazon.com/lambda/latest/dg/API_RemovePermission.html
 
 ### Sample configuration
 
-Following example illustrates how to connect to Amazon Lambda with the init operation and METHODNAME operation.
+Following example illustrates how to connect to Amazon Lambda with the init operation and addPermission operation.
 
 1. Create a sample proxy as below :
 ```xml
-<proxy/>
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+      name="amazonlambda_addPermission"
+      startOnLoad="true"
+      statistics="disable"
+      trace="disable"
+      transports="https, http">
+  <target>
+     <inSequence>
+        <property expression="json-eval($.secretAccessKey)" name="secretAccessKey"/>
+        <property expression="json-eval($.accessKeyId)" name="accessKeyId"/>
+        <property expression="json-eval($.region)" name="region"/>
+        <property expression="json-eval($.blocking)" name="blocking"/>
+        <property expression="json-eval($.functionName)" name="functionName"/>
+        <property expression="json-eval($.action)" name="action"/>
+        <property expression="json-eval($.statementId)" name="statementId"/>
+	    <property expression="json-eval($.principal)" name="principal"/>
+        <amazonlambda.init>
+           <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
+           <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
+           <region>{$ctx:region}</region>
+           <blocking>{$ctx:blocking}</blocking>
+        </amazonlambda.init>
+        <amazonlambda.addPermission>
+            <functionName>{$ctx:functionName}</functionName>
+            <action>{$ctx:action}</action>
+            <statementId>{$ctx:statementId}</statementId>
+            <principal>{$ctx:principal}</principal>	
+	    </amazonlambda.addPermission>           
+        <respond/>
+     </inSequence>
+  </target>
+  <description/>
+</proxy>
+
+
 ```
-2. Create a json file named METHODNAME.json and copy the configurations given below to it:
+2. Create a json file named addPermission.json and copy the configurations given below to it:
 ```json
 {
     "secretAccessKey":"b+fcbf7mH6M*****************",
     "accessKeyId":"AKIAJHJ**********",
     "region":"us-east-1",
-    "blocking":"false"
+    "blocking":"false",
+    "functionName":"Fn",
+    "action":"lambda:addPermission",
+    "principal":"s3.amazonaws.com",
+    "statementId":"Permisssion_Added1443p"
 }
 ```
 

@@ -27,17 +27,17 @@ import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetParametersValueMap {
+public class ParametersValueMap {
 
 
-    private static Log log = LogFactory.getLog(GetParametersValueMap.class);
+    private static Log log = LogFactory.getLog(ParametersValueMap.class);
 
     private final MessageContext messageContext;
     private final Map<String, String> headersParametersValueMap;
     private final Map<String, String> queryParametersValueMap;
     private final Map<String, String> payloadParametersValueMap;
 
-    public GetParametersValueMap(MessageContext messageContext) {
+    public ParametersValueMap(MessageContext messageContext) {
 
         this.messageContext = messageContext;
         headersParametersValueMap = headerHashMap();
@@ -48,7 +48,7 @@ public class GetParametersValueMap {
 
     private Map<String, String> headerHashMap() {
 
-        String[] keys = GetKeys.headers();
+        String[] keys = KeysStore.getHeaderKeys();
         Map<String, String> parametersMap = new HashMap<>();
 
         for (String key : keys) {
@@ -64,7 +64,7 @@ public class GetParametersValueMap {
     private Map<String, String> queryHashMap() {
         Map<String, String> parametersMap = new HashMap<>();
 
-        for (String key : GetKeys.query()) {
+        for (String key : KeysStore.getQueryKeys()) {
             Object property = messageContext.getProperty(key);
             log.info(String.valueOf(property));
             log.info("============================== DEBUG MESSAGE CONTEXT ==============================");
@@ -88,7 +88,7 @@ public class GetParametersValueMap {
 
     private Map<String, String> payloadHashMap() {
 
-        String[] keys = GetKeys.payload();
+        String[] keys = KeysStore.getPayloadKeys();
         Map<String, String> parametersMap = new HashMap<>();
         for (String key : keys) {
             String paramValue =

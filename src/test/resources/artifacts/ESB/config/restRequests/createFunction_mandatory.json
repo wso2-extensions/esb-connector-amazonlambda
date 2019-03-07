@@ -1,13 +1,13 @@
 {
-  "secretAccessKey":"0b+fcboKq87Nf7mH6M55z8I0ZhP/pby8trP+MeyV",
-  "accessKeyId":"AKIAJHJXWUY7PFNBT4OQ",
-  "region":"us-east-1",
+  "secretAccessKey":"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",
+  "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
+  "region":"us-east-2",
   "blocking":"false",
-  "s3Bucket":"ajbuck8421",
+  "s3Bucket":"ajbuck8",
   "s3Key":"fnc.zip",
-  "s3ObjectVersion":"22ic0JWCGdaE6uWr5o1AAfowrZWYcv4T",
-  "functionName":"createdFunc",
+  "s3ObjectVersion":"null",
+  "functionName":"createdFuncM",
   "handler":"mdhandler",
-  "role":"arn:aws:iam::610968236798:role/aj@role8421",
+  "role":"arn:aws:iam::141896495686:role/service-role/yfuj",
   "runtime":"python3.7"
 }

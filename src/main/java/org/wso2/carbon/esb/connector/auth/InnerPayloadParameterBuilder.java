@@ -26,9 +26,13 @@ import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Builder {
+/**
+ * InnerPayloadParameterBuilder class is used to build the inner payload. It gets the inner payload
+ * parameters' values and build it as in the form of payload with their parameter for the respective outer payload parameter's value.
+ */
+public class InnerPayloadParameterBuilder {
 
-    private static final Log LOG = LogFactory.getLog(Builder.class);
+    private static final Log LOG = LogFactory.getLog(InnerPayloadParameterBuilder.class);
 
     private final MessageContext messageContext;
     private final String functionCode;
@@ -38,15 +42,15 @@ public class Builder {
     private final String vpcConfig;
     private final String routingConfig;
 
-    public Builder(MessageContext messageContext) {
+    public InnerPayloadParameterBuilder(MessageContext messageContext) {
 
         this.messageContext = messageContext;
-        functionCode = functionCode();
-        deadLetterConfig = deadLetterConfig();
-        environment = environment();
-        tracingConfig = tracingConfig();
-        vpcConfig = vpcConfig();
-        routingConfig = routingConfig();
+        functionCode = buildFunctionCode();
+        deadLetterConfig = buildDeadLetterConfig();
+        environment = buildEnvironment();
+        tracingConfig = buildTracingConfig();
+        vpcConfig = buildVpcConfig();
+        routingConfig = buildRoutingConfig();
 
     }
 
@@ -55,7 +59,12 @@ public class Builder {
 //        return code != null && !((String) code).trim().isEmpty();
 //    }
 
-    private String functionCode() {
+    /**
+     * buildFunctionCode method builds the inner payload needed for the
+     * API payload parameter "Code" in createFunction method.
+     * @return String String that is built as payload from the inner payload parameter/s of Code parameter.
+     */
+    private String buildFunctionCode() {
 
         Map<String, Object> codes = new HashMap<>();
 
@@ -87,7 +96,12 @@ public class Builder {
         return String.format("{%s}", codeBuilder.toString());
     }
 
-    private String deadLetterConfig() {
+    /**
+     * buildDeadLetterConfig  method build the inner payload needed for the
+     * API payload parameter "DeadLetterConfig" in createFunction method.
+     * @return String String that is built as payload from the inner payload parameter of DeadLetterConfig parameter.
+     */
+    private String buildDeadLetterConfig() {
 
         Object targetArnObj = messageContext.getProperty(AmazonLambdaConstants.TARGET_ARN);
 
@@ -104,7 +118,12 @@ public class Builder {
         return String.format("{\"TargetArn\":\"%s\"}", targetArnStr);
     }
 
-    private String environment() {//check for setting variables, use of " " is not needed
+    /**
+     * buildEnvironment method builds the inner payload needed for the
+     * API payload parameter "Environment" in createFunction method.
+     * @return String String that is built as in a form of payload from the inner payload parameter of Environment parameter.
+     */
+    private String buildEnvironment() {
         Object envVarObj = messageContext.getProperty(AmazonLambdaConstants.ENVIRONMENT_VARIABLES);
 
         if (envVarObj == null) {
@@ -120,7 +139,11 @@ public class Builder {
         return String.format("{\"Variables\":%s}", environmentVariableStr);
     }
 
-    private String tracingConfig() {
+    /**
+     * buildTracingConfig method builds the inner payload needed for the API payload parameter "TracingConfig".
+     * @return String String that is built as in a form of payload from the inner payload parameter of TracingConfig parameter.
+     */
+    private String buildTracingConfig() {
 
         Object modeObj = messageContext.getProperty(AmazonLambdaConstants.MODE);
 
@@ -137,7 +160,11 @@ public class Builder {
         return String.format("{\"Mode\":\"%s\"}", modeStr);
     }
 
-    private String vpcConfig() {
+    /**
+     * buildVpcConfig method builds the inner payload for the API payload parameter "VpcConfig".
+     * @return String String that is built as in a form of payload structure from the inner payload parameter/s of VpcConfig.
+     */
+    private String buildVpcConfig() {
 
         StringBuilder vpcConfigBuilder = new StringBuilder();
 
@@ -173,7 +200,12 @@ public class Builder {
         return "";
     }
 
-    public String routingConfig() {
+    /**
+     * buildRoutingConfig method builds the inner payload for the API payload parameter "RoutingConfig".
+     * @return string that is built as in the form of payload structure from the inner payload parameter of the
+     * RoutingConfig.
+     */
+    public String buildRoutingConfig() {
 
         Object additionalVersionWeightsObj = messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
 
@@ -190,31 +222,55 @@ public class Builder {
         return String.format("{\"AdditionalVersionWeights\": %s}", additonalVersionWeightStr);
     }
 
+    /**
+     * getFunctionCode method returns the value of functionCode.
+     * @return functionCode.
+     */
     public String getFunctionCode() {
 
         return functionCode;
     }
 
+    /**
+     * getDeadLetterConfig method returns the value of deadLetterConfig.
+     * @return deadLetterConfig.
+     */
     public String getDeadLetterConfig() {
 
         return deadLetterConfig;
     }
 
+    /**
+     * getEnvironment method returns environment
+     * @return environment
+     */
     public String getEnvironment() {
 
         return environment;
     }
 
+    /**
+     * getTracingConfig method returns tracingConfig.
+     * @return tracingConfig.
+     */
     public String getTracingConfig() {
 
         return tracingConfig;
     }
 
+    /**
+     * getVpcConfig method returns vpcConfig.
+     * @return vpcConfig.
+     */
     public String getVpcConfig() {
 
         return vpcConfig;
     }
 
+    /**
+     * getRoutingConfig method returns routingConfig.
+     * @return routingConfig.
+     */
     public String getRoutingConfig() {
 
         return routingConfig;

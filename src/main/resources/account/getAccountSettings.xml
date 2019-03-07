@@ -24,7 +24,7 @@
         <property name="httpMethod" value="GET"/>
 
 
-        <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaConnector"/>
+        <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
 
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>

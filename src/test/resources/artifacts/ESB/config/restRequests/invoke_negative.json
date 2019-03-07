@@ -3,5 +3,5 @@
   "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
   "region":"us-east-2",
   "blocking":"false",
-  "functionName":"createdFuncM"
+  "functionName":"testFunction"
 }

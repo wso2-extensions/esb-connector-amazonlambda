@@ -20,9 +20,9 @@ package org.wso2.carbon.esb.connector.auth;
 
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 
-public class GetKeys {
+public class KeysStore {
 
-    public static String[] headers() {
+    public static String[] getHeaderKeys() {
 
         return new String[]{
                 AmazonLambdaConstants.CONTENT_TYPE, AmazonLambdaConstants.X_AMZ_INVOCATION_TYPE,
@@ -31,7 +31,7 @@ public class GetKeys {
         };
     }
 
-    public static String[] query() {
+    public static String[] getQueryKeys() {
 
         return new String[]{
                 AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.URI_QUALIFIER,
@@ -40,7 +40,7 @@ public class GetKeys {
         };
     }
 
-    public static String[] payload() {
+    public static String[] getPayloadKeys() {
 
         return new String[]{
 

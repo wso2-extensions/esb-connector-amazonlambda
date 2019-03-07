@@ -43,9 +43,9 @@ Following is a sample REST request that can be handled by the createAlias operat
 {
     "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
     "accessKeyId":"AKIAJHJ*************",
-    "region":"us-east-1",
+    "region":"us-east-2",
     "blocking":"false",
-    "functionName":"Fn",
+    "functionName":"test",
     "functionVersion":"$LATEST",
     "aliasName":"alias2"
 }
@@ -57,7 +57,12 @@ Given below is a sample response for the createAlias operation.
 
 ```json
 {
-
+    "AliasArn": "arn:aws:lambda:us-east-2:141896495686:function:test:alias2",
+    "Description": "",
+    "FunctionVersion": "$LATEST",
+    "Name": "alias2",
+    "RevisionId": "be8925ae-a634-4303-92e2-5364d0724406",
+    "RoutingConfig": null
 }
 ```
 
@@ -86,9 +91,9 @@ Following is a sample REST request that can be handled by the deleteAlias operat
 {
   "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
   "accessKeyId":"AKIAJHJ*************",
-  "region":"us-east-1",
+  "region":"us-east-2",
   "blocking":"false",
-  "functionName":"Fn",
+  "functionName":"test",
   "aliasName":"alias2"
 }
 ```
@@ -97,11 +102,8 @@ Following is a sample REST request that can be handled by the deleteAlias operat
 
 Given below is a sample response for the deleteAlias operation.
 
-```json
-{
-
-}
-```
+    Status: 204 No Content
+    
 **Related Amazon Lambda documentation**
 [https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteAlias.html](https://docs.aws.amazon.com/lambda/latest/dg/API_DeleteAlias.html)
 
@@ -127,10 +129,10 @@ Following is a sample REST request that can be handled by the getAlias operation
 {
   "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
   "accessKeyId":"AKIAJHJ*************",
-  "region":"us-east-1",
+  "region":"us-east-2",
   "blocking":"false",
-  "functionName":"Fn",
-  "aliasName":"alias1"
+  "functionName":"test",
+  "aliasName":"alias2"
 }
 ```
 
@@ -138,9 +140,15 @@ Following is a sample REST request that can be handled by the getAlias operation
 
 Given below is a sample response for the getAlias operation.
 
+    Status: 200 OK
 ```json
 {
-
+    "AliasArn": "arn:aws:lambda:us-east-2:141896495686:function:test:alias2",
+    "Description": "",
+    "FunctionVersion": "$LATEST",
+    "Name": "alias2",
+    "RevisionId": "be8925ae-a634-4303-92e2-5364d0724406",
+    "RoutingConfig": null
 }
 ```
 
@@ -177,8 +185,8 @@ Following is a sample REST request that can be handled by the updateAlias operat
   "accessKeyId":"AKIAJHJ*************",
   "region":"us-east-1",
   "blocking":"false",
-  "functionName":"Fn",
-  "aliasName":"alias1",
+  "functionName":"test",
+  "aliasName":"alias2",
   "functionVersion":"$LATEST"
 }
 ```
@@ -187,9 +195,15 @@ Following is a sample REST request that can be handled by the updateAlias operat
 
 Given below is a sample response for the updateAlias operation.
 
+    Status: 200 OK
 ```json
 {
-
+    "AliasArn": "arn:aws:lambda:us-east-2:141896495686:function:test:alias2",
+    "Description": "",
+    "FunctionVersion": "$LATEST",
+    "Name": "alias2",
+    "RevisionId": "6d8d089b-c632-4a4b-91ba-ee1ce706c50a",
+    "RoutingConfig": null
 }
 ```
 

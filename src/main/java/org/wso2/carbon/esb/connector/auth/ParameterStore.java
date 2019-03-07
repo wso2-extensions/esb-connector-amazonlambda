@@ -18,6 +18,7 @@
 
 package org.wso2.carbon.esb.connector.auth;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 
@@ -27,16 +28,31 @@ import java.util.Map;
 public class ParameterStore {
 
     private static Map<String, String> headers;
+    private static Map<String, String> payloads;
+    private static Map<String, String> query;
 
     static {
         headers = new HashMap<>();
+        payloads = new HashMap<>();
+        query = new HashMap<>();
+
         headers.put(AmazonLambdaConstants.CONTENT_TYPE, AmazonLambdaConstants.API_CONTENT_TYPE);
         headers.put(AmazonLambdaConstants.HOST, AmazonLambdaConstants.API_HOST);
         headers.put(AmazonLambdaConstants.X_AMZ_DATE, AmazonLambdaConstants.API_X_AMZ_DATE);
         headers.put(AmazonLambdaConstants.X_AMZ_INVOCATION_TYPE, AmazonLambdaConstants.API_X_AMZ_INVOCATION_TYPE);
         headers.put(AmazonLambdaConstants.X_AMZ_LOG_TYPE, AmazonLambdaConstants.API_X_AMZ_LOG_TYPE);
         headers.put(AmazonLambdaConstants.X_AMZ_CLIENT_CONTEXT, AmazonLambdaConstants.API_X_AMZ_CLIENT_CONTEXT);
+
+        query.put(AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.API_URI_REVISION_ID);
+        query.put(AmazonLambdaConstants.URI_QUALIFIER, AmazonLambdaConstants.API_URI_QUALIFIER);
+        query.put(AmazonLambdaConstants.URI_FUNCTION_VERSION, AmazonLambdaConstants.API_URI_FUNCTION_VERSION);
+        query.put(AmazonLambdaConstants.URI_MARKER, AmazonLambdaConstants.API_URI_MARKER);
+        query.put(AmazonLambdaConstants.URI_MASTER_REGION, AmazonLambdaConstants.API_URI_MASTER_REGION);
+        query.put(AmazonLambdaConstants.URI_MAX_ITEM, AmazonLambdaConstants.API_URI_MAX_ITEM);
+
+
     }
+
 
     private final MessageContext context;
 
@@ -48,6 +64,18 @@ public class ParameterStore {
     public String[] getHeaderKeys() {
 
         return headers.keySet().toArray(new String[0]);
+    }
+
+    public Map<String, String> getHeadersNameMaps(){
+        return headers;
+    }
+
+    public String[] getQueryKey(){
+        return query.keySet().toArray(new String[0]);
+    }
+
+    public String[] getPayloadKey(){
+        return payloads.keySet().toArray(new String[0]);
     }
 }
 
