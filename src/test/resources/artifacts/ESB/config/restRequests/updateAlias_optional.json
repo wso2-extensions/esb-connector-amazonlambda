@@ -3,7 +3,7 @@
   "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
   "region":"us-east-2",
   "blocking":"false",
-  "functionName":"test",
-  "aliasName":"aliasO",
+  "functionName":"testFunction",
+  "aliasName":"alias5",
   "functionVersion":"$LATEST"
 }

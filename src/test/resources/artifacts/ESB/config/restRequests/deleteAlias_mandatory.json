@@ -3,6 +3,6 @@
   "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
   "region":"us-east-2",
   "blocking":"false",
-  "functionName":"test",
+  "functionName":"testFunction",
   "aliasName":"aliasM"
 }

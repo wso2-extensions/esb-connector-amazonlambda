@@ -43,7 +43,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Class AmazonLambdaAuthConnector which helps to generate authentication header for Amazon Lambda WSO2 ESB Connector
+ * Class AmazonLambdaAuthConnector which helps to generate authentication header for Amazon Lambda WSO2 ESB Connector.
  */
 public class AmazonLambdaAuthConnector extends AbstractConnector {
 

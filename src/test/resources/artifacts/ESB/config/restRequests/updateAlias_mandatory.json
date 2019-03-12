@@ -4,6 +4,6 @@
   "region":"us-east-2",
   "blocking":"false",
   "functionName":"testFunction",
-  "aliasName":"alias1",
+  "aliasName":"alias6",
   "functionVersion":"$LATEST"
 }

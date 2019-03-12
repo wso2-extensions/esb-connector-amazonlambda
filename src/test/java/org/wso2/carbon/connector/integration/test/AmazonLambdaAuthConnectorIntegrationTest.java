@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrationTestBase {
 
     private Map<String, String> eiRequestHeadersMap = new HashMap<String, String>();
@@ -54,10 +53,10 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         SLEEP_TIME = Integer.parseInt(connectorProperties.getProperty("sleepTime"));
     }
 
-    /**
-     * Positive test case for addLayerVersionPermission method with mandatory parameters.
-     *
-     */
+//    /**
+//     * Positive test case for addLayerVersionPermission method with mandatory parameters.
+//     *
+//     */
 //    @Test(groups = {"wso2.ei"})
 //    public void testAddLayerVersionPermissionWithMandatoryParameters() throws Exception {
 //        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
@@ -67,11 +66,11 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
 //        log.info(eiRestResponse.getBody());
 //        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
 //    }
-
-    /**
-     * Positive test case for addLayerVersionPermission method with optional parameters.
-     *
-     */
+//
+//    /**
+//     * Positive test case for addLayerVersionPermission method with optional parameters.
+//     *
+//     */
 //    @Test(groups = {"wso2.ei"})
 //    public void testAddLayerVersionPermissionWithOptionalParameters() throws Exception {
 //        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
@@ -96,19 +95,19 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
-//    /**
-//     * Positive test case for addPermission method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testAddPermissionWithOptionalParameters() throws IOException, JSONException {
-//        eiRequestHeadersMap.put("Action", "urn:addPermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addPermission_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
-//    }
+    /**
+     * Positive test case for addPermission method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testAddPermissionWithOptionalParameters() throws IOException, JSONException {
+        eiRequestHeadersMap.put("Action", "urn:addPermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addPermission_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
+    }
 
     /**
      * Positive test case for createAlias method with mandatory parameters.
@@ -124,19 +123,19 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
-//    /**
-//     * Positive test case for createAlias method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testCreateAliasWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:createAlias");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "createAlias_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
-//    }
+    /**
+     * Positive test case for createAlias method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testCreateAliasWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:createAlias");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "createAlias_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
+    }
 
     /**
      * Positive test case for createFunction method with mandatory parameters.
@@ -152,19 +151,19 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
-//    /**
-//     * Positive test case for createFunction method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testCreateFunctionWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:createFunction");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "createFunction_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
-//    }
+    /**
+     * Positive test case for createFunction method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testCreateFunctionWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:createFunction");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "createFunction_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
+    }
 
     /**
      * Positive test case for getAccountSettings method with mandatory parameters.
@@ -209,19 +208,19 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
-//    /**
-//     * Positive test case for getAlias method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testGetAliasWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:getAlias");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "getAlias_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
-//    }
+    /**
+     * Positive test case for getAlias method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testGetAliasWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:getAlias");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "getAlias_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
+    }
 
     /**
      * Positive test case for getFunction method with mandatory parameters.
@@ -279,10 +278,10 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
-    /**
-     * Positive test case for invoke method with mandatory parameters.
-     *
-     */
+//    /**
+//     * Positive test case for invoke method with mandatory parameters.
+//     *
+//     */
 //    @Test(groups = {"wso2.ei"})
 //    public void testInvokeWithMandatoryParameters() throws Exception {
 //        eiRequestHeadersMap.put("Action", "urn:invoke");
@@ -292,11 +291,11 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
 //        log.info(eiRestResponse.getBody());
 //        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
 //    }
-
-    /**
-     * Positive test case for invoke method with optional parameters.
-     *
-     */
+//
+//    /**
+//     * Positive test case for invoke method with optional parameters.
+//     *
+//     */
 //    @Test(groups = {"wso2.ei"})
 //    public void testInvokeWithOptionalParameters() throws Exception {
 //        eiRequestHeadersMap.put("Action", "urn:invoke");
@@ -335,10 +334,10 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
-    /**
-     * Positive test case for removeLayerVersionPermission method with mandatory parameters.
-     *
-     */
+//    /**
+//     * Positive test case for removeLayerVersionPermission method with mandatory parameters.
+//     *
+//     */
 //    @Test(groups = {"wso2.ei"})
 //    public void testRemoveLayerVersionPermissionWithMandatoryParameters() throws Exception {
 //        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
@@ -348,11 +347,11 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
 //        log.info(eiRestResponse.getBody());
 //        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
 //    }
-
-    /**
-     * Positive test case for removeLayerVersionPermission method with optional parameters.
-     *
-     */
+//
+//    /**
+//     * Positive test case for removeLayerVersionPermission method with optional parameters.
+//     *
+//     */
 //    @Test(groups = {"wso2.ei"})
 //    public void testRemoveLayerVersionPermissionWithOptionalParameters() throws Exception {
 //        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
@@ -377,19 +376,20 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
-//    /**
-//     * Positive test case for removePermission method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testRemovePermissionWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:removePermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removePermission_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
-//    }
+    /**
+     * Positive test case for removePermission method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testRemovePermissionWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:removePermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removePermission_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
+
+    }
 
     /**
      * Positive test case for updateAlias method with mandatory parameters.
@@ -405,19 +405,19 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
-//    /**
-//     * Positive test case for updateAlias method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testUpdateAliasWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:updateAlias");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "updateAlias_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
-//    }
+    /**
+     * Positive test case for updateAlias method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testUpdateAliasWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:updateAlias");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "updateAlias_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
+    }
 
     /**
      * Positive test case for deleteAlias method with mandatory parameters.
@@ -433,19 +433,19 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
-//    /**
-//     * Positive test case for deleteAlias method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testDeleteAliasWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:deleteAlias");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "deleteAlias_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
-//    }
+    /**
+     * Positive test case for deleteAlias method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testDeleteAliasWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:deleteAlias");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "deleteAlias_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
+    }
 
     /**
      * Positive test case for deleteFunction method with mandatory parameters.
@@ -460,19 +460,20 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
-//    /**
-//     * Positive test case for deleteFunction method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testDeleteFunctionWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:deleteFunction");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "deleteFunction_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
-//    }
+
+    /**
+     * Positive test case for deleteFunction method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testDeleteFunctionWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:deleteFunction");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "deleteFunction_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
+    }
 
 /////////////////////////////////////////////////////////////
     /*
