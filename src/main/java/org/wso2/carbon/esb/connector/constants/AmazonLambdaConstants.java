@@ -36,6 +36,9 @@ public class AmazonLambdaConstants {
 
     public static final String REQUEST_PAYLOAD = "requestPayload";
 
+    public static final String PAYLOAD = "payload";
+    public static final String API_PAYLOAD = "Payload";
+
     public static final String REGION = "region";
 
     public static final String SERVICE = "service";

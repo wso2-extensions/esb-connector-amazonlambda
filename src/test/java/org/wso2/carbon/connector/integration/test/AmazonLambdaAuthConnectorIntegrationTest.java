@@ -53,33 +53,33 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         SLEEP_TIME = Integer.parseInt(connectorProperties.getProperty("sleepTime"));
     }
 
-//    /**
-//     * Positive test case for addLayerVersionPermission method with mandatory parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testAddLayerVersionPermissionWithMandatoryParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addLayerVersionPermission_mandatory.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
-//    }
-//
-//    /**
-//     * Positive test case for addLayerVersionPermission method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testAddLayerVersionPermissionWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addLayerVersionPermission_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
-//    }
+    /**
+     * Positive test case for addLayerVersionPermission method with mandatory parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testAddLayerVersionPermissionWithMandatoryParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addLayerVersionPermission_mandatory.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
+    }
+
+    /**
+     * Positive test case for addLayerVersionPermission method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testAddLayerVersionPermissionWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addLayerVersionPermission_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
+    }
 
     /**
      * Positive test case for addPermission method with mandatory parameters.
@@ -334,33 +334,33 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
-//    /**
-//     * Positive test case for removeLayerVersionPermission method with mandatory parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testRemoveLayerVersionPermissionWithMandatoryParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removeLayerVersionPermission_mandatory.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
-//    }
-//
-//    /**
-//     * Positive test case for removeLayerVersionPermission method with optional parameters.
-//     *
-//     */
-//    @Test(groups = {"wso2.ei"})
-//    public void testRemoveLayerVersionPermissionWithOptionalParameters() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removeLayerVersionPermission_optional.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
-//    }
+    /**
+     * Positive test case for removeLayerVersionPermission method with mandatory parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testRemoveLayerVersionPermissionWithMandatoryParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removeLayerVersionPermission_mandatory.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
+    }
+
+    /**
+     * Positive test case for removeLayerVersionPermission method with optional parameters.
+     *
+     */
+    @Test(groups = {"wso2.ei"})
+    public void testRemoveLayerVersionPermissionWithOptionalParameters() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removeLayerVersionPermission_optional.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
+    }
 
     /**
      * Positive test case for removePermission method with mandatory parameters.
@@ -483,15 +483,15 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for addLayerVersionPermission method.
      */
-//    @Test(groups = {"wso2.ei"})
-//    public void testAddLayerVersionPermissionWithNegativeCase() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addLayerVersionPermission_negative.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 400);
-//    }
+    @Test(groups = {"wso2.ei"})
+    public void testAddLayerVersionPermissionWithNegativeCase() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "addLayerVersionPermission_negative.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
+    }
 
     /**
      * Negative test case for addPermission method.
@@ -535,19 +535,19 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 400);
     }
 
-    /**
-     * Negative test case for getAccountSettings method.
-     *
-     */
-    @Test(groups = {"wso2.ei"})
-    public void testGetAccountSettingsWithNegativeCase() throws Exception {
-        eiRequestHeadersMap.put("Action", "urn:getAccountSettings");
-        RestResponse<JSONObject> eiRestResponse =
-                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "getAccountSettings_negative.json");
-
-        log.info(eiRestResponse.getBody());
-        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
-    }
+//    /**
+//     * Negative test case for getAccountSettings method.
+//     *
+//     */
+//    @Test(groups = {"wso2.ei"})
+//    public void testGetAccountSettingsWithNegativeCase() throws Exception {
+//        eiRequestHeadersMap.put("Action", "urn:getAccountSettings");
+//        RestResponse<JSONObject> eiRestResponse =
+//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "getAccountSettings_negative.json");
+//
+//        log.info(eiRestResponse.getBody());
+//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
+//    }
 
     /**
      * Negative test case for getAlias method.
@@ -630,15 +630,15 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
      * Negative test case for removeLayerVersionPermission method.
      *
      */
-//    @Test(groups = {"wso2.ei"})
-//    public void testRemoveLayerVersionPermissionWithNegativeCase() throws Exception {
-//        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
-//        RestResponse<JSONObject> eiRestResponse =
-//                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removeLayerVersionPermission_negative.json");
-//
-//        log.info(eiRestResponse.getBody());
-//        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 400);
-//    }
+    @Test(groups = {"wso2.ei"})
+    public void testRemoveLayerVersionPermissionWithNegativeCase() throws Exception {
+        eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
+        RestResponse<JSONObject> eiRestResponse =
+                sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap, "removeLayerVersionPermission_negative.json");
+
+        log.info(eiRestResponse.getBody());
+        Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
+    }
 
     /**
      * Negative test case for removePermission method.

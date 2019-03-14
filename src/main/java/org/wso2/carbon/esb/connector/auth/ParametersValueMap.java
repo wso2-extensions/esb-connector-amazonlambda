@@ -66,21 +66,14 @@ public class ParametersValueMap {
 
         for (String key : KeysStore.getQueryKeys()) {
             Object property = messageContext.getProperty(key);
-            log.info(String.valueOf(property));
-            log.info("============================== DEBUG MESSAGE CONTEXT ==============================");
-            log.info("===================================================================");
             if (property == null) {
                 parametersMap.put(key, "");
                 continue;
             }
 
             String value = (String) property;
+            parametersMap.put(key, value);
 
-            if (StringUtils.isEmpty(value)) {
-                parametersMap.put(key, "");
-            } else {
-                parametersMap.put(key, value);
-            }
         }
 
         return parametersMap;

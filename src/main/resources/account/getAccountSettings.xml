@@ -32,8 +32,8 @@
             <format/>
             <args/>
         </payloadFactory>
-        <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
-
+        <!--<property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>-->
+        <property name="FORCE_POST_PUT_NOBODY" value="true" scope="axis2" type="BOOLEAN"/>
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">

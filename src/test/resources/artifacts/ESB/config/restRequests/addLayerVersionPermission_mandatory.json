@@ -1,11 +1,11 @@
 {
-  "secretAccessKey":"0b+fcboKq87Nf7mH6M55z8I0ZhP/pby8trP+MeyV",
-  "accessKeyId":"AKIAJHJXWUY7PFNBT4OQ",
-  "region":"us-east-1",
+  "secretAccessKey":"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",
+  "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
+  "region":"us-east-2",
   "blocking":"false",
-  "versionNumber":"arn:aws:lambda:us-east-1:668099181075:layer:AWSLambda-Python37-SciPy1x:2",
+  "versionNumber":"1",
   "principal":"*",
-  "statementId":"Permisssion_Added171p",
+  "statementId":"Layer_Version_Permisssion_AddedM",
   "action":"lambda:GetLayerVersion",
-  "layerName":"arn:aws:lambda:us-east-1:668099181075:layer:AWSLambda-Python37-SciPy1x"
+  "layerName":"CustomFunction"
 }

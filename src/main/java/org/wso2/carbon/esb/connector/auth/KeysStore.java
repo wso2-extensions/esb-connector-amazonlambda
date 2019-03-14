@@ -36,7 +36,7 @@ public class KeysStore {
         return new String[]{
                 AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.URI_QUALIFIER,
                 AmazonLambdaConstants.URI_MAX_ITEM, AmazonLambdaConstants.URI_MASTER_REGION,
-                AmazonLambdaConstants.URI_MARKER, AmazonLambdaConstants.URI_FUNCTION_VERSION,
+                AmazonLambdaConstants.URI_MARKER, AmazonLambdaConstants.URI_FUNCTION_VERSION
         };
     }
 
@@ -65,7 +65,7 @@ public class KeysStore {
                 AmazonLambdaConstants.SOURCE_ARN,
                 AmazonLambdaConstants.FUNCTION_VERSION,
                 AmazonLambdaConstants.ALIAS_NAME,
-
+                AmazonLambdaConstants.PAYLOAD
         };
     }
 }

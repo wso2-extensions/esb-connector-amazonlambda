@@ -83,6 +83,7 @@ public class ParameterNamesMap {
         payloadParametersMap.put(AmazonLambdaConstants.SOURCE_ACCOUNT, AmazonLambdaConstants.API_SOURCE_ACCOUNT);
         payloadParametersMap.put(AmazonLambdaConstants.SOURCE_ARN, AmazonLambdaConstants.API_SOURCE_ARN);
         payloadParametersMap.put(AmazonLambdaConstants.FUNCTION_VERSION, AmazonLambdaConstants.API_FUNCTION_VERSION);
+        payloadParametersMap.put(AmazonLambdaConstants.PAYLOAD, AmazonLambdaConstants.API_PAYLOAD);
         //payloadParametersMap.put(AmazonLambdaConstants.ROUTING_CONFIG, AmazonLambdaConstants.API_ROUTING_CONFIG);
         return payloadParametersMap;
     }

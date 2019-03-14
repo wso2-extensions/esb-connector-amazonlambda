@@ -232,48 +232,53 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
 
             //Payload Building from the payload parameter and value given by user.
             String requestPayload = "";
-            Object requestPayLoad = messageContext.getProperty(AmazonLambdaConstants.REQUEST_PAYLOAD);
-            if (requestPayLoad != null && !((String) requestPayLoad).trim().isEmpty()) {
-                requestPayload = (String) requestPayLoad;
-            } else {
-                final Map<String, String> payloadParametersMap = ParameterNamesMap.getPayloadParameterNamesMap();
-                final StringBuilder payloadBuilder = new StringBuilder();
-                for (Map.Entry<String, String> entry : payloadParametersMap.entrySet()) {
-                    String key = entry.getKey();
-                    String tempParam = payloadParametersValueMap.get(key);
-                    if (!tempParam.isEmpty()) {
-                        payloadParamsMap.put(payloadParametersMap.get(key),
-                                tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
-                    }
+//            Object requestPayLoad = messageContext.getProperty(AmazonLambdaConstants.REQUEST_PAYLOAD);
+//            if (requestPayLoad != null && !((String) requestPayLoad).trim().isEmpty()) {
+//                requestPayload = (String) requestPayLoad;
+//                System.out.println("SYSTEM PRINTING REQUESTPAYLOAD");
+//                System.out.println(requestPayload);
+//            } else {
+            final Map<String, String> payloadParametersMap = ParameterNamesMap.getPayloadParameterNamesMap();
+            final StringBuilder payloadBuilder = new StringBuilder();
+            for (Map.Entry<String, String> entry : payloadParametersMap.entrySet()) {
+                String key = entry.getKey();
+                String tempParam = payloadParametersValueMap.get(key);
+                if (!tempParam.isEmpty()) {
+                    payloadParamsMap.put(payloadParametersMap.get(key),
+                            tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
                 }
-                final SortedSet<String> payloadKeys = new TreeSet<>(payloadParamsMap.keySet());
-
+            }
+            final SortedSet<String> payloadKeys = new TreeSet<>(payloadParamsMap.keySet());
+            if(payloadKeys.equals(AmazonLambdaConstants.PAYLOAD)){
+                payloadBuilder.append(payloadParamsMap.get(AmazonLambdaConstants.PAYLOAD));
+            }
+            else{
                 for (String key : payloadKeys) {
                     String payloadValues = payloadParamsMap.get(key);
                     payloadBuilder.append('"');
                     payloadBuilder.append(key);
                     payloadBuilder.append('"');
                     payloadBuilder.append(':');
-                    /*
-                    Checks for "{" and "[", to omit putting payload value inside quotation mark, which represents either
-                     the value has nested-payload-like parameter or is an array. In both case the value need not to be
-                     inside the quotation mark.
-                     */
+                /*
+                Checks for "{" and "[", to omit putting payload value inside quotation mark, which represents either
+                 the value has nested-payload-like parameter or is an array. In both case the value need not to be
+                 inside the quotation mark.
+                 */
                     if (payloadValues.substring(0, 1).equals("{") || payloadValues.substring(0, 1).equals("[")) {
                         payloadBuilder.append(payloadValues)
                                 .append(',');
                     }
-                    /*
-                    Checks for the parameter which contains integer value. If it is such parameters then it directly put the value without putting inside quotation mark while building the payload.
-                     */
+                /*
+                Checks for the parameter which contains integer value. If it is such parameters then it directly put the value without putting inside quotation mark while building the payload.
+                 */
                     else if (key.equals(AmazonLambdaConstants.API_PUBLISH) ||
                             key.equals(AmazonLambdaConstants.API_TIMEOUT)) {
                         payloadBuilder.append(payloadValues)
                                 .append(',');
                     }
-                    /*
-                    If both conditions mentioned above fails then the values should be inside the quotation mark.This condition does so.
-                     */
+                /*
+                If both conditions mentioned above fails then the values should be inside the quotation mark.This condition does so.
+                 */
                     else {
                         payloadBuilder.append('"');
                         payloadBuilder.append(payloadValues);
@@ -282,13 +287,14 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                         payloadBuilder.append(',');
                     }
                 }
-                //Checks the length of payload if it is greater than zero, meaning payload is not empty, it keeps all the appended payload's parameters and values within the "{}".
-                if (payloadBuilder.length() > 0) {
-                    requestPayload = "{" + payloadBuilder.substring(0, payloadBuilder.length() - 1) + "}";
-                }
-                //Setting requestPayload to the message context which will be used by methods to send the payload while making the API request.
-                messageContext.setProperty(AmazonLambdaConstants.REQUEST_PAYLOAD, requestPayload);
             }
+
+            //Checks the length of payload if it is greater than zero, meaning payload is not empty, it keeps all the appended payload's parameters and values within the "{}".
+            if (payloadBuilder.length() > 0) {
+                requestPayload = "{" + payloadBuilder.substring(0, payloadBuilder.length() - 1) + "}";
+            }
+            //Setting requestPayload to the message context which will be used by methods to send the payload while making the API request.
+            messageContext.setProperty(AmazonLambdaConstants.REQUEST_PAYLOAD, requestPayload);
 
             log.info("============================== DEBUG REQUEST PAYLOAD ==============================");
             log.info(requestPayload);
