@@ -19,25 +19,25 @@
 
 <template xmlns="http://ws.apache.org/ns/synapse" name="addLayerVersionPermission">
     <parameter name="layerName" description="The name or Amazon Resource Name(ARN) of the layer."/>
-    <parameter name="versionNumber" description="version number"/>
-    <parameter name="revisionId" description="to update the policy if the revision ID matcheds the ID specified"/>
+    <parameter name="layerVersionNumber" description="version number"/>
+    <parameter name="layerRevisionId" description="to update the policy if the revision ID matcheds the ID specified"/>
 
-    <parameter name="action" description="the api action that grants access to the layer"/>
-    <parameter name="organizationId" description="organization id (optional)"/>
-    <parameter name="principal" description="An account ID, or * to grant permission to all AWS accounts."/>
-    <parameter name="statementId"
+    <parameter name="layerAction" description="the api action that grants access to the layer"/>
+    <parameter name="layerOrganizationId" description="organization id (optional)"/>
+    <parameter name="layerPrincipal" description="An account ID, or * to grant permission to all AWS accounts."/>
+    <parameter name="layerStatementId"
                description="An identifier that distinguishes the policy from others on the same layer version."/>
 
 
     <sequence>
         <property name="uri.var.layerName" expression="$func:layerName"/>
-        <property name="uri.var.versionNumber" expression="$func:versionNumber"/>
-        <property name="uri.var.revisionId" expression="$func:revisionId"/>
+        <property name="uri.var.versionNumber" expression="$func:layerVersionNumber"/>
+        <property name="uri.var.revisionId" expression="$func:layerRevisionId"/>
 
-        <property name="payloadAction" expression="$func:action"/>
-        <property name="payloadOrganizationId" expression="$func:organizationId"/>
-        <property name="payloadPrincipal" expression="$func:principal"/>
-        <property name="payloadStatementId" expression="$func:statementId"/>
+        <property name="payloadAction" expression="$func:layerAction"/>
+        <property name="payloadOrganizationId" expression="$func:layerOrganizationId"/>
+        <property name="payloadPrincipal" expression="$func:layerPrincipal"/>
+        <property name="payloadStatementId" expression="$func:layerStatementId"/>
 
         <property name="httpMethod" value="POST"/>
 

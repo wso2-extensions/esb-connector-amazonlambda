@@ -19,17 +19,17 @@
 
 <template xmlns="http://ws.apache.org/ns/synapse" name="removePermission">
     <parameter name="functionName" description="The name of the function."/>
-    <parameter name="statementId" description="Statement Id of the permission to remove"/>
-    <parameter name="qualifier"
+    <parameter name="permissionStatementId" description="Statement Id of the permission to remove"/>
+    <parameter name="permissionQualifier"
                description="Specify a version or alias to remove permissions from a published version of the function."/>
-    <parameter name="revisionId" description="To update the policy if the revision ID matched the ID specified"/>
+    <parameter name="permissionRevisionId" description="To update the policy if the revision ID matched the ID specified"/>
 
 
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
-        <property name="uri.var.statementId" expression="$func:statementId"/>
-        <property name="uri.var.qualifier" expression="$func:qualifier"/>
-        <property name="uri.var.revisionId" expression="$func:revisionId"/>
+        <property name="uri.var.statementId" expression="$func:permissionStatementId"/>
+        <property name="uri.var.qualifier" expression="$func:permissionQualifier"/>
+        <property name="uri.var.revisionId" expression="$func:permissionRevisionId"/>
 
         <property name="httpMethod" value="DELETE"/>
 

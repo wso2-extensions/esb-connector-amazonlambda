@@ -20,7 +20,7 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="createFunction">
 
     <parameter name="functionName" description="Name of the Lambda function."/>
-    <parameter name="description" description="The description of the function."/>
+    <parameter name="functionDescription" description="The description of the function."/>
 
     <!-- Code parameters -->
     <parameter name="s3Bucket" description="S3 bucket name in the same AWS Region."/>
@@ -61,7 +61,7 @@
 
     <sequence>
         <property name="payloadFunctionName" expression="$func:functionName"/>
-        <property name="payloadDescription" expression="$func:description"/>
+        <property name="payloadDescription" expression="$func:functionDescription"/>
 
         <property name="payloadS3Bucket" expression="$func:s3Bucket"/>
         <property name="payloadS3Key" expression="$func:s3Key"/>

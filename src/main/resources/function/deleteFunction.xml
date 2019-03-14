@@ -19,11 +19,11 @@
 
 <template xmlns="http://ws.apache.org/ns/synapse" name="deleteFunction">
     <parameter name="functionName" description="Name of the Lambda function to be deleted"/>
-    <parameter name="qualifier" description="version of function to delete the specified version"/>
+    <parameter name="deleteFunctionQualifier" description="version of function to delete the specified version"/>
 
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
-        <property name="uri.var.qualifier" expression="$func:qualifier"/>
+        <property name="uri.var.qualifier" expression="$func:deleteFunctionQualifier"/>
         <property name="httpMethod" value="DELETE"/>
 
         <property name="uri.var.uriRemainder" value=""/>

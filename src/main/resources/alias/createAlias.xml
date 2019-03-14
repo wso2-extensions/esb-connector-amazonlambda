@@ -22,22 +22,22 @@
     <!-- uri request parameter-->
     <parameter name="functionName" description="Name of the Lambda function."/>
     <!-- uri body parameters-->
-    <parameter name="description" description="The description of the alias."/>
+    <parameter name="createAliasDescription" description="The description of the alias."/>
     <parameter name="functionVersion" description="The version of the function."/>
     <parameter name="aliasName" description="The name of the alias."/>
-    <parameter name="additionalVersionWeights"
+    <parameter name="aliasAdditionalVersionWeights"
                description="The name of the second alias, and the percentage of traffic that's routed to it. It has a value ranging from 0.0 to 1.0."/>
 
 
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
 
-        <property name="payloadDescription" expression="$func:description"/>
+        <property name="payloadDescription" expression="$func:createAliasDescription"/>
         <property name="payloadFunctionVersion" expression="$func:functionVersion"/>
         <property name="payloadAliasName" expression="$func:aliasName"/>
 
         <!-- URI request parameters for RoutingConfig-->
-        <property name="payloadAdditionalVersionWeights" expression="$func:additionalVersionWeights"/>
+        <property name="payloadAdditionalVersionWeights" expression="$func:aliasAdditionalVersionWeights"/>
 
         <property name="httpMethod" value="POST"/>
 

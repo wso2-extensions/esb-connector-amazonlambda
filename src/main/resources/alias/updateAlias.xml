@@ -25,12 +25,12 @@
 
 
     <!-- URI request parameters-->
-    <parameter name="description" description="The description of the alias."/>
+    <parameter name="updatedAliasDescription" description="The description of the alias."/>
     <parameter name="functionVersion" description="The version of the function that the alias invokes."/>
-    <parameter name="revisionId"
+    <parameter name="aliasRevisionId"
                description="Only update the alias if the revision ID matches the ID that's specified."/>
     <!-- URI request parameters for RoutingConfig-->
-    <parameter name="additionalVersionWeights"
+    <parameter name="updatedAliasAdditionalVersionWeights"
                description="The name of the second alias, and the percentage of traffic that's routed to it. It has a value ranging from 0.0 to 1.0."/>
 
 
@@ -38,10 +38,10 @@
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.aliasName" expression="$func:aliasName"/>
 
-        <property name="payloadDescription" expression="$func:description"/>
+        <property name="payloadDescription" expression="$func:updatedAliasDescription"/>
         <property name="payloadFunctionVersion" expression="$func:functionVersion"/>
-        <property name="payloadRevisionId" expression="$func:revisionId"/>
-        <property name="payloadAdditionalVersionWeights" expression="$func:additionalVersionWeights"/>
+        <property name="payloadRevisionId" expression="$func:aliasRevisionId"/>
+        <property name="payloadAdditionalVersionWeights" expression="$func:updatedAliasAdditionalVersionWeights"/>
 
         <property name="httpMethod" value="PUT"/>
 

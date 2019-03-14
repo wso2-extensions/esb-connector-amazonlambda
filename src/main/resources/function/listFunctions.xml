@@ -18,7 +18,7 @@
   -->
 
 <template xmlns="http://ws.apache.org/ns/synapse" name="listFunctions">
-    <parameter name="functionVersion"
+    <parameter name="functionVersionToBeListed"
                description="Set to ALL to include entries for all published versions of each function."/>
     <parameter name="marker"
                description="Specify the pagination token returned by a previous request to retrieve the next page of results. "/>
@@ -26,7 +26,7 @@
     <parameter name="maxItems" description="Number of functions to get in the response."/>
 
     <sequence>
-        <property name="uri.var.functionVersion" expression="$func:functionVersion"/>
+        <property name="uri.var.functionVersion" expression="$func:functionVersionToBeListed"/>
         <property name="uri.var.marker" expression="$func:marker"/>
         <property name="uri.var.masterRegion" expression="$func:masterRegion"/>
         <property name="uri.var.maxItems" expression="$func:maxItems"/>
