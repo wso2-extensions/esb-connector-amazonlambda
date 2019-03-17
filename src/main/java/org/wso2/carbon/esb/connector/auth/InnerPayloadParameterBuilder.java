@@ -18,8 +18,6 @@
 
 package org.wso2.carbon.esb.connector.auth;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 
@@ -31,8 +29,6 @@ import java.util.Map;
  * parameters' values and build it as in the form of payload with their parameter for the respective outer payload parameter's value.
  */
 public class InnerPayloadParameterBuilder {
-
-    private static final Log LOG = LogFactory.getLog(InnerPayloadParameterBuilder.class);
 
     private final MessageContext messageContext;
     private final String functionCode;
@@ -53,11 +49,6 @@ public class InnerPayloadParameterBuilder {
         routingConfig = buildRoutingConfig();
 
     }
-
-//    private boolean isFunctionCodeNotEmpty(Object code) {
-//
-//        return code != null && !((String) code).trim().isEmpty();
-//    }
 
     /**
      * buildFunctionCode method builds the inner payload needed for the
@@ -276,5 +267,3 @@ public class InnerPayloadParameterBuilder {
         return routingConfig;
     }
 }
-
-

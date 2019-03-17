@@ -81,27 +81,21 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
          */
         if (code != null && !code.isEmpty()) {
             payloadParamsMap.put("Code", code);
-
         }
         if (deadLetterConfig != null && !deadLetterConfig.isEmpty()) {
             payloadParamsMap.put("DeadLetterConfig", deadLetterConfig);
-
         }
         if (environment != null && !environment.isEmpty()) {
             payloadParamsMap.put("Environment", environment);
-
         }
         if (tracingConfig != null && !tracingConfig.isEmpty()) {
             payloadParamsMap.put("TracingConfig", tracingConfig);
-
         }
         if (vpcConfig != null && !vpcConfig.isEmpty()) {
             payloadParamsMap.put("VpcConfig", vpcConfig);
-
         }
         if (routingConfig != null && !routingConfig.isEmpty()) {
             payloadParamsMap.put("RoutingConfig", routingConfig);
-
         }
 
         // Generates time-stamp which will be sent to API and to use in Signature generation.
@@ -110,26 +104,20 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         final DateFormat dateFormat = new SimpleDateFormat(AmazonLambdaConstants.ISO8601_BASIC_DATE_FORMAT);
         dateFormat.setTimeZone(timeZone);
         final String amzDate = dateFormat.format(date);
-        //Setting amzDate to message context which can be later used by Connector to send it as header to every API request.
+
+        /**Setting amzDate to message context which can be later used by Connector to send it
+        *as header to every API request.
+         */
         messageContext.setProperty(AmazonLambdaConstants.X_AMZ_DATE, amzDate);
-//Delete this below three line.
-        String amz = messageContext.getProperty(AmazonLambdaConstants.X_AMZ_DATE).toString();
-        System.out.println("SYSTEM PRINTING AMAZON DATE>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        System.out.println(amz);
 
         //Generates date  in the yyyyMMdd.
         final DateFormat FORMAT_FOR_DATE_ONLY = new SimpleDateFormat(AmazonLambdaConstants.FORMAT_FOR_DATE_ONLY);
         FORMAT_FOR_DATE_ONLY.setTimeZone(timeZone);
         final String dateOnly = FORMAT_FOR_DATE_ONLY.format(date);
 
-        //final Map<String, String> parameterNamesMap = getParameterNamesMap();
         final Map<String, String> queryParametersValueMap = parametersValueMap.getQueryValueHashMap();
         final Map<String, String> headerParametersValueMap = parametersValueMap.getHeadersValueHashMap();
         final Map<String, String> payloadParametersValueMap = parametersValueMap.getPayloadsValueHashMap();
-
-        log.info("============================== DEBUG MESSAGE CONTEXT ==============================");
-        log.info("444444444444444444444444444444444444444444444444");
-        log.info("===================================================================");
 
         try {
 
@@ -159,24 +147,14 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                     queryParamsMap.put(queryParametersMap.get(key), tempParam);
                 }
             }
-
-            System.out.println("hellow world outside loop");
-
             final SortedSet<String> queryKeys = new TreeSet<>(queryParamsMap.keySet());
-
             for (String key : queryKeys) {
-
                 String queryValue = queryParamsMap.get(key);
                 canonicalQueryString.append(URLEncoder.encode(key, AmazonLambdaConstants.UTF_8))
                         .append(AmazonLambdaConstants.EQUAL)
                         .append(URLEncoder.encode(queryValue, AmazonLambdaConstants.UTF_8))
                         .append(AmazonLambdaConstants.AMPERSAND);
             }
-            String x = "";
-            x = x.concat(canonicalQueryString.toString());
-            System.out.println("CANONICAL QUERYSTRING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            System.out.println(x);
-            System.out.println();
 
             //Removes additional ampersand added at the end from canonicalQueryString and append to canonicalRequest.
             if (canonicalQueryString.length() > 0) {
@@ -192,7 +170,7 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             final StringBuilder canonicalHeader = new StringBuilder();
             final StringBuilder signedHeader = new StringBuilder();
 
-            headersParamsMap.put(AmazonLambdaConstants.API_X_AMZ_DATE, amz);
+            headersParamsMap.put(AmazonLambdaConstants.API_X_AMZ_DATE, amzDate);
             for (Map.Entry<String, String> entry : headerParametersMap.entrySet()) {
                 String key = entry.getKey();
                 String tempParam = headerParametersValueMap.get(key);
@@ -202,6 +180,7 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
 
                 }
             }
+
             final SortedSet<String> headerKeys = new TreeSet<>(headersParamsMap.keySet());
             for (String key : headerKeys) {
                 String headerValues = headersParamsMap.get(key);
@@ -210,34 +189,23 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                 signedHeader.append(key.toLowerCase());
                 signedHeader.append(AmazonLambdaConstants.SEMI_COLON);
             }
-            //Remove the 2 lines code below.
-            System.out.println("system printed value of canonical headers");
-            System.out.println(canonicalHeader.toString());
 
             //Appending canonicalHeader to canonicalRequest.
             canonicalRequest.append(canonicalHeader.toString());
             canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
 
-            // Remove unwanted semi-colon at the end of the signedHeader string
+            // Removes unwanted semi-colon at the end of the signedHeader string
             String signedHeaders = "";
             if (signedHeader.length() > 0) {
                 signedHeaders = signedHeader.substring(0, signedHeader.length() - 1);
             }
-            //Remove the below 2 lines code
-            System.out.println("PRINTED VALUE OF SIGNEDHEADERS: ");
-            System.out.println(signedHeaders);
+
             //Appending signedHeaders to canonicalRequest.
             canonicalRequest.append(signedHeaders);
             canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
 
             //Payload Building from the payload parameter and value given by user.
             String requestPayload = "";
-//            Object requestPayLoad = messageContext.getProperty(AmazonLambdaConstants.REQUEST_PAYLOAD);
-//            if (requestPayLoad != null && !((String) requestPayLoad).trim().isEmpty()) {
-//                requestPayload = (String) requestPayLoad;
-//                System.out.println("SYSTEM PRINTING REQUESTPAYLOAD");
-//                System.out.println(requestPayload);
-//            } else {
             final Map<String, String> payloadParametersMap = ParameterNamesMap.getPayloadParameterNamesMap();
             final StringBuilder payloadBuilder = new StringBuilder();
             for (Map.Entry<String, String> entry : payloadParametersMap.entrySet()) {
@@ -296,10 +264,6 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             //Setting requestPayload to the message context which will be used by methods to send the payload while making the API request.
             messageContext.setProperty(AmazonLambdaConstants.REQUEST_PAYLOAD, requestPayload);
 
-            log.info("============================== DEBUG REQUEST PAYLOAD ==============================");
-            log.info(requestPayload);
-            log.info("===================================================================");
-
             //Hashing and making it lowercase hexadecimal string for appending to canonical request.
             canonicalRequest.append(bytesToHex(hash(messageContext, requestPayload)).toLowerCase());
 
@@ -356,14 +320,6 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         } catch (Exception e) {
             throw new ConnectException(e);
         }
-        System.out.println("canonical request>>>>>>>>>>>>>>>>>>>>>>>>>");
-        System.out.println(canonicalRequest.toString());
-        System.out.println("string to sign..........>>>>>>>>>>>>>");
-        System.out.println(stringToSign.toString());
-        System.out.println("signature>>>>>>>>>>>>>>>>>>>>>>>>>");
-        System.out.println();
-        System.out.println("canonicalHeaders>>>>>>>>>>>>>>>>>>>>");
-
     }
 
     private void storeErrorResponseStatus(final MessageContext ctxt, final Throwable throwable, final int errorCode) {

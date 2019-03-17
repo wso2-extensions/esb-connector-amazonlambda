@@ -1,13 +1,13 @@
 {
-  "secretAccessKey":"ZvLiOJbh/Gm5o/wE9l7+kAVtjDRg414a/Ev8sF0M",
-  "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
-  "region":"us-east-2",
-  "blocking":"false",
-  "s3Bucket":"ajbuck8",
-  "s3Key":"fnc.zip",
-  "s3ObjectVersion":"null",
-  "functionName":"createdFuncM",
-  "handler":"mdhandler",
-  "role":"arn:aws:iam::141896495686:role/service-role/yfuj",
-  "runtime":"python3.7"
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "functionName": "%s(functionName)",
+  "s3Bucket": "%s(s3Bucket)",
+  "s3Key": "%s(s3Key)",
+  "s3ObjectVersion": "%s(s3ObjectVersion)",
+  "handler": "%s(handler)",
+  "role": "%s(role)",
+  "runtime": "%s(runtime)"
 }

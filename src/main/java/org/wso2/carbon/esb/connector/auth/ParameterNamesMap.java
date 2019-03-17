@@ -57,10 +57,7 @@ public class ParameterNamesMap {
 
         final Map<String, String> payloadParametersMap = new HashMap<>();
 
-        //payloadParametersMap.put(AmazonLambdaConstants.CODE, AmazonLambdaConstants.API_CODE);
-        //payloadParametersMap.put(AmazonLambdaConstants.DEAD_LETTER_CONFIG, AmazonLambdaConstants.API_DEAD_LETTER_CONFIG);
         payloadParametersMap.put(AmazonLambdaConstants.DESCRIPTION, AmazonLambdaConstants.API_DESCRIPTION);
-        //payloadParametersMap.put(AmazonLambdaConstants.ENVIRONMENT, AmazonLambdaConstants.API_ENVIRONMENT);
         payloadParametersMap.put(AmazonLambdaConstants.FUNCTION_NAME, AmazonLambdaConstants.API_FUNCTION_NAME);
         payloadParametersMap.put(AmazonLambdaConstants.ALIAS_NAME, AmazonLambdaConstants.API_ALIAS_NAME);
         payloadParametersMap.put(AmazonLambdaConstants.HANDLER, AmazonLambdaConstants.API_HANDLER);
@@ -72,8 +69,6 @@ public class ParameterNamesMap {
         payloadParametersMap.put(AmazonLambdaConstants.RUNTIME, AmazonLambdaConstants.API_RUNTIME);
         payloadParametersMap.put(AmazonLambdaConstants.TAGS, AmazonLambdaConstants.API_TAGS);
         payloadParametersMap.put(AmazonLambdaConstants.TIMEOUT, AmazonLambdaConstants.API_TIMEOUT);
-        //payloadParametersMap.put(AmazonLambdaConstants.TRACING_CONFIG, AmazonLambdaConstants.API_TRACING_CONFIG);
-        //payloadParametersMap.put(AmazonLambdaConstants.VPC_CONFIG, AmazonLambdaConstants.API_VPC_CONFIG);
         payloadParametersMap.put(AmazonLambdaConstants.ACTION, AmazonLambdaConstants.API_ACTION);
         payloadParametersMap.put(AmazonLambdaConstants.ORGANIZATION_ID, AmazonLambdaConstants.API_ORGANIZATION_ID);
         payloadParametersMap.put(AmazonLambdaConstants.PRINCIPAL, AmazonLambdaConstants.API_PRINCIPAL);
@@ -84,7 +79,7 @@ public class ParameterNamesMap {
         payloadParametersMap.put(AmazonLambdaConstants.SOURCE_ARN, AmazonLambdaConstants.API_SOURCE_ARN);
         payloadParametersMap.put(AmazonLambdaConstants.FUNCTION_VERSION, AmazonLambdaConstants.API_FUNCTION_VERSION);
         payloadParametersMap.put(AmazonLambdaConstants.PAYLOAD, AmazonLambdaConstants.API_PAYLOAD);
-        //payloadParametersMap.put(AmazonLambdaConstants.ROUTING_CONFIG, AmazonLambdaConstants.API_ROUTING_CONFIG);
+
         return payloadParametersMap;
     }
 }

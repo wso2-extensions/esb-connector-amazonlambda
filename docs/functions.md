@@ -26,17 +26,20 @@ The addPermission implementation of the POST operation grants an AWS service or 
 ```xml
 <amazonlambda.addPermission>
     <functionName>{$ctx:functionName}</functionName>
-    <action>{$ctx:action}</action>
-    <statementId>{$ctx:statementId}</statementId>
-    <principal>{$ctx:principal}</principal>
+    <permissionAction>{$ctx:permissionAction}</permissionAction>
+    <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
+    <permissionPrincipal>{$ctx:permissionPrincipal}</permissionPrincipal>
+    <permissionQualifier>{$ctx:permissionQualifier}</permissionQualifier>
+
 </amazonlambda.addPermission>
 ```
 
 **Properties**
 * functionName: Name of the Lambda function, version, or alias.
-* action: The action that the principal can use on the function.For example, lambda:InvokeFunction or lambda:GetFunction.
-* statementId: A statement identifier that differentiates the statement from others in the same policy.
-* principal: The AWS service or account that invokes the function. If you specify a service, use SourceArn or SourceAccount to limit who can invoke the function through that service.
+* permissionAction: The action that the principal can use on the function.For example, lambda:InvokeFunction or lambda:GetFunction.
+* permissionStatementId: A statement identifier that differentiates the statement from others in the same policy.
+* permissionPrincipal: The AWS service or account that invokes the function. If you specify a service, use SourceArn or SourceAccount to limit who can invoke the function through that service.
+* permissionQualifier: Specify a version or alias.
 
 **Sample request**
 
@@ -48,9 +51,9 @@ Following is a sample REST request that can be handled by the addPermission oper
     "region":"us-east-2",
     "blocking":"false",
     "functionName":"testFunction",
-    "action":"lambda:addPermission",
-    "principal":"s3.amazonaws.com",
-    "statementId":"Permisssion_Added182p"
+    "permissionAction":"lambda:addPermission",
+    "permissionPrincipal":"s3.amazonaws.com",
+    "permissionStatementId":"Permisssion_Added182p"
 }
 ```
 
@@ -61,7 +64,7 @@ Given below is a sample response for the addPermission operation.
     Status: 201 Created
 ```json
 {
-    "Statement": "{\"Sid\":\"Permisssion_Added182p\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:addPermission\",\"Resource\":\"arn:aws:lambda:us-east-2:141896495686:function:testFunction\"}"
+    "Statement": "{\"Sid\":\"Permisssion_Added182p\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:addPermission\",\"Resource\":\"arn:aws:lambda:us-east-2:*******:function:testFunction\"}"
 }
 ```
 **Related Amazon Lambda documentation**
@@ -74,7 +77,7 @@ The createFunction operation creates a Lambda function. To create a function, yo
 ```xml
 <amazonlambda.createFunction>
     <functionName>{$ctx:functionName}</functionName>
-    <description>{$ctx:description}</description>
+    <functionDescription>{$ctx:functionDescription}</functionDescription>
     <s3Bucket>{$ctx:s3Bucket}</s3Bucket>
     <s3Key>{$ctx:s3Key}</s3Key>
     <s3ObjectVersion>{$ctx:s3ObjectVersion}</s3ObjectVersion>
@@ -98,7 +101,7 @@ The createFunction operation creates a Lambda function. To create a function, yo
 
 **Properties**
 * functionName: The name of the Lambda function.
-* description: Contains description of the function.
+* functionDescription: Contains description of the function.
 * s3Bucket: An Amazon S3 bucket name in the same region as your function.
 * s3Key: The Amazon S3 key of the deployment package.
 * s3ObjectVersion: For versioned objects, the version of the deployment package object to use.
@@ -148,7 +151,7 @@ Given below is a sample response for the createFunction operation.
     "DeadLetterConfig": null,
     "Description": "",
     "Environment": null,
-    "FunctionArn": "arn:aws:lambda:us-east-2:141896495686:function:createdFunc",
+    "FunctionArn": "arn:aws:lambda:us-east-2:*********:function:createdFunc",
     "FunctionName": "createdFunc",
     "Handler": "mdhandler",
     "KMSKeyArn": null,
@@ -157,7 +160,7 @@ Given below is a sample response for the createFunction operation.
     "MasterArn": null,
     "MemorySize": 128,
     "RevisionId": "acdf452b-5bf0-4203-9e22-728c200aa42a",
-    "Role": "arn:aws:iam::141896495686:role/service-role/yfuj",
+    "Role": "arn:aws:iam::**********:role/service-role/yfuj",
     "Runtime": "python3.7",
     "Timeout": 3,
     "TracingConfig": {
@@ -178,13 +181,13 @@ Implementation of deleteFunction method deletes a Lambda function. To delete a s
 ```xml
 <amazonlambda.deleteFunction>
     <functionName>{$ctx:functionName}</functionName>
-    <qualifier>{$ctx:qualifier}</qualifier>
+    <deleteFunctionQualifier>{$ctx:deleteFunctionQualifier}</deleteFunctionQualifier>
 </amazonlambda.deleteFunction>
 ```
 
 **Properties**
 * functionName: The name of the Lambda function.
-* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+* deleteFunctionQualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
 
 **Sample request**
 
@@ -222,7 +225,7 @@ Implementation of getFunction operation return information about the function or
 
 **Properties**
 * functionName: The name of the Lambda function.
-* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+* qualifier: Specify a version or alias.
 
 **Sample request**
 
@@ -245,7 +248,7 @@ Given below is a sample response for the getFunction operation.
 ```json
 {
     "Code": {
-        "Location": "https://awslambda-us-east-2-tasks.s3.us-east-2.amazonaws.com/snapshots/141896495686/test-9f25e193-f604-4d9e-83f1-1254f57e92bc?versionId=wGTdzzK2xtmCGZdt_kgFyy4dlBV8qr1N&X-Amz-Security-Token=FQoGZXIvYXdzEFoaDGu12sbFFNlw0JI6rCK3A6sbM%2FoxC7a2gKuwHXuKoacmpYJa0L%2FtR%2B52PUf9Pbxh2K4OOg5iffmAhfRV%2BpdhyLs32zWlkiYXRpZseDeZPAbofXMZSoLDWhtLVB0EmLTwz33gX8EQfrsvAJa2xWyM9bsebmNwHe9jTa56DvfaQzPEEa4QXpzWEKH8i5%2FSz9iNCrQhbRP%2B5dvclV%2FULql2gMPlxbwPIZNIYdF1xZuddIGcZInkrEHL3956%2B0kHag%2FL%2FoWzN81IGkySbjKNgRFeLxlDEn9ZpDiC%2FdrnNqJ%2FuBdgben7T1ZV3ck5ra0aT7XKaZhDtEN4jHv0sw3O9rORxvlne50TZ56aVePW%2FpUekHjTUiMgrwG%2B2J4uXl2ht2lTJQW3heAFFCoo1DawPlSG%2Fszht8Mt%2BhkHOrE7Re2GRTlnj0jEzEtqgp3JjuaYZU7dtbU4PhbvavF2LtxWFin9p0hWGkcMjKWuWDTaHLdj%2FzTSkS3qifkD9k34B6P%2BaQE1liduGSwK4CgNGNIP5PISt%2Fyoq2Gii1A3yIKyFgeL1W3cJ%2FuhVL9iC%2FsAN6AMkGMsNNjO%2BxvlclQ0YNK10sGhsc7A0z0Cvsgo0O344wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190305T090047Z&X-Amz-SignedHeaders=host&X-Amz-Expires=599&X-Amz-Credential=ASIARQRML75E7CY33SUO%2F20190305%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=e82c9ea475e1ba363b6e061c2eebeded0dfd8f275ad8313e16f42430a4f4819b",
+        "Location": "https://awslambda-us-east-2-tasks.s3.us-east-2.amazonaws.com/snapshots/1*****6/test-9f25e193-f604-4d9e-83f1-1254f57e92bc?versionId=wGTdzzK2xtmCGZdt_kgFyy4dlBV8qr1N&X-Amz-Security-Token=FQoGZXIvYXdzEFoaDGu12sbFFNlw0JI6rCK3A6sbM%2FoxC7a2gKuwHXuKoacmpYJa0L%2FtR%2B52PUf9Pbxh2K4OOg5iffmAhfRV%2BpdhyLs32zWlkiYXRpZseDeZPAbofXMZSoLDWhtLVB0EmLTwz33gX8EQfrsvAJa2xWyM9bsebmNwHe9jTa56DvfaQzPEEa4QXpzWEKH8i5%2FSz9iNCrQhbRP%2B5dvclV%2FULql2gMPlxbwPIZNIYdF1xZuddIGcZInkrEHL3956%2B0kHag%2FL%2FoWzN81IGkySbjKNgRFeLxlDEn9ZpDiC%2FdrnNqJ%2FuBdgben7T1ZV3ck5ra0aT7XKaZhDtEN4jHv0sw3O9rORxvlne50TZ56aVePW%2FpUekHjTUiMgrwG%2B2J4uXl2ht2lTJQW3heAFFCoo1DawPlSG%2Fszht8Mt%2BhkHOrE7Re2GRTlnj0jEzEtqgp3JjuaYZU7dtbU4PhbvavF2LtxWFin9p0hWGkcMjKWuWDTaHLdj%2FzTSkS3qifkD9k34B6P%2BaQE1liduGSwK4CgNGNIP5PISt%2Fyoq2Gii1A3yIKyFgeL1W3cJ%2FuhVL9iC%2FsAN6AMkGMsNNjO%2BxvlclQ0YNK10sGhsc7A0z0Cvsgo0O344wU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20190305T090047Z&X-Amz-SignedHeaders=host&X-Amz-Expires=599&X-Amz-Credential=ASIARQRML75E7CY33SUO%2F20190305%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=e82c9ea475e1ba363b6e061c2eebeded0dfd8f275ad8313e16f42430a4f4819b",
         "RepositoryType": "S3"
     },
     "Concurrency": null,
@@ -255,14 +258,14 @@ Given below is a sample response for the getFunction operation.
         "DeadLetterConfig": null,
         "Description": "",
         "Environment": null,
-        "FunctionArn": "arn:aws:lambda:us-east-2:141896495686:function:test:$LATEST",
+        "FunctionArn": "arn:aws:lambda:us-east-2:********:function:test:$LATEST",
         "FunctionName": "test",
         "Handler": "index.handler",
         "KMSKeyArn": null,
         "LastModified": "2019-03-05T08:43:52.123+0000",
         "Layers": [
             {
-                "Arn": "arn:aws:lambda:us-east-2:141896495686:layer:ballerina-09903:1",
+                "Arn": "arn:aws:lambda:us-east-2:*******:layer:ballerina-09903:1",
                 "CodeSize": 177304793,
                 "UncompressedCodeSize": 207173983
             }
@@ -270,7 +273,7 @@ Given below is a sample response for the getFunction operation.
         "MasterArn": null,
         "MemorySize": 128,
         "RevisionId": "1da07f2e-469d-4981-a350-38bb01f19167",
-        "Role": "arn:aws:iam::141896495686:role/test-role",
+        "Role": "arn:aws:iam::**********:role/test-role",
         "Runtime": "nodejs8.10",
         "Timeout": 3,
         "TracingConfig": {
@@ -305,7 +308,7 @@ Implementation of getFunctionConfiguration operation returns the version-specifi
 
 **Properties**
 * functionName: The name of the Lambda function.
-* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+* qualifier: Specify a version or alias.
 
 **Sample request**
 
@@ -333,14 +336,14 @@ Given below is a sample response for the getFunctionConfiguration operation.
     "DeadLetterConfig": null,
     "Description": "",
     "Environment": null,
-    "FunctionArn": "arn:aws:lambda:us-east-2:141896495686:function:test:$LATEST",
+    "FunctionArn": "arn:aws:lambda:us-east-2:*********:function:test:$LATEST",
     "FunctionName": "test",
     "Handler": "index.handler",
     "KMSKeyArn": null,
     "LastModified": "2019-03-05T08:43:52.123+0000",
     "Layers": [
         {
-            "Arn": "arn:aws:lambda:us-east-2:141896495686:layer:ballerina-09903:1",
+            "Arn": "arn:aws:lambda:us-east-2:***********:layer:ballerina-09903:1",
             "CodeSize": 177304793,
             "UncompressedCodeSize": 207173983
         }
@@ -348,7 +351,7 @@ Given below is a sample response for the getFunctionConfiguration operation.
     "MasterArn": null,
     "MemorySize": 128,
     "RevisionId": "1da07f2e-469d-4981-a350-38bb01f19167",
-    "Role": "arn:aws:iam::141896495686:role/test-role",
+    "Role": "arn:aws:iam::*********:role/test-role",
     "Runtime": "nodejs8.10",
     "Timeout": 3,
     "TracingConfig": {
@@ -379,13 +382,13 @@ Implementation of invoke operation invokes a Lambda function. You can invoke a f
     <x-amz-invocation-type>{$ctx:x-amz-invocation-type}</x-amz-invocation-type>
     <x-amz-log-type>{$ctx:x-amz-log-type}</x-amz-log-type>
     <x-amz-client-context>{$ctx:x-amz-client-context}</x-amz-client-context>
-    <requestPayload>{$ctx:requestPayload}</requestPayload>
+    <payload>{$ctx:payload}</payload>
 </amazonlambda.invoke>
 ```
 
 **Properties**
 * functionName: The name of the Lambda function.
-* qualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
+* qualifier: Specify a version or alias to invoke.
 * x-amz-invocation-type: It specifies the way you want to invoke the function.
         
     Choose from the following options.
@@ -398,7 +401,7 @@ Implementation of invoke operation invokes a Lambda function. You can invoke a f
         
 * x-amz-log-type: It specifies whether to include the execution log in the response. Set to Tail to include it in the response. Valid values are: None and Tail
 * x-amz-client-context: It's the base64-encoded data about the invoking client to pass to the function in the context object. It can be up to 3583 bytes. 
-* requestPayload: The JSON that you want to provide to your Lambda function as input.
+* payload: The JSON that you want to provide to your Lambda function as input.
 
 **Sample request**
 
@@ -409,10 +412,7 @@ Following is a sample REST request that can be handled by the invoke operation.
 	"accessKeyId":"AKIAJHJXWUY*********",
 	"region":"us-east-1",
 	"blocking":"false",
-	"functionName":"arn:aws:lambda:us-east-1:61*********:function:Fn",
-	"qualifier":"$LATEST",
-	"x-amz-invocation-type":"Event",
-	"x-amz-log-type":"Tail"
+	"functionName":"LambdawithLayer"
 }
 ```
 
@@ -422,7 +422,8 @@ Given below is a sample response for the invoke operation.
 
 ```json
 {
-
+    "body": "Hello from Lambda Layers!",
+    "statusCode": 200
 }
 ```
 
@@ -464,16 +465,6 @@ Following is a sample REST request that can be handled by the listFunctions oper
 }
 ```
 
-**Sample response**
-
-Given below is a sample response for the listFunctions on operation.
-
-```json
-{
-
-}
-```
-
 **Related Amazon Lambda documentation**
 https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctions.html
 
@@ -484,17 +475,17 @@ The removePermission implementation of the DELETE method revokes function-use pe
 ```xml
 <amazonlambda.removePermission>
     <functionName>{$ctx:functionName}</functionName>
-    <statementId>{$ctx:statementId}</statementId>
-    <qualifier>{$ctx:qualifier}</qualifier>
-    <revisionId>{$ctx:revisionId}</revisionId>
+    <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
+    <permissionQualifier>{$ctx:permissionQualifier}</permissionQualifier>
+    <permissionRevisionId>{$ctx:permissionRevisionId}</permissionRevisionId>
 </amazonlambda.removePermission>
 ```
 
 **Properties**
 * functionName: Name of the Lambda function.
-* statementId: Statement ID of the permission to remove.
-* qualifier: It specifies a version or alias to remove permission from a published version of the function.
-* revisionId: It's a Id which allow to update the policy only if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
+* permissionStatementId: Statement ID of the permission to remove.
+* permissionQualifier: It specifies a version or alias to remove permission from a published version of the function.
+* permissionRevisionId: It's a Id which allow to update the policy only if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
 
 **Sample request**
 
@@ -506,7 +497,7 @@ Following is a sample REST request that can be handled by the removePermission o
   "region":"us-east-1",
   "blocking":"false",
   "functionName":"Fn",
-  "statementId":"Permisssion_Added1443p"
+  "permissionStatementId":"Permisssion_Added1443p"
 }
 ```
 
@@ -550,9 +541,9 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
         </amazonlambda.init>
         <amazonlambda.addPermission>
             <functionName>{$ctx:functionName}</functionName>
-            <action>{$ctx:action}</action>
-            <statementId>{$ctx:statementId}</statementId>
-            <principal>{$ctx:principal}</principal>	
+            <permissionAction>{$ctx:permissionAction}</permissionAction>
+            <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
+            <permissionPrincipal>{$ctx:permissionPrincipal}</permissionPrincipal>	
 	    </amazonlambda.addPermission>           
         <respond/>
      </inSequence>
@@ -567,12 +558,12 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
 {
     "secretAccessKey":"b+fcbf7mH6M*****************",
     "accessKeyId":"AKIAJHJ**********",
-    "region":"us-east-1",
+    "region":"us-east-2",
     "blocking":"false",
-    "functionName":"Fn",
-    "action":"lambda:addPermission",
-    "principal":"s3.amazonaws.com",
-    "statementId":"Permisssion_Added1443p"
+    "functionName":"createdFuncLast",
+    "permissionAction":"lambda:addPermission",
+    "permissionPrincipal":"s3.amazonaws.com",
+    "permissionStatementId":"Permisssion_Added"
 }
 ```
 
@@ -581,13 +572,14 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
 4. Execute the following curl command:
 
 ```bash
-CURL COMMAND HERE
+curl http://localhost:8280/services/amazonlambda_addPermission -H "Content-Type: application/json" -d @addPermission.json
+
 ```
 5. Amazon Lambda returns a json response similar to the one shown below:
  
 ```json
 {
-"RESPONSE":"BODY HERE"
+    "Statement": "{\"Sid\":\"Permisssion_Added\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:addPermission\",\"Resource\":\"arn:aws:lambda:us-east-2:*********:function:createdFuncLast\"}"
 }
 ```
 

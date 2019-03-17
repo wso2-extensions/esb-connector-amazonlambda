@@ -1,11 +1,11 @@
 {
-  "secretAccessKey":"ZvLiOJbh/Gm5o/wE9l7+kAVtjDRg414a/Ev8sF0M",
-  "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
-  "region":"us-east-2",
-  "blocking":"false",
-  "versionNumber":"1",
-  "principal":"*",
-  "statementId":"Layer_Version_Permisssion_AddedM",
-  "action":"lambda:GetLayerVersion",
-  "layerName":"CustomFunction"
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "layerVersionNumber":"%s(layerVersionNumber)",
+  "layerPrincipal":"%s(layerPrincipal)",
+  "layerStatementId":"%s(layerStatementId)",
+  "layerAction":"%s(layerAction)",
+  "layerName":"%s(layerName)"
 }

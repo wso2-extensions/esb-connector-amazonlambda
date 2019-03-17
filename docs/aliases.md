@@ -22,19 +22,19 @@ The createAlias implementation of the POST operation creates an alias for a Lamb
 ```xml
 <amazonlambda.createAlias>
     <functionName>{$ctx:functionName}</functionName>
-    <description>{$ctx:description}</description>
+    <createAliasDescription>{$ctx:createAliasDescription}</createAliasDescription>
     <functionVersion>{$ctx:functionVersion}</functionVersion>
     <aliasName>{$ctx:aliasName}</aliasName>
-    <additionalVersionWeights>{$ctx:additionalVersionWeights}</additionalVersionWeights>
+    <aliasAdditionalVersionWeights>{$ctx:aliasAdditionalVersionWeights}</aliasAdditionalVersionWeights>
 </amazonlambda.createAlias>
 ```
 
 **Properties**
 * functionName : The name of the Lambda function that the alias invokes.
-* description: The description of the alias.
+* createAliasDescription: The description of the alias.
 * functionVersion : The function version that the alias invokes.
 * aliasName: The name of the alias.
-* additionalVersionWeights : The name of second alias, and the percentage of traffic that's routed to it.
+* aliasAdditionalVersionWeights : The name of second alias, and the percentage of traffic that's routed to it.
 
 **Sample request**
 
@@ -57,7 +57,7 @@ Given below is a sample response for the createAlias operation.
 
 ```json
 {
-    "AliasArn": "arn:aws:lambda:us-east-2:141896495686:function:test:alias2",
+    "AliasArn": "arn:aws:lambda:us-east-2:********:function:test:alias2",
     "Description": "",
     "FunctionVersion": "$LATEST",
     "Name": "alias2",
@@ -143,7 +143,7 @@ Given below is a sample response for the getAlias operation.
     Status: 200 OK
 ```json
 {
-    "AliasArn": "arn:aws:lambda:us-east-2:141896495686:function:test:alias2",
+    "AliasArn": "arn:aws:lambda:us-east-2:********:function:test:alias2",
     "Description": "",
     "FunctionVersion": "$LATEST",
     "Name": "alias2",
@@ -162,19 +162,19 @@ The updateAlias method implementation updates the configuration of a Lambda func
 ```xml
 <amazonlambda.updateAlias>
     <functionName>{$ctx:functionName}</functionName>
-    <description>{$ctx:description}</description>
+    <updatedAliasDescription>{$ctx:updatedAliasDescription}</updatedAliasDescription>
     <functionVersion>{$ctx:functionVersion}</functionVersion>
     <aliasName>{$ctx:aliasName}</aliasName>
-    <additionalVersionWeights>{$ctx:additionalVersionWeights}</additionalVersionWeights>
+    <updatedAliasAdditionalVersionWeight>{$ctx:updatedAliasAdditionalVersionWeight}</updatedAliasAdditionalVersionWeight>
 </amazonlambda.updateAlias>
 ```
 
 **Properties**
 * functionName : The name of the Lambda function that the alias invokes.
-* description: The description of the alias.
+* updatedAliasDescription: The description of the alias.
 * functionVersion : The function version that the alias invokes.
 * aliasName: The name of the alias.
-* additionalVersionWeights : The name of second alias, and the percentage of traffic that's routed to it.
+* updatedAliasAdditionalVersionWeight : The name of second alias, and the percentage of traffic that's routed to it.
 
 **Sample request**
 
@@ -198,7 +198,7 @@ Given below is a sample response for the updateAlias operation.
     Status: 200 OK
 ```json
 {
-    "AliasArn": "arn:aws:lambda:us-east-2:141896495686:function:test:alias2",
+    "AliasArn": "arn:aws:lambda:us-east-2:*********:function:test:alias2",
     "Description": "",
     "FunctionVersion": "$LATEST",
     "Name": "alias2",
@@ -231,10 +231,10 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
          <property expression="json-eval($.region)" name="region"/>
          <property expression="json-eval($.blocking)" name="blocking"/>
          <property expression="json-eval($.functionName)" name="functionName"/>
-         <property expression="json-eval($.description)" name="description"/>
+         <property expression="json-eval($.createAliasDescription)" name="createAliasDescription"/>
          <property expression="json-eval($.functionVersion)" name="functionVersion"/>
          <property expression="json-eval($.aliasName)" name="aliasName"/>
-         <property expression="json-eval($.additionalVersionWeights)" name="additionalVersionWeights"/>
+         <property expression="json-eval($.aliasAdditionalVersionWeights)" name="aliasAdditionalVersionWeights"/>
          <amazonlambda.init>
             <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
             <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
@@ -243,10 +243,10 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
          </amazonlambda.init>
          <amazonlambda.createAlias>
             <functionName>{$ctx:functionName}</functionName>	   
-            <description>{$ctx:description}</description>
+            <createAliasDescription>{$ctx:createAliasDescription}</createAliasDescription>
             <functionVersion>{$ctx:functionVersion}</functionVersion>
             <aliasName>{$ctx:aliasName}</aliasName>
-            <additionalVersionWeights>{$ctx:additionalVersionWeights}</additionalVersionWeights>
+            <aliasAdditionalVersionWeights>{$ctx:aliasAdditionalVersionWeights}</aliasAdditionalVersionWeights>
          </amazonlambda.createAlias>           
          <respond/>
       </inSequence>
@@ -261,9 +261,9 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
     "secretAccessKey":"id4qxxxxxxxx",
     "region":"us-east-1",
     "blocking":"false",
-    "functionName":"Fn",
+    "functionName":"createdFuncLast",
     "functionVersion":"$LATEST",
-    "aliasName":"alias2"
+    "aliasName":"aliasJ7"
 }
 ```
 
@@ -272,14 +272,19 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
 4. Execute the following curl command:
 
 ```bash
-give the curl command here
+curl http://localhost:8280/services/amazonlambda_createAlias -H "Content-Type: application/json" -d @createAlias.json
 ```
 5. Amazon Lambda returns a json response similar to the one shown below:
  
 ```json
 {
-
-   }
+    "AliasArn": "arn:aws:lambda:us-east-2:*******:function:createdFuncLast:aliasJ7",
+    "Description": "",
+    "FunctionVersion": "$LATEST",
+    "Name": "aliasJ7",
+    "RevisionId": "f1e5fc6e-752d-408d-9e1e-367bef0cd681",
+    "RoutingConfig": null
+}
 
 ```
 

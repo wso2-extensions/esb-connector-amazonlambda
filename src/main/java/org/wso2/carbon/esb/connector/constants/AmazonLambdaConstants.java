@@ -20,39 +20,64 @@ package org.wso2.carbon.esb.connector.constants;
 
 public class AmazonLambdaConstants {
 
-    public static final String API_URL = "uri.var.apiUrl";
-
+    /**
+     * Constant for Secret Access Key.
+     */
     public static final String SECRET_ACCESS_KEY = "secretAccessKey";
 
+    /**
+     * Constant for Access Key Id.
+     */
     public static final String ACCESS_KEY_ID = "accessKeyId";
 
+    /**
+     * Constant for HTTP method.
+     */
     public static final String HTTP_METHOD = "httpMethod";
 
-    public static final String CANONICAL_URI = "canonicalUri"; // "/"
-
-    public static final String CANONICAL_QUERY_STRING = "canonicalQueryString";
-
-    public static final String CANONICAL_HEADERS = "canonicalHeaders";
-
+    /**
+     * Constant for request payload to later use in signature generation process.
+     */
     public static final String REQUEST_PAYLOAD = "requestPayload";
 
+    /**
+     * Constant for payload parameter.
+     */
     public static final String PAYLOAD = "payload";
+
+    /**
+     * Constant for API payload parameter.
+     */
     public static final String API_PAYLOAD = "Payload";
 
+    /**
+     * Constant for region.
+     */
     public static final String REGION = "region";
 
+    /**
+     * Constant for service.
+     */
     public static final String SERVICE = "service";
 
-    public static final String CREDENTIAL_SCOPE = "credentialScope"; //date only + region + service + terminationString build garney aafailey
-
+    /**
+     * Constant for termination string.
+     */
     public static final String TERMINATION_STRING = "terminationString";
 
-    public static final String HASHED_CANONICAL_REQUEST = "hashedCanonicalRequest";
-
+    /**
+     * Constant for semi colon.
+     */
     public static final String SEMI_COLON = ";";
 
+    /**
+     * Constant for new line.
+     */
     public static final String NEW_LINE = "\n";
 
+    /**
+     * Constant for signature.
+     */
     public static final String API_SIGNATURE = "Signature";
 
     /**
@@ -94,56 +119,6 @@ public class AmazonLambdaConstants {
      * Constant for Ampersand.
      */
     public static final String AMPERSAND = "&";
-
-    /**
-     * Error code constant for Invalid parameters.
-     */
-    public static final String INVALID_PARAMETERS = "Invalid parameters";
-
-    /**
-     * Constant fot Invalid Key Error.
-     */
-    public static final String INVALID_KEY_ERROR = "Invalid key";
-
-    /**
-     * Constant for Invalid Error.
-     */
-    public static final String NO_SUCH_ALGORITHM_ERROR = "Invalid Algorithm";
-
-    /**
-     * Constant for Illegal State Error.
-     */
-    public static final String ILLEGAL_STATE_ERROR = "Illegal State";
-
-    /**
-     * Constant for Unsupported Encoding Error.
-     */
-    public static final String UNSUPPORTED_ENCORDING_ERROR = "Unsupported Encoding";
-
-    /**
-     * Constant errorCode for InvalidKeyException.
-     */
-    public static final int INVALID_KEY_ERROR_CODE = 700007;
-
-    /**
-     * Constant errorCode for NoSuchAlgorithmException.
-     */
-    public static final int NO_SUCH_ALGORITHM_ERROR_CODE = 700008;
-
-    /**
-     * Constant errorCode for IllegalArgumentException.
-     */
-    public static final int ILLEGAL_ARGUMENT_ERROR_CODE = 700013;
-
-    /**
-     * Constant for Illegal State Error Code.
-     */
-    public static final int ILLEGAL_STATE_ERROR_CODE = 700015;
-
-    /**
-     * Constant errorCode for UnsupportedEncodingException.
-     */
-    public static final int UNSUPPORTED_ENCORDING_ERROR_CODE = 700009;
 
     /**
      * Error code constant for generic exception.
@@ -195,12 +170,6 @@ public class AmazonLambdaConstants {
      */
     public static final String HAMC_SHA_256 = "HmacSHA256";
 
-    public static final String SIGNATURE_METHOD = "HmacSHA256";
-
-    // following two string variables may not be needed
-
-    public static final String API_SIGNATURE_METHOD = "SignatureMethod";
-
     /**
      * Constant for AWS4.
      */
@@ -217,11 +186,6 @@ public class AmazonLambdaConstants {
     public static final String TRIM_SPACE_REGEX = "  ++(?=(?:[^\"]*+\"[^\"]*+\")*+[^\"]*+$)";
 
     /**
-     * Constant for Space.
-     */
-    public static final String SPACE = " ";
-
-    /**
      * Constant for Emptyspace.
      */
     public static final String EMPTY_STR = "";
@@ -232,10 +196,11 @@ public class AmazonLambdaConstants {
     public static final String CONNECTOR_ERROR = "Error occurred in connector";
 
     /**
-     * Constant for Connector Error.
+     * Constant for URI Remainder.
      */
-
     public static final String URI_REMAINDER = "uri.var.uriRemainder";
+
+
 
     //CONSTANTS FOR CANONICAL HEADER PARAMETER AND IT'S VALUE
 
@@ -267,11 +232,7 @@ public class AmazonLambdaConstants {
 
     public static final String CODE = "payloadCode";
 
-    public static final String DEAD_LETTER_CONFIG = "payloadDeadLetterConfig";
-
     public static final String DESCRIPTION = "payloadDescription";
-
-    public static final String ENVIRONMENT = "payloadEnvironment";
 
     public static final String FUNCTION_NAME = "payloadFunctionName";//added the prefix payload because without the prefix user might use it values in proxy and the input will be inserted as a payload parameter
 
@@ -293,10 +254,6 @@ public class AmazonLambdaConstants {
 
     public static final String TIMEOUT = "payloadTimeout";
 
-    public static final String TRACING_CONFIG = "payloadTracingConfig";
-
-    public static final String VPC_CONFIG = "payloadVpcConfig";
-
     public static final String ACTION = "payloadAction";
 
     public static final String ORGANIZATION_ID = "payloadOrganizationId";
@@ -317,15 +274,7 @@ public class AmazonLambdaConstants {
 
     public static final String ALIAS_NAME = "payloadAliasName";
 
-    public static final String ROUTING_CONFIG = "payloadRoutingConfig";
-
-    public static final String API_CODE = "Code";
-
-    public static final String API_DEAD_LETTER_CONFIG = "DeadLetterConfig";
-
     public static final String API_DESCRIPTION = "Description";
-
-    public static final String API_ENVIRONMENT = "Environment";
 
     public static final String API_FUNCTION_NAME = "FunctionName";
 
@@ -347,10 +296,6 @@ public class AmazonLambdaConstants {
 
     public static final String API_TIMEOUT = "Timeout";
 
-    public static final String API_TRACING_CONFIG = "TracingConfig";
-
-    public static final String API_VPC_CONFIG = "VpcConfig";
-
     public static final String API_ACTION = "Action";
 
     public static final String API_ORGANIZATION_ID = "OrganizationId";
@@ -370,22 +315,6 @@ public class AmazonLambdaConstants {
     public static final String API_FUNCTION_VERSION = "FunctionVersion";
 
     public static final String API_ALIAS_NAME = "Name";
-
-    public static final String API_ROUTING_CONFIG = "RoutingConfig";
-
-    //constants for endpoints
-
-    public static final String URI_FUNCTION_NAME = "uri.var.functionName";
-
-    public static final String URI_LAYER_NAME = "uri.var.layerName";
-
-    public static final String URI_ALIAS_NAME = "uri.var.aliasName";
-
-    public static final String URI_STATEMENT_ID = "uri.var.statementId";
-
-    public static final String URI_VERSION_NUMBER = "uri.var.versionNumber";
-
-
 
     //constants for query parameter
 
@@ -437,5 +366,4 @@ public class AmazonLambdaConstants {
     public static final String ADDITIONAL_VERSION_WEIGHTS = "payloadAdditionalVersionWeights";
 
     public static final String S3_ZIP_FILE = "payloadZipFile";
-
 }

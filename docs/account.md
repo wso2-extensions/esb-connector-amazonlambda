@@ -72,7 +72,7 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <proxy xmlns="http://ws.apache.org/ns/synapse"
-      name="awslambda_getAccountSettings"
+      name="amazonlambda_getAccountSettings"
       startOnLoad="true"
       statistics="disable"
       trace="disable"
@@ -112,12 +112,26 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
 4. Execute the following curl command:
 
 ```bash
-CURL COMMAND HERE
+curl http://localhost:8280/services/amazonlambda_getAccountSettings -H "Content-Type: application/json" -d @getAccountSettings.json
 ```
 5. Amazon Lambda returns a json response similar to the one shown below:
  
 ```json
 {
-"RESPONSE":"BODY HERE"
+    "AccountLimit": {
+        "CodeSizeUnzipped": 262144000,
+        "CodeSizeZipped": 52428800,
+        "ConcurrentExecutions": 1000,
+        "TotalCodeSize": 80530636800,
+        "UnreservedConcurrentExecutions": 1000,
+        "UnreservedConcurrentExecutionsMinimum": null
+    },
+    "AccountUsage": {
+        "FunctionCount": 4,
+        "TotalCodeSize": 176270013
+    },
+    "DeprecatedFeaturesAccess": null,
+    "HasFunctionWithDeprecatedRuntime": false,
+    "PreviewFeatures": null
 }
 ```

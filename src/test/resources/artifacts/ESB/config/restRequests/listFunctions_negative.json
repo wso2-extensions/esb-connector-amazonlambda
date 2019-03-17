@@ -1,9 +1,10 @@
 {
-  "secretAccessKey":"ZvLiOJbh/Gm5o/wE9l7+kAVtjDRg414a/Ev8sF0M",
-  "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
-  "region":"us-east-2",
-  "blocking":"false",
-  "functionVersion":"",
-  "masterRegion":"us-east-2",
-  "maxItems":"3"
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "functionVersionToBeListed": "",
+  "masterRegion": "%s(masterRegion)",
+  "maxItems": "%s(maxItems)"
 }
+

@@ -1,8 +1,8 @@
 {
-  "secretAccessKey":"ZvLiOJbh/Gm5o/wE9l7+kAVtjDRg414a/Ev8sF0M",
-  "accessKeyId":"AKIAIZCDHDKX7DBMEKSA",
-  "region":"us-east-2",
-  "blocking":"false",
-  "functionName":"test",
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "functionName": "%s(functionName)",
   "aliasName":""
 }
