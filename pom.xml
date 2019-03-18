@@ -37,12 +37,14 @@
         <emma.version>2.1.5320</emma.version>
         <synapse.version>2.1.7-wso2v19</synapse.version>
         <carbon.mediation.version>4.6.19</carbon.mediation.version>
-        <json.version>2.0.0.wso2v1</json.version>
+        <wso2.json.version>2.0.0.wso2v1</wso2.json.version>
         <org.testng.version>6.1.1</org.testng.version>
         <jets3t.version>0.9.4</jets3t.version>
         <bouncycastle.version>1.55</bouncycastle.version>
         <rampart.apache.version>1.6.1-wso2v18</rampart.apache.version>
         <rampart.wso2.version>1.6.1.wso2v18</rampart.wso2.version>
+        <httpmime.version>4.3.6</httpmime.version>
+        <json.version>20080701</json.version>
         <skip-tests>true</skip-tests>
     </properties>
 
@@ -60,7 +62,7 @@
         <dependency>
             <groupId>org.json.wso2</groupId>
             <artifactId>json</artifactId>
-            <version>${json.version}</version>
+            <version>${wso2.json.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.carbon.automation</groupId>
@@ -107,7 +109,6 @@
             <groupId>org.wso2.carbon.automationutils</groupId>
             <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
             <version>${automation.framework.utils.version}</version>
-            <!--<scope>compile</scope>-->
         </dependency>
 
         <dependency>
@@ -161,12 +162,12 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
-            <version>4.3.6</version>
+            <version>${httpmime.version}</version>
         </dependency>
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20080701</version>
+            <version>${json.version}</version>
         </dependency>
         <dependency>
             <groupId>org.wso2.ei</groupId>
