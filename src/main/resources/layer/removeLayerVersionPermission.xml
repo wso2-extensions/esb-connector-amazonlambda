@@ -16,41 +16,31 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-
 <template xmlns="http://ws.apache.org/ns/synapse" name="removeLayerVersionPermission">
     <parameter name="layerName" description="The name or Amazon Resource Name(ARN) of the layer."/>
     <parameter name="layerVersionNumber" description="version number"/>
     <parameter name="layerStatementId" description="The identifier that was specified when the statement was added."/>
     <parameter name="layerRevisionId" description="to update the policy if the revision ID matched the ID specified"/>
-
-
     <sequence>
         <property name="uri.var.layerName" expression="$func:layerName"/>
         <property name="uri.var.versionNumber" expression="$func:layerVersionNumber"/>
         <property name="uri.var.statementId" expression="$func:layerStatementId"/>
         <property name="uri.var.revisionId" expression="$func:layerRevisionId"/>
         <property name="httpMethod" value="DELETE"/>
-
-
         <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
                   expression="fn:concat('/2018-10-31/layers/', $ctx:uri.var.layerName, '/versions/', $ctx:uri.var.versionNumber, '/policy/', $ctx:uri.var.statementId)"/>
-
         <script language="js">
             <![CDATA[
             var queryParameter = '';
-
             var revisionId = mc.getProperty('uri.var.revisionId');
             if (revisionId != null && revisionId != "")
             {
                 queryParameter = "?RevisionId=" + encodeURIComponent(revisionId);
             }
-
             mc.setProperty('uri.var.queryParameter', queryParameter);
            ]]>
-
         </script>
-
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
 
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
@@ -60,7 +50,6 @@
             <args/>
         </payloadFactory>
         <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
-
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">

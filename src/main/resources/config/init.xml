@@ -23,22 +23,16 @@
     <parameter name="secretAccessKey" description="The secret access key of the account."/>
     <parameter name="blocking"
                description="The blocking parameter is helping connector performs the blocking invocation to amazon lambda"/>
-
-
     <sequence>
         <property name="region" expression="$func:region"/>
         <property name="accessKeyId" expression="$func:accessKeyId"/>
         <property name="secretAccessKey" expression="$func:secretAccessKey"/>
         <!-- Common values for all methods -->
         <property name="terminationString" value="aws4_request"/>
-        <!--<property name="contentType" value="application/json"/>-->
-        <!--<property name="signatureMethod" value="HmacSHA256"/>-->
         <property name="service" value="lambda"/>
         <property name="uri.var.httpRequestUri" value="/"/>
         <property name="amazonLambdaBlocking" expression="$func:blocking"/>
         <property name="hostName" expression="fn:concat($ctx:service ,'.' , $ctx:region ,'.amazonaws.com')"/>
         <property name="uri.var.apiUrl" expression="fn:concat('https://' , $ctx:hostName)"/>
-
-
     </sequence>
 </template>

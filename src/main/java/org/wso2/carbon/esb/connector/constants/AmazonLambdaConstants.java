@@ -126,22 +126,12 @@ public class AmazonLambdaConstants {
     public static final int ERROR_CODE_EXCEPTION = 900001;
 
     /**
-     * Constant for two.
-     */
-    public static final int TWO = 2;
-
-    /**
-     * Constant for API variable for Expires.
-     */
-    public static final String API_EXPIRES = "Expires";
-
-    /**
      * Constant for sha 256.
      */
     public static final String SHA_256 = "SHA-256";
 
     /**
-     * Constant for aws4-hmac-sha256. Hashing algorithm used for creating string-to-sign
+     * Constant for aws4-hmac-sha256. Hashing algorithm used for creating string-to-sign.
      */
     public static final String AWS4_HMAC_SHA_256 = "AWS4-HMAC-SHA256";
 
@@ -200,10 +190,9 @@ public class AmazonLambdaConstants {
      */
     public static final String URI_REMAINDER = "uri.var.uriRemainder";
 
-
-
-    //CONSTANTS FOR CANONICAL HEADER PARAMETER AND IT'S VALUE
-
+    /**
+     * Constants for Header parameters.
+     */
     public static final String CONTENT_TYPE = "contentType";
 
     public static final String API_CONTENT_TYPE = "Content-Type";
@@ -228,13 +217,12 @@ public class AmazonLambdaConstants {
 
     public static final String X_AMZ_DATE = "x-amz-date";
 
-    //CONSTANTS FOR HEADERS PARAMETER(PAYLOAD PARAM)
-
-    public static final String CODE = "payloadCode";
-
+    /**
+     * Constants for Payload parameters.
+     */
     public static final String DESCRIPTION = "payloadDescription";
 
-    public static final String FUNCTION_NAME = "payloadFunctionName";//added the prefix payload because without the prefix user might use it values in proxy and the input will be inserted as a payload parameter
+    public static final String FUNCTION_NAME = "payloadFunctionName";
 
     public static final String HANDLER = "payloadHandler";
 
@@ -316,8 +304,9 @@ public class AmazonLambdaConstants {
 
     public static final String API_ALIAS_NAME = "Name";
 
-    //constants for query parameter
-
+    /**
+     * Constants for query parameters.
+     */
     public static final String URI_REVISION_ID = "uri.var.revisionId";
 
     public static final String API_URI_REVISION_ID = "RevisionId";
@@ -342,11 +331,9 @@ public class AmazonLambdaConstants {
 
     public static final String API_URI_MAX_ITEM = "MaxItems";
 
-
-
-
-    //constants for innerPayload header
-
+    /**
+     * Constants for innerPayload headers.
+     */
     public static final String S3_BUCKET = "payloadS3Bucket";
 
     public static final String S3_KEY = "payloadS3Key";

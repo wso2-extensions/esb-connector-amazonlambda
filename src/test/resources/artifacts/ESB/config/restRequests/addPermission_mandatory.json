@@ -5,6 +5,6 @@
   "blocking": "%s(blocking)",
   "functionName": "%s(functionName)",
   "permissionAction": "%s(permissionAction)",
-  "permissionPrincipal":  "%s(permissionPrincipal)",
-  "permissionStatementId":"%s(permissionStatementId)"
+  "permissionPrincipal": "%s(permissionPrincipal)",
+  "permissionStatementId": "%s(permissionStatementId)"
 }

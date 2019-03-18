@@ -49,7 +49,6 @@ public class ParameterNamesMap {
         queryParametersMap.put(AmazonLambdaConstants.URI_MASTER_REGION, AmazonLambdaConstants.API_URI_MASTER_REGION);
         queryParametersMap.put(AmazonLambdaConstants.URI_MAX_ITEM, AmazonLambdaConstants.API_URI_MAX_ITEM);
 
-
         return queryParametersMap;
     }
 

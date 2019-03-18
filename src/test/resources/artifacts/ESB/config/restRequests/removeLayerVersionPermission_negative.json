@@ -3,7 +3,7 @@
   "secretAccessKey": "%s(secretAccessKey)",
   "region": "%s(region)",
   "blocking": "%s(blocking)",
-  "layerVersionNumber":"%s(layerVersionNumber)",
-  "layerStatementId":"%s(layerStatementId)",
-  "layerName":""
+  "layerVersionNumber": "%s(layerVersionNumber)",
+  "layerStatementId": "%s(layerStatementId)",
+  "layerName": ""
 }

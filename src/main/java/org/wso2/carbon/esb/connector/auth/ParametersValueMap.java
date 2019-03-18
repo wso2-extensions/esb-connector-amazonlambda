@@ -18,7 +18,6 @@
 
 package org.wso2.carbon.esb.connector.auth;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.MessageContext;
@@ -28,7 +27,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParametersValueMap {
-
 
     private static Log log = LogFactory.getLog(ParametersValueMap.class);
 
@@ -62,6 +60,7 @@ public class ParametersValueMap {
     }
 
     private Map<String, String> queryHashMap() {
+
         Map<String, String> parametersMap = new HashMap<>();
 
         for (String key : KeysStore.getQueryKeys()) {

@@ -77,14 +77,16 @@
                     <property expression="json-eval($.createAliasDescription)" name="createAliasDescription"/>
                     <property expression="json-eval($.functionVersion)" name="functionVersion"/>
                     <property expression="json-eval($.aliasName)" name="aliasName"/>
-                    <property expression="json-eval($.aliasAdditionalVersionWeights)" name="aliasAdditionalVersionWeights"/>
+                    <property expression="json-eval($.aliasAdditionalVersionWeights)"
+                              name="aliasAdditionalVersionWeights"/>
                     <!--implementation of create alias-->
                     <amazonlambda.createAlias>
                         <functionName>{$ctx:functionName}</functionName>
                         <createAliasDescription>{$ctx:createAliasDescription}</createAliasDescription>
                         <functionVersion>{$ctx:functionVersion}</functionVersion>
                         <aliasName>{$ctx:aliasName}</aliasName>
-                        <aliasAdditionalVersionWeights>{$ctx:aliasAdditionalVersionWeights}</aliasAdditionalVersionWeights>
+                        <aliasAdditionalVersionWeights>{$ctx:aliasAdditionalVersionWeights}
+                        </aliasAdditionalVersionWeights>
                     </amazonlambda.createAlias>
                 </case>
                 <case regex="urn:createFunction">
@@ -255,7 +257,8 @@
                     <property expression="json-eval($.functionVersion)" name="functionVersion"/>
                     <property expression="json-eval($.aliasName)" name="aliasName"/>
                     <property expression="json-eval($.aliasRevisionId)" name="aliasRevisionId"/>
-                    <property expression="json-eval($.updatedAliasAdditionalVersionWeights)" name="updatedAliasAdditionalVersionWeights"/>
+                    <property expression="json-eval($.updatedAliasAdditionalVersionWeights)"
+                              name="updatedAliasAdditionalVersionWeights"/>
 
                     <!--updateAliasImplementation-->
                     <amazonlambda.updateAlias>
@@ -264,7 +267,8 @@
                         <aliasName>{$ctx:aliasName}</aliasName>
                         <updatedAliasDescription>{$ctx:updatedAliasDescription}</updatedAliasDescription>
                         <aliasRevisionId>{$ctx:aliasRevisionId}</aliasRevisionId>
-                        <updatedAliasAdditionalVersionWeights>{$ctx:updatedAliasAdditionalVersionWeights}</updatedAliasAdditionalVersionWeights>
+                        <updatedAliasAdditionalVersionWeights>{$ctx:updatedAliasAdditionalVersionWeights}
+                        </updatedAliasAdditionalVersionWeights>
                     </amazonlambda.updateAlias>
                 </case>
             </switch>

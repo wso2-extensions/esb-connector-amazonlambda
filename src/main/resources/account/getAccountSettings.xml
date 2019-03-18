@@ -16,23 +16,17 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-
 <template xmlns="http://ws.apache.org/ns/synapse" name="getAccountSettings">
-
     <sequence>
         <property name="uri.var.uriRemainder" value="/2016-08-19/account-settings/"/>
         <property name="httpMethod" value="GET"/>
-
-
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
-
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
         <payloadFactory media-type="json">
             <format/>
             <args/>
         </payloadFactory>
-        <!--<property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>-->
         <property name="FORCE_POST_PUT_NOBODY" value="true" scope="axis2" type="BOOLEAN"/>
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>

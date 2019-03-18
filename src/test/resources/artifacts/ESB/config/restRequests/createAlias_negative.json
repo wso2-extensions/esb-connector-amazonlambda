@@ -4,6 +4,6 @@
   "region": "%s(region)",
   "blocking": "%s(blocking)",
   "functionName": "%s(functionName)",
-  "functionVersion":"%s(functionVersion)",
-  "aliasName":""
+  "functionVersion": "%s(functionVersion)",
+  "aliasName": ""
 }

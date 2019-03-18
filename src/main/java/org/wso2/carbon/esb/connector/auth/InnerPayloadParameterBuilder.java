@@ -53,6 +53,7 @@ public class InnerPayloadParameterBuilder {
     /**
      * buildFunctionCode method builds the inner payload needed for the
      * API payload parameter "Code" in createFunction method.
+     *
      * @return String String that is built as payload from the inner payload parameter/s of Code parameter.
      */
     private String buildFunctionCode() {
@@ -90,6 +91,7 @@ public class InnerPayloadParameterBuilder {
     /**
      * buildDeadLetterConfig  method build the inner payload needed for the
      * API payload parameter "DeadLetterConfig" in createFunction method.
+     *
      * @return String String that is built as payload from the inner payload parameter of DeadLetterConfig parameter.
      */
     private String buildDeadLetterConfig() {
@@ -112,9 +114,11 @@ public class InnerPayloadParameterBuilder {
     /**
      * buildEnvironment method builds the inner payload needed for the
      * API payload parameter "Environment" in createFunction method.
+     *
      * @return String String that is built as in a form of payload from the inner payload parameter of Environment parameter.
      */
     private String buildEnvironment() {
+
         Object envVarObj = messageContext.getProperty(AmazonLambdaConstants.ENVIRONMENT_VARIABLES);
 
         if (envVarObj == null) {
@@ -132,6 +136,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * buildTracingConfig method builds the inner payload needed for the API payload parameter "TracingConfig".
+     *
      * @return String String that is built as in a form of payload from the inner payload parameter of TracingConfig parameter.
      */
     private String buildTracingConfig() {
@@ -153,6 +158,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * buildVpcConfig method builds the inner payload for the API payload parameter "VpcConfig".
+     *
      * @return String String that is built as in a form of payload structure from the inner payload parameter/s of VpcConfig.
      */
     private String buildVpcConfig() {
@@ -193,6 +199,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * buildRoutingConfig method builds the inner payload for the API payload parameter "RoutingConfig".
+     *
      * @return string that is built as in the form of payload structure from the inner payload parameter of the
      * RoutingConfig.
      */
@@ -215,6 +222,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * getFunctionCode method returns the value of functionCode.
+     *
      * @return functionCode.
      */
     public String getFunctionCode() {
@@ -224,6 +232,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * getDeadLetterConfig method returns the value of deadLetterConfig.
+     *
      * @return deadLetterConfig.
      */
     public String getDeadLetterConfig() {
@@ -233,6 +242,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * getEnvironment method returns environment
+     *
      * @return environment
      */
     public String getEnvironment() {
@@ -242,6 +252,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * getTracingConfig method returns tracingConfig.
+     *
      * @return tracingConfig.
      */
     public String getTracingConfig() {
@@ -251,6 +262,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * getVpcConfig method returns vpcConfig.
+     *
      * @return vpcConfig.
      */
     public String getVpcConfig() {
@@ -260,6 +272,7 @@ public class InnerPayloadParameterBuilder {
 
     /**
      * getRoutingConfig method returns routingConfig.
+     *
      * @return routingConfig.
      */
     public String getRoutingConfig() {

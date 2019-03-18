@@ -3,5 +3,7 @@
   "secretAccessKey": "%s(secretAccessKey)",
   "region": "%s(region)",
   "blocking": "%s(blocking)",
-  "functionName": "%s(functionNameOptional)"
+  "functionName": "%s(functionNameOptional)",
+  "x-amz-log-type": "%s(x-amz-log-type)",
+  "payload": ""
 }

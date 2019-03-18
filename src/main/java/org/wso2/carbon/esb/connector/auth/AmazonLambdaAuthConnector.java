@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.wso2.carbon.esb.connector.auth;
 
 import org.apache.commons.lang.StringUtils;
@@ -120,11 +121,9 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         final Map<String, String> payloadParametersValueMap = parametersValueMap.getPayloadsValueHashMap();
 
         try {
-
             //Appending HTTP method.
             canonicalRequest.append(messageContext.getProperty(AmazonLambdaConstants.HTTP_METHOD))
                     .append(AmazonLambdaConstants.NEW_LINE);
-
             //Setting canonicalUri.
             String canonicalUri = (String) messageContext.getProperty(AmazonLambdaConstants.URI_REMAINDER);
             if (canonicalUri != null && !canonicalUri.isEmpty()) {
@@ -134,13 +133,10 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                 canonicalRequest.append(AmazonLambdaConstants.FORWARD_SLASH)
                         .append(AmazonLambdaConstants.NEW_LINE);
             }
-
             //Setting canonicalQueryString
             final StringBuilder canonicalQueryString = new StringBuilder();
             final Map<String, String> queryParametersMap = ParameterNamesMap.getQueryParameterNamesMap();
-
             for (Map.Entry<String, String> entry : queryParametersMap.entrySet()) {
-
                 String key = entry.getKey();
                 String tempParam = queryParametersValueMap.get(key);
                 if (StringUtils.isNotEmpty((tempParam))) {
@@ -155,21 +151,17 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                         .append(URLEncoder.encode(queryValue, AmazonLambdaConstants.UTF_8))
                         .append(AmazonLambdaConstants.AMPERSAND);
             }
-
             //Removes additional ampersand added at the end from canonicalQueryString and append to canonicalRequest.
             if (canonicalQueryString.length() > 0) {
-
                 canonicalRequest.append(canonicalQueryString.substring(0, canonicalQueryString.length() - 1))
                         .append(AmazonLambdaConstants.NEW_LINE);
             } else {
                 canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
             }
-
             //Setting canonicalHeader and signedHeader
             final Map<String, String> headerParametersMap = ParameterNamesMap.getHeaderParameterNamesMap();
             final StringBuilder canonicalHeader = new StringBuilder();
             final StringBuilder signedHeader = new StringBuilder();
-
             headersParamsMap.put(AmazonLambdaConstants.API_X_AMZ_DATE, amzDate);
             for (Map.Entry<String, String> entry : headerParametersMap.entrySet()) {
                 String key = entry.getKey();
@@ -177,10 +169,8 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                 if (!tempParam.isEmpty()) {
                     headersParamsMap.put(headerParametersMap.get(key),
                             tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
-
                 }
             }
-
             final SortedSet<String> headerKeys = new TreeSet<>(headersParamsMap.keySet());
             for (String key : headerKeys) {
                 String headerValues = headersParamsMap.get(key);
@@ -189,21 +179,17 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                 signedHeader.append(key.toLowerCase());
                 signedHeader.append(AmazonLambdaConstants.SEMI_COLON);
             }
-
             //Appending canonicalHeader to canonicalRequest.
             canonicalRequest.append(canonicalHeader.toString());
             canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
-
             // Removes unwanted semi-colon at the end of the signedHeader string
             String signedHeaders = "";
             if (signedHeader.length() > 0) {
                 signedHeaders = signedHeader.substring(0, signedHeader.length() - 1);
             }
-
             //Appending signedHeaders to canonicalRequest.
             canonicalRequest.append(signedHeaders);
             canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
-
             //Payload Building from the payload parameter and value given by user.
             String requestPayload = "";
             final Map<String, String> payloadParametersMap = ParameterNamesMap.getPayloadParameterNamesMap();
@@ -272,7 +258,6 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             stringToSign.append(AmazonLambdaConstants.NEW_LINE);
             stringToSign.append(amzDate);
             stringToSign.append(AmazonLambdaConstants.NEW_LINE);
-
             stringToSign.append(dateOnly);
             stringToSign.append(AmazonLambdaConstants.FORWARD_SLASH);
             stringToSign.append(messageContext.getProperty(AmazonLambdaConstants.REGION));
@@ -280,7 +265,6 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             stringToSign.append(messageContext.getProperty(AmazonLambdaConstants.SERVICE));
             stringToSign.append(AmazonLambdaConstants.FORWARD_SLASH);
             stringToSign.append(messageContext.getProperty(AmazonLambdaConstants.TERMINATION_STRING));
-
             stringToSign.append(AmazonLambdaConstants.NEW_LINE);
             stringToSign.append(bytesToHex(hash(messageContext, canonicalRequest.toString())).toLowerCase());
 
@@ -321,7 +305,6 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             throw new ConnectException(e);
         }
     }
-
     private void storeErrorResponseStatus(final MessageContext ctxt, final Throwable throwable, final int errorCode) {
 
         ctxt.setProperty(SynapseConstants.ERROR_CODE, errorCode);

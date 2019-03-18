@@ -4,10 +4,10 @@
   "region": "%s(region)",
   "blocking": "%s(blocking)",
   "functionName": "%s(functionName)",
-  "s3Bucket":"",
-  "s3Key":"%s(s3Key)",
-  "s3ObjectVersion":"%s(s3ObjectVersion)",
-  "handler":"%s(handler)",
-  "role":"%s(role)",
-  "runtime":"%s(runtime)"
+  "s3Bucket": "",
+  "s3Key": "%s(s3Key)",
+  "s3ObjectVersion": "%s(s3ObjectVersion)",
+  "handler": "%s(handler)",
+  "role": "%s(role)",
+  "runtime": "%s(runtime)"
 }

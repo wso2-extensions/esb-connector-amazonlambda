@@ -19,19 +19,18 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="addPermission">
     <parameter name="functionName" description="Name of the Lambda function to which add a new permission."/>
     <parameter name="permissionQualifier" description="To apply the permission to the specified."/>
-
     <parameter name="permissionAction" description="The AWS Lambda action to allow."/>
     <parameter name="eventSourceToken" description="A unique token supplied by the principal invoking the function."/>
-    <parameter name="permissionPrincipal" description="The principal who is getting this permission to invoke the function."/>
-    <parameter name="permissionRevisionId" description="Only update the policy if the revision ID matches the ID specified."/>
+    <parameter name="permissionPrincipal"
+               description="The principal who is getting this permission to invoke the function."/>
+    <parameter name="permissionRevisionId"
+               description="Only update the policy if the revision ID matches the ID specified."/>
     <parameter name="sourceAccount" description="The source account."/>
     <parameter name="sourceArn" description="The ARN of the source."/>
     <parameter name="permissionStatementId" description="A unique statement identifier."/>
-
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:permissionQualifier"/>
-
         <property name="payloadAction" expression="$func:permissionAction"/>
         <property name="payloadEventSourceToken" expression="$func:eventSourceToken"/>
         <property name="payloadPrincipal" expression="$func:permissionPrincipal"/>
@@ -39,30 +38,22 @@
         <property name="payloadSourceAccount" expression="$func:sourceAccount"/>
         <property name="payloadSourceArn" expression="$func:sourceArn"/>
         <property name="payloadStatementId" expression="$func:permissionStatementId"/>
-
         <property name="httpMethod" value="POST"/>
-
         <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
                   expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/policy')"/>
-
         <script language="js">
             <![CDATA[
-
             var queryParameter = '';
             var qualifier = mc.getProperty('uri.var.qualifier');
             if (qualifier != null && qualifier != "")
             {
                 queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
             }
-
             mc.setProperty('uri.var.queryParameter', queryParameter.toString());
            ]]>
-
         </script>
-
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
-
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
         <payloadFactory media-type="json">
@@ -73,9 +64,6 @@
                 <arg expression="$ctx:requestPayload"/>
             </args>
         </payloadFactory>
-
-        <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
-
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">
