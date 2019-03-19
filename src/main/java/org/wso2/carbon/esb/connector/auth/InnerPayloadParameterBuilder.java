@@ -18,6 +18,7 @@
 
 package org.wso2.carbon.esb.connector.auth;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 
@@ -26,7 +27,8 @@ import java.util.Map;
 
 /**
  * InnerPayloadParameterBuilder class is used to build the inner payload. It gets the inner payload
- * parameters' values and build it as in the form of payload with their parameter for the respective outer payload parameter's value.
+ * parameters' values and build it as in the form of payload with their parameter for the respective
+ * outer payload parameter's value.
  */
 public class InnerPayloadParameterBuilder {
 
@@ -47,7 +49,6 @@ public class InnerPayloadParameterBuilder {
         tracingConfig = buildTracingConfig();
         vpcConfig = buildVpcConfig();
         routingConfig = buildRoutingConfig();
-
     }
 
     /**
@@ -115,7 +116,7 @@ public class InnerPayloadParameterBuilder {
      * buildEnvironment method builds the inner payload needed for the
      * API payload parameter "Environment" in createFunction method.
      *
-     * @return String String that is built as in a form of payload from the inner payload parameter of Environment parameter.
+     * @return String that is built as in a form of payload from the inner payload parameter of Environment parameter.
      */
     private String buildEnvironment() {
 
@@ -137,7 +138,7 @@ public class InnerPayloadParameterBuilder {
     /**
      * buildTracingConfig method builds the inner payload needed for the API payload parameter "TracingConfig".
      *
-     * @return String String that is built as in a form of payload from the inner payload parameter of TracingConfig parameter.
+     * @return String that is built in a form of payload from the inner payload parameter of TracingConfig parameter.
      */
     private String buildTracingConfig() {
 
@@ -159,7 +160,7 @@ public class InnerPayloadParameterBuilder {
     /**
      * buildVpcConfig method builds the inner payload for the API payload parameter "VpcConfig".
      *
-     * @return String String that is built as in a form of payload structure from the inner payload parameter/s of VpcConfig.
+     * @return String that is built as in a form of payload structure from the inner payload parameter/s of VpcConfig.
      */
     private String buildVpcConfig() {
 
@@ -177,18 +178,17 @@ public class InnerPayloadParameterBuilder {
         if (subnetIdsObj != null && !((String) subnetIdsObj).trim().isEmpty()) {
             subnetIdsStr = ((String) subnetIdsObj).trim();
         }
-
-        if (securityGroupIdsStr != "" || subnetIdsStr != "") {
+        if (StringUtils.isNotEmpty(securityGroupIdsStr) || StringUtils.isNotEmpty(subnetIdsStr)) {
             vpcConfigBuilder.append('{');
 
-            if (securityGroupIdsStr != "") {
-                vpcConfigBuilder = vpcConfigBuilder.append(String.format("{\"SecurityGroupIds\":[\"%s\"]}", securityGroupIdsStr))
+            if (StringUtils.isNotEmpty(securityGroupIdsStr)) {
+                vpcConfigBuilder
+                        .append(String.format("\"SecurityGroupIds\":[\"%s\"]", securityGroupIdsStr))
                         .append(',');
             }
 
-            if (subnetIdsStr != "") {
-                vpcConfigBuilder = vpcConfigBuilder.append(String.format("{\"SubnetIds\":[\"%s\"]}", subnetIdsStr));
-
+            if (StringUtils.isNotEmpty(subnetIdsStr)) {
+                vpcConfigBuilder.append(String.format("\"SubnetIds\":[\"%s\"]", subnetIdsStr));
             }
             vpcConfigBuilder.append('}');
 
@@ -205,7 +205,8 @@ public class InnerPayloadParameterBuilder {
      */
     public String buildRoutingConfig() {
 
-        Object additionalVersionWeightsObj = messageContext.getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
+        Object additionalVersionWeightsObj = messageContext.
+                getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
 
         if (additionalVersionWeightsObj == null) {
             return "";

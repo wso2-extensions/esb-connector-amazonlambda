@@ -41,7 +41,6 @@ public class ParametersValueMap {
         headersParametersValueMap = headerHashMap();
         queryParametersValueMap = queryHashMap();
         payloadParametersValueMap = payloadHashMap();
-
     }
 
     private Map<String, String> headerHashMap() {
