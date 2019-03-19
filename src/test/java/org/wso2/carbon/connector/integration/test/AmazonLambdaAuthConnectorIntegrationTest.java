@@ -45,8 +45,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
                 System.getProperty("connector_version") + ".zip";
         init(connectorName);
         getApiConfigProperties();
-
-        //eiRequestHeadersMap.put("Accept-Charset", "UTF-8");
         eiRequestHeadersMap.put("Content-Type", "application/json");
     }
 
@@ -60,8 +58,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createFunction_mandatory.json");
-//        String revisionId = eiRestResponse.getBody().getString("RevisionId");
-//        connectorProperties.setProperty("revisionId", revisionId);
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -283,8 +279,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
-//Depends on createAlias
-
     /**
      * Positive test case for getAlias method with mandatory parameters.
      */
@@ -458,7 +452,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
 
     /**
      * Positive test case for deleteFunction method with optional parameters.
-     * dependsOnMethods = {"testCreateFunctionWithOptionalParameters"},
      */
     @Test(groups = {"wso2.ei"},
             description = "amazonlambda {deleteFunction} integration test optional case.")
@@ -563,7 +556,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunction_negative.json");
-        //no matter what mandatory parameter gets empty value it's giving status: 200 ok
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
