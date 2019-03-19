@@ -18,18 +18,12 @@
 
 package org.wso2.carbon.esb.connector.auth;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class ParametersValueMap {
-
-    private static Log log = LogFactory.getLog(ParametersValueMap.class);
-
     private final MessageContext messageContext;
     private final Map<String, String> headersParametersValueMap;
     private final Map<String, String> queryParametersValueMap;

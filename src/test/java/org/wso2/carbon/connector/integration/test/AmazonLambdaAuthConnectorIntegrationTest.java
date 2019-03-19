@@ -62,8 +62,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
                         "createFunction_mandatory.json");
 //        String revisionId = eiRestResponse.getBody().getString("RevisionId");
 //        connectorProperties.setProperty("revisionId", revisionId);
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -78,8 +76,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createFunction_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -95,8 +91,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunction_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -111,8 +105,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunction_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -127,8 +119,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunctionConfiguration_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -143,8 +133,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunctionConfiguration_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -159,8 +147,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "invoke_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -175,8 +161,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "invoke_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -225,8 +209,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "addPermission_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -241,8 +223,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "addPermission_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -257,8 +237,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "removePermission_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
@@ -273,8 +251,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "removePermission_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
 
     }
@@ -290,8 +266,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createAlias_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -306,8 +280,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createAlias_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -324,8 +296,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getAlias_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -340,8 +310,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getAlias_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -356,8 +324,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "updateAlias_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -372,8 +338,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "updateAlias_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -390,8 +354,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "deleteAlias_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
@@ -408,8 +370,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "deleteAlias_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
@@ -423,8 +383,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getAccountSettings_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -439,8 +397,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "addLayerVersionPermission_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -455,8 +411,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "addLayerVersionPermission_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -471,8 +425,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "removeLayerVersionPermission_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
@@ -487,8 +439,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "removeLayerVersionPermission_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
@@ -503,8 +453,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "deleteFunction_mandatory.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
@@ -520,8 +468,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "deleteFunction_optional.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 204);
     }
 
@@ -539,8 +485,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "addLayerVersionPermission_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -554,8 +498,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "addPermission_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -569,8 +511,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createAlias_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 400);
     }
 
@@ -584,8 +524,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createFunction_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 400);
     }
 
@@ -599,8 +537,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getAccountSettings_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -614,8 +550,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getAlias_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -629,8 +563,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunction_negative.json");
-
-        log.info(eiRestResponse.getBody());
         //no matter what mandatory parameter gets empty value it's giving status: 200 ok
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
@@ -645,8 +577,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunctionConfiguration_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -660,8 +590,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "invoke_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -690,8 +618,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "removeLayerVersionPermission_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -705,8 +631,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "removePermission_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -720,8 +644,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "updateAlias_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -735,8 +657,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "deleteAlias_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
@@ -750,8 +670,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "deleteFunction_negative.json");
-
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 403);
     }
 
