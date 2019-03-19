@@ -15,4 +15,3 @@ For general information on using connectors and their operations in your configu
 | | Version |
 | ------------- |-------------|
 | Connector    | 1.0.0 |
-

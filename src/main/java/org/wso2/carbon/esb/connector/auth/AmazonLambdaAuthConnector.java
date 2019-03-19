@@ -166,7 +166,8 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             for (Map.Entry<String, String> entry : headerParametersMap.entrySet()) {
                 String key = entry.getKey();
                 String tempParam = headerParametersValueMap.get(key);
-                if (!tempParam.isEmpty()) {
+//                if (!tempParam.isEmpty()) {
+                if (StringUtils.isNotEmpty(tempParam)) {
                     headersParamsMap.put(headerParametersMap.get(key),
                             tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
                 }
@@ -197,7 +198,8 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             for (Map.Entry<String, String> entry : payloadParametersMap.entrySet()) {
                 String key = entry.getKey();
                 String tempParam = payloadParametersValueMap.get(key);
-                if (!tempParam.isEmpty()) {
+//                if (!tempParam.isEmpty()) {
+                if (StringUtils.isNotEmpty(tempParam)) {
                     payloadParamsMap.put(payloadParametersMap.get(key),
                             tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
                 }

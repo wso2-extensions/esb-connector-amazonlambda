@@ -287,4 +287,3 @@ curl http://localhost:8280/services/amazonlambda_createAlias -H "Content-Type: a
 }
 
 ```
-

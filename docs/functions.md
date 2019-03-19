@@ -582,5 +582,3 @@ curl http://localhost:8280/services/amazonlambda_addPermission -H "Content-Type:
     "Statement": "{\"Sid\":\"Permisssion_Added\",\"Effect\":\"Allow\",\"Principal\":{\"Service\":\"s3.amazonaws.com\"},\"Action\":\"lambda:addPermission\",\"Resource\":\"arn:aws:lambda:us-east-2:*********:function:createdFuncLast\"}"
 }
 ```
-
-
