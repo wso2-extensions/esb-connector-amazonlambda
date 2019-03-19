@@ -186,6 +186,36 @@ public class AmazonLambdaConstants {
     public static final String CONNECTOR_ERROR = "Error occurred in connector";
 
     /**
+     * Constant for Illegal State Error Code.
+     */
+    public static final int ILLEGAL_STATE_ERROR_CODE = 700015;
+
+    /**
+     * Constant errorCode for UnsupportedEncodingException.
+     */
+    public static final int UNSUPPORTED_ENCODING_ERROR_CODE = 700009;
+
+    /**
+     * Constant fot Invalid Key Error.
+     */
+    public static final String INVALID_KEY_ERROR = "Invalid key";
+
+    /**
+     * Constant errorCode for InvalidKeyException.
+     */
+    public static final int INVALID_KEY_ERROR_CODE = 700007;
+
+    /**
+     * Constant for Invalid Error.
+     */
+    public static final String NO_SUCH_ALGORITHM_ERROR = "Invalid Algorithm";
+
+    /**
+     * Constant errorCode for NoSuchAlgorithmException.
+     */
+    public static final int NO_SUCH_ALGORITHM_ERROR_CODE = 700008;
+
+    /**
      * Constant for URI Remainder.
      */
     public static final String URI_REMAINDER = "uri.var.uriRemainder";

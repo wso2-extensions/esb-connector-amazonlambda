@@ -310,8 +310,18 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             // Adds authorization header to message context
             messageContext.setProperty(AmazonLambdaConstants.AUTHORIZATION_HEADER, authHeader.toString());
 
-        } catch (Exception e) {
-            throw new ConnectException(e);
+        } catch (InvalidKeyException exc) {
+            storeErrorResponseStatus(messageContext, exc, AmazonLambdaConstants.INVALID_KEY_ERROR_CODE);
+            handleException(AmazonLambdaConstants.INVALID_KEY_ERROR, exc, messageContext);
+        } catch (NoSuchAlgorithmException exc) {
+            storeErrorResponseStatus(messageContext, exc, AmazonLambdaConstants.NO_SUCH_ALGORITHM_ERROR_CODE);
+            handleException(AmazonLambdaConstants.NO_SUCH_ALGORITHM_ERROR, exc, messageContext);
+        } catch (IllegalStateException exc) {
+            storeErrorResponseStatus(messageContext, exc, AmazonLambdaConstants.ILLEGAL_STATE_ERROR_CODE);
+            handleException(AmazonLambdaConstants.CONNECTOR_ERROR, exc, messageContext);
+        } catch (UnsupportedEncodingException exc) {
+            storeErrorResponseStatus(messageContext, exc, AmazonLambdaConstants.UNSUPPORTED_ENCODING_ERROR_CODE);
+            handleException(AmazonLambdaConstants.CONNECTOR_ERROR, exc, messageContext);
         }
     }
 
