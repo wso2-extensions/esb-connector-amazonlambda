@@ -80,22 +80,22 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         /*
         Checks whether any of the inner payload parameter has value and if it has value,
          */
-        if (code != null && !code.isEmpty()) {
+        if (StringUtils.isNotEmpty(code)) {
             payloadParamsMap.put("Code", code);
         }
-        if (deadLetterConfig != null && !deadLetterConfig.isEmpty()) {
+        if (StringUtils.isNotEmpty(deadLetterConfig)) {
             payloadParamsMap.put("DeadLetterConfig", deadLetterConfig);
         }
-        if (environment != null && !environment.isEmpty()) {
+        if (StringUtils.isNotEmpty(environment)) {
             payloadParamsMap.put("Environment", environment);
         }
-        if (tracingConfig != null && !tracingConfig.isEmpty()) {
+        if (StringUtils.isNotEmpty(tracingConfig)) {
             payloadParamsMap.put("TracingConfig", tracingConfig);
         }
-        if (vpcConfig != null && !vpcConfig.isEmpty()) {
+        if (StringUtils.isNotEmpty(vpcConfig)) {
             payloadParamsMap.put("VpcConfig", vpcConfig);
         }
-        if (routingConfig != null && !routingConfig.isEmpty()) {
+        if (StringUtils.isNotEmpty(routingConfig)) {
             payloadParamsMap.put("RoutingConfig", routingConfig);
         }
 
@@ -126,7 +126,7 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                     .append(AmazonLambdaConstants.NEW_LINE);
             //Setting canonicalUri.
             String canonicalUri = (String) messageContext.getProperty(AmazonLambdaConstants.URI_REMAINDER);
-            if (canonicalUri != null && !canonicalUri.isEmpty()) {
+            if (StringUtils.isNotEmpty(canonicalUri)) {
                 canonicalRequest.append(canonicalUri.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR))
                         .append(AmazonLambdaConstants.NEW_LINE);
             } else {
