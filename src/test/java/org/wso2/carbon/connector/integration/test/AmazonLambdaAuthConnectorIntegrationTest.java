@@ -262,6 +262,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createAlias_mandatory.json");
+        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -271,7 +272,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     @Test(groups = {"wso2.ei"}, dependsOnMethods = {"testCreateFunctionWithMandatoryParameters"},
             description = "amazonlambda {createAlias} integration test optional case.")
     public void testCreateAliasWithOptionalParameters() throws Exception {
-
         eiRequestHeadersMap.put("Action", "urn:createAlias");
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,

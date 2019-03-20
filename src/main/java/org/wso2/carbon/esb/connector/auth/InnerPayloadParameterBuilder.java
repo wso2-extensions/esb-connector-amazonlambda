@@ -205,20 +205,19 @@ public class InnerPayloadParameterBuilder {
      */
     public String buildRoutingConfig() {
 
-        Object additionalVersionWeightsObj = messageContext.
-                getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
-
+        Object additionalVersionWeightsObj = messageContext
+                .getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
         if (additionalVersionWeightsObj == null) {
             return "";
         }
 
-        String additonalVersionWeightStr = (String) additionalVersionWeightsObj;
+        String additionalVersionWeightStr = (String) additionalVersionWeightsObj;
 
-        if (additonalVersionWeightStr.trim().isEmpty()) {
+        if (additionalVersionWeightStr.trim().isEmpty()) {
             return "";
         }
 
-        return String.format("{\"AdditionalVersionWeights\": %s}", additonalVersionWeightStr);
+        return String.format("{\"AdditionalVersionWeights\": %s}", additionalVersionWeightStr);
     }
 
     /**
