@@ -20,18 +20,20 @@
     <parameter name="functionName" description="The name of the function."/>
     <parameter name="permissionStatementId" description="Statement Id of the permission to remove"/>
     <parameter name="permissionQualifier"
-               description="Specify a version or alias to remove permissions from a published version of the function."/>
+               description="Specify a version/alias to remove permissions from a published version of the function."/>
     <parameter name="permissionRevisionId"
                description="To update the policy if the revision ID matched the ID specified"/>
+    <parameter name="apiVersionRemovePermission" description="API version used for RemovePermission method."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.statementId" expression="$func:permissionStatementId"/>
         <property name="uri.var.qualifier" expression="$func:permissionQualifier"/>
         <property name="uri.var.revisionId" expression="$func:permissionRevisionId"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionRemovePermission"/>
         <property name="httpMethod" value="DELETE"/>
-        <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/policy/', $ctx:uri.var.statementId)"/>
+                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
+                   '/policy/', $ctx:uri.var.statementId)"/>
         <script language="js">
             <![CDATA[
             var queryParameters = '';

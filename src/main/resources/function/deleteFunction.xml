@@ -19,13 +19,14 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="deleteFunction">
     <parameter name="functionName" description="Name of the Lambda function to be deleted"/>
     <parameter name="deleteFunctionQualifier" description="version of function to delete the specified version"/>
+    <parameter name="apiVersionDeleteFunction" description="API version used for DeleteFunction method."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:deleteFunctionQualifier"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionDeleteFunction"/>
         <property name="httpMethod" value="DELETE"/>
-        <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName)"/>
+                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName)"/>
         <script language="js">
             <![CDATA[
             var queryParameter = '';

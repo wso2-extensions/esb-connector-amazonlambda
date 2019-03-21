@@ -4,5 +4,6 @@
   "region": "%s(region)",
   "blocking": "%s(blocking)",
   "functionName": "%s(functionNameOptional)",
-  "qualifier": "%s(qualifier)"
+  "qualifier": "%s(qualifier)",
+  "apiVersionGetFunctionConfiguration": "%s(apiVersionGetFunctionConfiguration)"
 }

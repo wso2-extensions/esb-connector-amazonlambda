@@ -9,5 +9,6 @@
   "s3ObjectVersion": "%s(s3ObjectVersion)",
   "handler": "%s(handler)",
   "role": "%s(role)",
-  "runtime": "%s(runtime)"
+  "runtime": "%s(runtime)",
+  "apiVersionCreateFunction": "%s(apiVersionCreateFunction)"
 }

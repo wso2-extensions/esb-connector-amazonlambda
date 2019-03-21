@@ -5,5 +5,7 @@
   "blocking": "%s(blocking)",
   "layerVersionNumber": "%s(layerVersionNumber)",
   "layerStatementId": "%s(layerStatementId)",
-  "layerName": ""
+  "layerName": "",
+  "apiVersionRemoveLayerVersionPermission": "%s(apiVersionRemoveLayerVersionPermission)"
+
 }

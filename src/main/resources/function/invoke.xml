@@ -19,17 +19,20 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="invoke">
     <!-- URI request parameters-->
     <parameter name="functionName" description="Name of the Lambda function."/>
+    <parameter name="apiVersionInvoke" description="API version used for Invoke method."/>
     <parameter name="qualifier"
                description="Specify a version or alias to invoke a published version of the function."/>
     <!-- Header parameters-->
     <parameter name="x-amz-invocation-type" description="Invocation type."/>
     <parameter name="x-amz-log-type" description="Set to Tail to include the execution log in the response."/>
     <parameter name="x-amz-client-context"
-               description="Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context object."/>
+               description="Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function
+                in the context object."/>
     <!-- Payloads-->
     <parameter name="payload" description="Payloads for the HTTP request."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionInvoke"/>
         <property name="uri.var.qualifier" expression="$func:qualifier"/>
 
         <property name="invocationType" expression="$func:x-amz-invocation-type"/>
@@ -38,9 +41,9 @@
 
         <property name="payload" expression="$func:payload"/>
         <property name="httpMethod" value="POST"/>
-        <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/invocations')"/>
+                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
+                   '/invocations')"/>
         <script language="js">
             <![CDATA[
             var queryParameter = '';

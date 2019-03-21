@@ -6,5 +6,6 @@
   "functionName": "%s(functionName)",
   "functionVersion": "%s(functionVersion)",
   "aliasName": "aliasO",
-  "updatedAliasDescription": "%s(updatedAliasDescription)"
+  "updatedAliasDescription": "%s(updatedAliasDescription)",
+  "apiVersionUpdateAlias": "%s(apiVersionUpdateAlias)"
 }

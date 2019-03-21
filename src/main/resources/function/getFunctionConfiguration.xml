@@ -19,13 +19,16 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="getFunctionConfiguration">
     <parameter name="functionName" description="Name of the Lambda function."/>
     <parameter name="qualifier" description="version/alias to specify"/>
+    <parameter name="apiVersionGetFunctionConfiguration"
+               description="API version used for GetFunctionConfiguration method."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:qualifier"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionGetFunctionConfiguration"/>
         <property name="httpMethod" value="GET"/>
-        <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/configuration')"/>
+                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
+                   '/configuration')"/>
         <script language="js">
             <![CDATA[
             var queryParameter = '';

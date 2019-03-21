@@ -7,5 +7,6 @@
   "layerPrincipal": "%s(layerPrincipal)",
   "layerStatementId": "%s(layerStatementId)",
   "layerAction": "%s(layerAction)",
-  "layerName": "%s(layerName)"
+  "layerName": "%s(layerName)",
+  "apiVersionAddLayerVersionPermission": "%s(apiVersionAddLayerVersionPermission)"
 }

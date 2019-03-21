@@ -19,13 +19,15 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="getAlias">
     <parameter name="functionName" description="Name of the Lambda function"/>
     <parameter name="aliasName" description="The name of the alias"/>
+    <parameter name="apiVersionGetAlias" description="API version used for GetAlias method."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.aliasName" expression="$func:aliasName"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionGetAlias"/>
         <property name="httpMethod" value="GET"/>
-        <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/aliases/', $ctx:uri.var.aliasName)"/>
+                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
+                   '/aliases/', $ctx:uri.var.aliasName)"/>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>

@@ -19,6 +19,7 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="addPermission">
     <parameter name="functionName" description="Name of the Lambda function to which add a new permission."/>
     <parameter name="permissionQualifier" description="To apply the permission to the specified."/>
+    <parameter name="apiVersionAddPermission" description="API version used for AddPermission method."/>
     <parameter name="permissionAction" description="The AWS Lambda action to allow."/>
     <parameter name="eventSourceToken" description="A unique token supplied by the principal invoking the function."/>
     <parameter name="permissionPrincipal"
@@ -31,6 +32,7 @@
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:permissionQualifier"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionAddPermission"/>
         <property name="payloadAction" expression="$func:permissionAction"/>
         <property name="payloadEventSourceToken" expression="$func:eventSourceToken"/>
         <property name="payloadPrincipal" expression="$func:permissionPrincipal"/>
@@ -39,9 +41,9 @@
         <property name="payloadSourceArn" expression="$func:sourceArn"/>
         <property name="payloadStatementId" expression="$func:permissionStatementId"/>
         <property name="httpMethod" value="POST"/>
-        <property name="uri.var.uriRemainder" value=""/>
         <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/2015-03-31/functions/', $ctx:uri.var.functionName, '/policy')"/>
+                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
+                   '/policy')"/>
         <script language="js">
             <![CDATA[
             var queryParameter = '';

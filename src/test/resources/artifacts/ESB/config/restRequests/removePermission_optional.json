@@ -4,5 +4,6 @@
   "region": "%s(region)",
   "blocking": "%s(blocking)",
   "functionName": "%s(functionName)",
-  "permissionStatementId": "addedPermissionOptional"
+  "permissionStatementId": "addedPermissionOptional",
+  "apiVersionRemovePermission": "%s(apiVersionRemovePermission)"
 }

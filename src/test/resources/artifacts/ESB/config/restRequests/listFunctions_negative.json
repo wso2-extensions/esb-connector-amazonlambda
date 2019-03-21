@@ -5,6 +5,8 @@
   "blocking": "%s(blocking)",
   "functionVersionToBeListed": "",
   "masterRegion": "%s(masterRegion)",
-  "maxItems": "%s(maxItems)"
+  "maxItems": "%s(maxItems)",
+  "apiVersionListFunctions": "%s(apiVersionListFunctions)"
+
 }
 

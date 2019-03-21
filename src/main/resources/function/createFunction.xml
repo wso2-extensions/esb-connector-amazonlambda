@@ -19,6 +19,7 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="createFunction">
     <parameter name="functionName" description="Name of the Lambda function."/>
     <parameter name="functionDescription" description="The description of the function."/>
+    <parameter name="apiVersionCreateFunction" description="API version used for CreateFunction method."/>
     <!-- Code parameters -->
     <parameter name="s3Bucket" description="S3 bucket name in the same AWS Region."/>
     <parameter name="s3Key" description="The Amazon S3 key of the deployment package."/>
@@ -33,17 +34,20 @@
     <parameter name="handler"
                description="The name of the method within your code that Lambda calls to execute your function."/>
     <parameter name="kmsKeyArn"
-               description="The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables."/>
+               description="The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your
+               function's environment variables."/>
     <parameter name="layers"
-               description="A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version."/>
+               description="A list of function layers to add to the function's execution environment. Specify each
+                layer by its ARN, including the version."/>
     <parameter name="memorySize" description="The amount of memory that your function has access to."/>
     <parameter name="publish" description="Set to true to publish the first version of the function during creation."/>
     <parameter name="role" description="The Amazon Resource Name (ARN) of the function's execution role."/>
     <parameter name="runtime" description="The identifier of the function's runtime."/>
     <parameter name="tags" description="A list of tags to apply to the function."/>
     <parameter name="timeout"
-               description="The amount of time that Lambda allows a function to run before stopping it (max value is 900 seconds, default 3 seconds)."/>
-    <!-- TracingConfig parameters -->
+               description="The amount of time that Lambda allows a function to run before stopping it (max value is
+               900 seconds, default 3 seconds)."/>
+    <!-- TracingConfig parameter -->
     <parameter name="mode" description="The tracing mode."/>
     <!-- VpcConfig parameters -->
     <parameter name="securityGroupIds" description="A list of VPC security group IDs. It's an array of strings."/>
@@ -51,6 +55,7 @@
     <sequence>
         <property name="payloadFunctionName" expression="$func:functionName"/>
         <property name="payloadDescription" expression="$func:functionDescription"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionCreateFunction"/>
         <property name="payloadS3Bucket" expression="$func:s3Bucket"/>
         <property name="payloadS3Key" expression="$func:s3Key"/>
         <property name="payloadS3ObjectVersion" expression="$func:s3ObjectVersion"/>
@@ -70,7 +75,8 @@
         <property name="payloadSecurityGroupIds" expression="$func:securityGroupIds"/>
         <property name="payloadSubnetIds" expression="$func:subnetIds"/>
         <property name="httpMethod" value="POST"/>
-        <property name="uri.var.uriRemainder" value="/2015-03-31/functions"/>
+        <property name="uri.var.uriRemainder"
+                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions')"/>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>

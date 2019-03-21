@@ -3,5 +3,7 @@
   "secretAccessKey": "%s(secretAccessKey)",
   "region": "%s(region)",
   "blocking": "%s(blocking)",
-  "functionName": ""
+  "functionName": "",
+  "apiVersionDeleteFunction": "%s(apiVersionDeleteFunction"
+
 }

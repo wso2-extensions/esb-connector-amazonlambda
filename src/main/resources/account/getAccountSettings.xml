@@ -17,8 +17,11 @@
   ~ under the License.
   -->
 <template xmlns="http://ws.apache.org/ns/synapse" name="getAccountSettings">
+    <parameter name="apiVersionGetAccountSettings" description="API version used for GetAccountSettings method."/>
     <sequence>
-        <property name="uri.var.uriRemainder" value="/2016-08-19/account-settings/"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionGetAccountSettings"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion,
+         '/account-settings/')"/>
         <property name="httpMethod" value="GET"/>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>

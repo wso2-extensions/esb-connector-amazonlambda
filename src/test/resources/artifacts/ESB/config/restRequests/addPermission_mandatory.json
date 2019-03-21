@@ -6,5 +6,7 @@
   "functionName": "%s(functionName)",
   "permissionAction": "%s(permissionAction)",
   "permissionPrincipal": "%s(permissionPrincipal)",
-  "permissionStatementId": "%s(permissionStatementId)"
+  "permissionStatementId": "%s(permissionStatementId)",
+  "apiVersionAddPermission": "%s(apiVersionAddPermission)"
+
 }

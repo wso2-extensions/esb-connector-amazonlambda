@@ -5,5 +5,7 @@
   "blocking": "%s(blocking)",
   "functionName": "%s(functionName)",
   "functionVersion": "%s(functionVersion)",
-  "aliasName": "%s(aliasName)"
+  "aliasName": "%s(aliasName)",
+  "apiVersionCreateAlias": "%s(apiVersionCreateAlias)"
+
 }
