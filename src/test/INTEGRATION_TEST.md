@@ -112,6 +112,7 @@ You can access the Amazon Lambda service using the root user credentials but the
         xlviii)   apiVersionRemovePermission                -   API version for RemovePermission method.
         xlix)     apiVersionUpdateAlias                     -   API version for UpdateAlias method.
         l)        payload                                   -   The JSON that you want to provide to your Lambda function as input for Invoke method.
+        li)       deleteFunctionQualifier                   -   The version or alias to delete the specified function version/alias. It can't delete the $LATEST version as it can only be deleted with directly deleting the function. So except $LATEST version if you are deleting any other version you can specify here.
 
 
  5. Navigate to "<AMAZONLAMBDA_CONNECTOR_HOME>" and run the following command. <br/>
