@@ -272,6 +272,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     @Test(groups = {"wso2.ei"}, dependsOnMethods = {"testCreateFunctionWithMandatoryParameters"},
             description = "amazonlambda {createAlias} integration test optional case.")
     public void testCreateAliasWithOptionalParameters() throws Exception {
+
         eiRequestHeadersMap.put("Action", "urn:createAlias");
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
@@ -471,7 +472,8 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for addLayerVersionPermission method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"},
+            description = "amazonlambda {addLayerVersionPermission} integration test negative case.")
     public void testAddLayerVersionPermissionWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:addLayerVersionPermission");
@@ -484,7 +486,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for addPermission method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {addPermission} integration test negative case.")
     public void testAddPermissionWithNegativeCase() throws IOException, JSONException {
 
         eiRequestHeadersMap.put("Action", "urn:addPermission");
@@ -497,7 +499,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for createAlias method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {createAlias} integration test negative case.")
     public void testCreateAliasWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:createAlias");
@@ -510,7 +512,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for createFunction method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {createFunction} integration test negative case.")
     public void testCreateFunctionWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:createFunction");
@@ -523,7 +525,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for getAccountSettings method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {getAccountSettings} integration test negative case.")
     public void testGetAccountSettingsWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:getAccountSettings");
@@ -536,7 +538,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for getAlias method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {getAlias} integration test negative case.")
     public void testGetAliasWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:getAlias");
@@ -549,7 +551,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for getFunction method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {getFunction} integration test negative case.")
     public void testGetFunctionWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:getFunction");
@@ -562,7 +564,8 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for getFunctionConfiguration method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"},
+            description = "amazonlambda {getFunctionConfiguration} integration test negative case.")
     public void testGetFunctionConfigurationWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:getFunctionConfiguration");
@@ -575,7 +578,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for invoke method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {invoke} integration test negative case.")
     public void testInvokeWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:invoke");
@@ -586,9 +589,9 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     }
 
     /**
-     * Negative test case for listFunction method.
+     * Negative test case for listFunctions method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {listFunctions} integration test negative case.")
     public void testListFunctionsWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:listFunctions");
@@ -603,7 +606,8 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for removeLayerVersionPermission method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"},
+            description = "amazonlambda {removeLayerVersionPermission} integration test negative case.")
     public void testRemoveLayerVersionPermissionWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:removeLayerVersionPermission");
@@ -616,7 +620,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for removePermission method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {removePermission} integration test negative case.")
     public void testRemovePermissionWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:removePermission");
@@ -629,7 +633,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for updateAlias method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {updateAlias} integration test negative case.")
     public void testUpdateAliasWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:updateAlias");
@@ -642,7 +646,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for deleteAlias method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {deleteAlias} integration test negative case.")
     public void testDeleteAliasWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:deleteAlias");
@@ -655,7 +659,7 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     /**
      * Negative test case for deleteFunction method.
      */
-    @Test(groups = {"wso2.ei"})
+    @Test(groups = {"wso2.ei"}, description = "amazonlambda {deleteFunction} integration test negative case.")
     public void testDeleteFunctionWithNegativeCase() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:deleteFunction");
