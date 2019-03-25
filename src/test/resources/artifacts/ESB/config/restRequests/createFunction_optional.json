@@ -10,5 +10,6 @@
   "handler": "%s(handler)",
   "role": "%s(role)",
   "runtime": "%s(runtime)",
-  "apiVersionCreateFunction": "%s(apiVersionCreateFunction)"
+  "apiVersionCreateFunction": "%s(apiVersionCreateFunction)",
+  "functionDescription": "%s(functionDescription)"
 }

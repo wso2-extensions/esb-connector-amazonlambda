@@ -6,6 +6,7 @@
   "functionName": "%s(functionName)",
   "functionVersion": "%s(functionVersion)",
   "aliasName": "aliasO",
-  "apiVersionCreateAlias": "%s(apiVersionCreateAlias)"
+  "apiVersionCreateAlias": "%s(apiVersionCreateAlias)",
+  "createAliasDescription": "%s(createAliasDescription)"
 
 }
