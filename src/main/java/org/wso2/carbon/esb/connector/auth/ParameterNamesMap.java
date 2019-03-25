@@ -23,8 +23,17 @@ import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ParmaeterNamesMap class is used to store the parameters' name as used in API and its corresponding name used in
+ * connector. Such changes in name is made to make it more readable.
+ */
 public class ParameterNamesMap {
 
+    /**
+     * getHeaderParameterNamesMap method is used to store the map of header parameters name.
+     *
+     * @return header parameters' name map.
+     */
     public static Map<String, String> getHeaderParameterNamesMap() {
 
         final Map<String, String> headersMap = new HashMap<>();
@@ -39,12 +48,18 @@ public class ParameterNamesMap {
         return headersMap;
     }
 
+    /**
+     * getQueryParameterNamesMap method is used to store the map of query parameters name.
+     *
+     * @return query parameters' name map.
+     */
     public static Map<String, String> getQueryParameterNamesMap() {
 
         final Map<String, String> queryParametersMap = new HashMap<>();
         queryParametersMap.put(AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.API_URI_REVISION_ID);
         queryParametersMap.put(AmazonLambdaConstants.URI_QUALIFIER, AmazonLambdaConstants.API_URI_QUALIFIER);
-        queryParametersMap.put(AmazonLambdaConstants.URI_FUNCTION_VERSION, AmazonLambdaConstants.API_URI_FUNCTION_VERSION);
+        queryParametersMap.put(AmazonLambdaConstants.URI_FUNCTION_VERSION,
+                AmazonLambdaConstants.API_URI_FUNCTION_VERSION);
         queryParametersMap.put(AmazonLambdaConstants.URI_MARKER, AmazonLambdaConstants.API_URI_MARKER);
         queryParametersMap.put(AmazonLambdaConstants.URI_MASTER_REGION, AmazonLambdaConstants.API_URI_MASTER_REGION);
         queryParametersMap.put(AmazonLambdaConstants.URI_MAX_ITEM, AmazonLambdaConstants.API_URI_MAX_ITEM);
@@ -52,6 +67,11 @@ public class ParameterNamesMap {
         return queryParametersMap;
     }
 
+    /**
+     * getPayloadParameterNamesMap method is used to store the map of payload parameters name.
+     *
+     * @return payload parameters' name map.
+     */
     public static Map<String, String> getPayloadParameterNamesMap() {
 
         final Map<String, String> payloadParametersMap = new HashMap<>();
@@ -72,7 +92,8 @@ public class ParameterNamesMap {
         payloadParametersMap.put(AmazonLambdaConstants.ORGANIZATION_ID, AmazonLambdaConstants.API_ORGANIZATION_ID);
         payloadParametersMap.put(AmazonLambdaConstants.PRINCIPAL, AmazonLambdaConstants.API_PRINCIPAL);
         payloadParametersMap.put(AmazonLambdaConstants.STATEMENT_ID, AmazonLambdaConstants.API_STATEMENT_ID);
-        payloadParametersMap.put(AmazonLambdaConstants.EVENT_SOURCE_TOKEN, AmazonLambdaConstants.API_EVENT_SOURCE_TOKEN);
+        payloadParametersMap.put(AmazonLambdaConstants.EVENT_SOURCE_TOKEN,
+                AmazonLambdaConstants.API_EVENT_SOURCE_TOKEN);
         payloadParametersMap.put(AmazonLambdaConstants.REVISION_ID, AmazonLambdaConstants.API_REVISION_ID);
         payloadParametersMap.put(AmazonLambdaConstants.SOURCE_ACCOUNT, AmazonLambdaConstants.API_SOURCE_ACCOUNT);
         payloadParametersMap.put(AmazonLambdaConstants.SOURCE_ARN, AmazonLambdaConstants.API_SOURCE_ARN);

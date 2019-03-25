@@ -23,6 +23,9 @@ import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ParametersValueMap class is used to store the map of parameters' name and its value.
+ */
 public class ParametersValueMap {
     private final MessageContext messageContext;
     private final Map<String, String> headersParametersValueMap;
@@ -37,6 +40,11 @@ public class ParametersValueMap {
         payloadParametersValueMap = payloadHashMap();
     }
 
+    /**
+     * headerHashMap method is used to store the map of header parameters' name and its value.
+     *
+     * @return header parameters' name and its value map.
+     */
     private Map<String, String> headerHashMap() {
 
         String[] keys = KeysStore.getHeaderKeys();
@@ -52,6 +60,11 @@ public class ParametersValueMap {
 
     }
 
+    /**
+     * queryHashMap method is used to store the map of query parameters' name and its value.
+     *
+     * @return query parameters' name and its value map.
+     */
     private Map<String, String> queryHashMap() {
 
         Map<String, String> parametersMap = new HashMap<>();
@@ -71,6 +84,11 @@ public class ParametersValueMap {
         return parametersMap;
     }
 
+    /**
+     * payloadHashMap method is used to store the map of payload parameters' name and its value.
+     *
+     * @return payload parameters' name and its value map.
+     */
     private Map<String, String> payloadHashMap() {
 
         String[] keys = KeysStore.getPayloadKeys();

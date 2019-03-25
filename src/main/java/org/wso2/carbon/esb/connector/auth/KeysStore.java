@@ -20,8 +20,17 @@ package org.wso2.carbon.esb.connector.auth;
 
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
 
+/**
+ * KeyStore class is used to store the key value of all the necessary parameters used in making request to API.
+ */
 public class KeysStore {
 
+    /**
+     * getHeaderKeys method is used to store the key(name) of all the necessary header parameters used in making
+     * request to API.
+     *
+     * @return String array which contains the list of header parameters name.
+     */
     public static String[] getHeaderKeys() {
 
         return new String[]{
@@ -31,6 +40,12 @@ public class KeysStore {
         };
     }
 
+    /**
+     * getQueryKeys method is used to store the key(name) of all the necessary query parameters used in making
+     * request to API.
+     *
+     * @return String array which contains the list of query parameters name.
+     */
     public static String[] getQueryKeys() {
 
         return new String[]{
@@ -40,6 +55,12 @@ public class KeysStore {
         };
     }
 
+    /**
+     * getPayloadKeys method is used to store the key(name) of all the necessary payload parameters used in making
+     * request to API.
+     *
+     * @return String array which contains the list of payload parameters name.
+     */
     public static String[] getPayloadKeys() {
 
         return new String[]{
