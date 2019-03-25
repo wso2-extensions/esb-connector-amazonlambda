@@ -21,7 +21,7 @@ which lets you run code without provisioning or managing servers. With Lambda, y
 3. For more information on using connectors and their operations in your EI configurations, see [Using a Connector](https://docs.wso2.com/display/EI640/Using+a+Connector).
 4. If you want to work with connectors via EI tooling, see [Working with Connectors via Tooling](https://docs.wso2.com/display/EI640/Working+with+Connectors+via+Tooling).
 
-####Configuring the connector operations
+#### Configuring the connector operations
 
 To get started with Amazon Lambda connector and their operation, see [Configuring Amazon Lambda Operations](docs/config.md).
 
