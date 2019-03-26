@@ -83,7 +83,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
     public void testGetFunctionWithMandatoryParameters() throws Exception {
 
         eiRequestHeadersMap.put("Action", "urn:getFunction");
-
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "getFunction_mandatory.json");
@@ -172,8 +171,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "listFunctions_mandatory.json");
-
-        log.info(clearLog(prettyJson(eiRestResponse.getBody())));
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -189,8 +186,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "listFunctions_optional.json");
-
-        log.info(clearLog(prettyJson(eiRestResponse.getBody())));
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 200);
     }
 
@@ -262,7 +257,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "createAlias_mandatory.json");
-        log.info(eiRestResponse.getBody());
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 201);
     }
 
@@ -598,8 +592,6 @@ public class AmazonLambdaAuthConnectorIntegrationTest extends ConnectorIntegrati
         RestResponse<JSONObject> eiRestResponse =
                 sendJsonRestRequest(proxyUrl, "POST", eiRequestHeadersMap,
                         "listFunctions_negative.json");
-
-        log.info(clearLog(prettyJson(eiRestResponse.getBody())));
         Assert.assertEquals(eiRestResponse.getHttpStatusCode(), 400);
     }
 

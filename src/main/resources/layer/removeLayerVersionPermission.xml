@@ -35,14 +35,14 @@
                    $ctx:uri.var.versionNumber, '/policy/', $ctx:uri.var.statementId)"/>
         <script language="js">
             <![CDATA[
-            var queryParameter = '';
-            var revisionId = mc.getProperty('uri.var.revisionId');
-            if (revisionId != null && revisionId != "")
-            {
-                queryParameter = "?RevisionId=" + encodeURIComponent(revisionId);
-            }
-            mc.setProperty('uri.var.queryParameter', queryParameter);
-           ]]>
+                var queryParameter = '';
+                var revisionId = mc.getProperty('uri.var.revisionId');
+                if (revisionId != null && revisionId != "")
+                {
+                    queryParameter = "?RevisionId=" + encodeURIComponent(revisionId);
+                }
+                mc.setProperty('uri.var.queryParameter', queryParameter);
+            ]]>
         </script>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
 

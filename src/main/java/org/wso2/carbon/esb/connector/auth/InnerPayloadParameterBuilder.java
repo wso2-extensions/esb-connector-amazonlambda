@@ -60,19 +60,15 @@ public class InnerPayloadParameterBuilder {
     private String buildFunctionCode() {
 
         Map<String, Object> codes = new HashMap<>();
-
         codes.put("S3Bucket", messageContext.getProperty(AmazonLambdaConstants.S3_BUCKET));
         codes.put("S3Key", messageContext.getProperty(AmazonLambdaConstants.S3_KEY));
         codes.put("S3ObjectVersion", messageContext.getProperty(AmazonLambdaConstants.S3_OBJECT_VERSION));
-
         StringBuilder codeBuilder = new StringBuilder();
-
         Object zipFile = messageContext.getProperty(AmazonLambdaConstants.S3_ZIP_FILE);
         if (zipFile != null && !((String) zipFile).trim().isEmpty()) {
             codeBuilder.append(String.format("\"%s\":%s", "ZipFile", zipFile));
             codeBuilder.append(",");
         }
-
         for (Map.Entry<String, Object> entry : codes.entrySet()) {
             if (entry.getValue() == null || ((String) entry.getValue()).trim().isEmpty()) {
                 continue;
@@ -83,9 +79,7 @@ public class InnerPayloadParameterBuilder {
         if (codeBuilder.length() == 0) {
             return "";
         }
-
         codeBuilder.setLength(codeBuilder.length() - 1);
-
         return String.format("{%s}", codeBuilder.toString());
     }
 
@@ -98,17 +92,13 @@ public class InnerPayloadParameterBuilder {
     private String buildDeadLetterConfig() {
 
         Object targetArnObj = messageContext.getProperty(AmazonLambdaConstants.TARGET_ARN);
-
         if (targetArnObj == null) {
             return "";
         }
-
         String targetArnStr = (String) targetArnObj;
-
         if (targetArnStr.trim().isEmpty()) {
             return "";
         }
-
         return String.format("{\"TargetArn\":\"%s\"}", targetArnStr);
     }
 
@@ -121,17 +111,13 @@ public class InnerPayloadParameterBuilder {
     private String buildEnvironment() {
 
         Object envVarObj = messageContext.getProperty(AmazonLambdaConstants.ENVIRONMENT_VARIABLES);
-
         if (envVarObj == null) {
             return "";
         }
-
         String environmentVariableStr = (String) envVarObj;
-
         if (environmentVariableStr.trim().isEmpty()) {
             return "";
         }
-
         return String.format("{\"Variables\":%s}", environmentVariableStr);
     }
 
@@ -143,17 +129,13 @@ public class InnerPayloadParameterBuilder {
     private String buildTracingConfig() {
 
         Object modeObj = messageContext.getProperty(AmazonLambdaConstants.MODE);
-
         if (modeObj == null) {
             return "";
         }
-
         String modeStr = (String) modeObj;
-
         if (modeStr.trim().isEmpty()) {
             return "";
         }
-
         return String.format("{\"Mode\":\"%s\"}", modeStr);
     }
 
@@ -165,13 +147,10 @@ public class InnerPayloadParameterBuilder {
     private String buildVpcConfig() {
 
         StringBuilder vpcConfigBuilder = new StringBuilder();
-
         Object securityGroupIdsObj = messageContext.getProperty(AmazonLambdaConstants.SECURITY_GROUP_IDS);
         Object subnetIdsObj = messageContext.getProperty(AmazonLambdaConstants.SUBNET_IDS);
-
         String securityGroupIdsStr = "";
         String subnetIdsStr = "";
-
         if (securityGroupIdsObj != null && !((String) securityGroupIdsObj).trim().isEmpty()) {
             securityGroupIdsStr = ((String) securityGroupIdsObj).trim();
         }
@@ -180,18 +159,15 @@ public class InnerPayloadParameterBuilder {
         }
         if (StringUtils.isNotEmpty(securityGroupIdsStr) || StringUtils.isNotEmpty(subnetIdsStr)) {
             vpcConfigBuilder.append('{');
-
             if (StringUtils.isNotEmpty(securityGroupIdsStr)) {
                 vpcConfigBuilder
                         .append(String.format("\"SecurityGroupIds\":[\"%s\"]", securityGroupIdsStr))
                         .append(',');
             }
-
             if (StringUtils.isNotEmpty(subnetIdsStr)) {
                 vpcConfigBuilder.append(String.format("\"SubnetIds\":[\"%s\"]", subnetIdsStr));
             }
             vpcConfigBuilder.append('}');
-
             return vpcConfigBuilder.toString();
         }
         return "";
@@ -210,13 +186,10 @@ public class InnerPayloadParameterBuilder {
         if (additionalVersionWeightsObj == null) {
             return "";
         }
-
         String additionalVersionWeightStr = (String) additionalVersionWeightsObj;
-
         if (additionalVersionWeightStr.trim().isEmpty()) {
             return "";
         }
-
         return String.format("{\"AdditionalVersionWeights\": %s}", additionalVersionWeightStr);
     }
 

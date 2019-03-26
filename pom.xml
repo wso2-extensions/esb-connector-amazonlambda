@@ -26,7 +26,6 @@
     <packaging>jar</packaging>
     <name>WSO2 Carbon - Connector For Amazon Lambda</name>
     <url>http://wso2.org</url>
-
     <properties>
         <connector.name>amazonlambda</connector.name>
         <integration.base.version>1.0.4</integration.base.version>
@@ -45,9 +44,8 @@
         <rampart.wso2.version>1.6.1.wso2v18</rampart.wso2.version>
         <httpmime.version>4.3.6</httpmime.version>
         <json.version>20080701</json.version>
-        <skip-tests>false</skip-tests>
+        <skip-tests>true</skip-tests>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.synapse</groupId>
@@ -70,7 +68,6 @@
             <version>${automation.framework.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.wso2.carbon.automation</groupId>
             <artifactId>org.wso2.carbon.automation.extensions</artifactId>
@@ -87,7 +84,6 @@
             </exclusions>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.wso2.carbon.automationutils</groupId>
             <artifactId>org.wso2.carbon.integration.common.admin.client</artifactId>
@@ -110,7 +106,6 @@
             <artifactId>org.wso2.carbon.integration.common.tests</artifactId>
             <version>${automation.framework.utils.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.wso2.carbon.mediation</groupId>
             <artifactId>org.wso2.carbon.connector.core</artifactId>

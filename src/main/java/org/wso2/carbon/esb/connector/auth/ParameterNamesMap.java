@@ -37,14 +37,12 @@ public class ParameterNamesMap {
     public static Map<String, String> getHeaderParameterNamesMap() {
 
         final Map<String, String> headersMap = new HashMap<>();
-
         headersMap.put(AmazonLambdaConstants.CONTENT_TYPE, AmazonLambdaConstants.API_CONTENT_TYPE);
         headersMap.put(AmazonLambdaConstants.HOST, AmazonLambdaConstants.API_HOST);
         headersMap.put(AmazonLambdaConstants.X_AMZ_DATE, AmazonLambdaConstants.API_X_AMZ_DATE);
         headersMap.put(AmazonLambdaConstants.X_AMZ_INVOCATION_TYPE, AmazonLambdaConstants.API_X_AMZ_INVOCATION_TYPE);
         headersMap.put(AmazonLambdaConstants.X_AMZ_LOG_TYPE, AmazonLambdaConstants.API_X_AMZ_LOG_TYPE);
         headersMap.put(AmazonLambdaConstants.X_AMZ_CLIENT_CONTEXT, AmazonLambdaConstants.API_X_AMZ_CLIENT_CONTEXT);
-
         return headersMap;
     }
 
@@ -63,7 +61,6 @@ public class ParameterNamesMap {
         queryParametersMap.put(AmazonLambdaConstants.URI_MARKER, AmazonLambdaConstants.API_URI_MARKER);
         queryParametersMap.put(AmazonLambdaConstants.URI_MASTER_REGION, AmazonLambdaConstants.API_URI_MASTER_REGION);
         queryParametersMap.put(AmazonLambdaConstants.URI_MAX_ITEM, AmazonLambdaConstants.API_URI_MAX_ITEM);
-
         return queryParametersMap;
     }
 
@@ -75,7 +72,6 @@ public class ParameterNamesMap {
     public static Map<String, String> getPayloadParameterNamesMap() {
 
         final Map<String, String> payloadParametersMap = new HashMap<>();
-
         payloadParametersMap.put(AmazonLambdaConstants.DESCRIPTION, AmazonLambdaConstants.API_DESCRIPTION);
         payloadParametersMap.put(AmazonLambdaConstants.FUNCTION_NAME, AmazonLambdaConstants.API_FUNCTION_NAME);
         payloadParametersMap.put(AmazonLambdaConstants.ALIAS_NAME, AmazonLambdaConstants.API_ALIAS_NAME);
@@ -99,7 +95,6 @@ public class ParameterNamesMap {
         payloadParametersMap.put(AmazonLambdaConstants.SOURCE_ARN, AmazonLambdaConstants.API_SOURCE_ARN);
         payloadParametersMap.put(AmazonLambdaConstants.FUNCTION_VERSION, AmazonLambdaConstants.API_FUNCTION_VERSION);
         payloadParametersMap.put(AmazonLambdaConstants.PAYLOAD, AmazonLambdaConstants.API_PAYLOAD);
-
         return payloadParametersMap;
     }
 }

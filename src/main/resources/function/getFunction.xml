@@ -29,14 +29,14 @@
                   expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName)"/>
         <script language="js">
             <![CDATA[
-            var queryParameter = '';
-            var qualifier = mc.getProperty('uri.var.qualifier');
-            if (qualifier != null && qualifier != "")
-            {
-                queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
-            }
-            mc.setProperty('uri.var.queryParameter', queryParameter);
-           ]]>
+                var queryParameter = '';
+                var qualifier = mc.getProperty('uri.var.qualifier');
+                if (qualifier != null && qualifier != "")
+                {
+                    queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
+                }
+                mc.setProperty('uri.var.queryParameter', queryParameter);
+            ]]>
         </script>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>

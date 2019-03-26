@@ -36,24 +36,24 @@
                    '/policy/', $ctx:uri.var.statementId)"/>
         <script language="js">
             <![CDATA[
-            var queryParameters = '';
-            var qualifier = mc.getProperty('uri.var.qualifier');
-            var revisionId = mc.getProperty('uri.var.revisionId');
-            if (qualifier != null && qualifier != "")
-            {
-                queryParameters = queryParameters + "Qualifier=" + encodeURIComponent(qualifier) + '&';
-            }
-            if (revisionId != null && revisionId != "")
-            {
-                queryParameters = queryParameters + "RevisionId=" + encodeURIComponent(revisionId) + '&';
-            }
-             if (queryParameters != "")
-            {
-                queryParameters = String(queryParameters);
-                queryParameters = '?' + queryParameters.substring(0, queryParameters.length - 1);
-            }
-            mc.setProperty('uri.var.queryParameter', queryParameters.toString());
-           ]]>
+                var queryParameters = '';
+                var qualifier = mc.getProperty('uri.var.qualifier');
+                var revisionId = mc.getProperty('uri.var.revisionId');
+                if (qualifier != null && qualifier != "")
+                {
+                    queryParameters = queryParameters + "Qualifier=" + encodeURIComponent(qualifier) + '&';
+                }
+                if (revisionId != null && revisionId != "")
+                {
+                    queryParameters = queryParameters + "RevisionId=" + encodeURIComponent(revisionId) + '&';
+                }
+                 if (queryParameters != "")
+                {
+                    queryParameters = String(queryParameters);
+                    queryParameters = '?' + queryParameters.substring(0, queryParameters.length - 1);
+                }
+                mc.setProperty('uri.var.queryParameter', queryParameters.toString());
+            ]]>
         </script>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>

@@ -60,15 +60,12 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
     public void connect(MessageContext messageContext) throws ConnectException {
 
         ParametersValueMap parametersValueMap = new ParametersValueMap(messageContext);
-
         final StringBuilder canonicalRequest = new StringBuilder();
         final StringBuilder stringToSign = new StringBuilder();
         final StringBuilder authHeader = new StringBuilder();
-
         final Map<String, String> headersParamsMap = new HashMap<>();
         final Map<String, String> queryParamsMap = new HashMap<>();
         final Map<String, String> payloadParamsMap = new HashMap<>();
-
         InnerPayloadParameterBuilder builder = new InnerPayloadParameterBuilder(messageContext);
         final String code = builder.getFunctionCode();
         final String deadLetterConfig = builder.getDeadLetterConfig();
@@ -98,7 +95,6 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         if (StringUtils.isNotEmpty(routingConfig)) {
             payloadParamsMap.put("RoutingConfig", routingConfig);
         }
-
         // Generates time-stamp which will be sent to API and to use in Signature generation.
         final Date date = new Date();
         final TimeZone timeZone = TimeZone.getTimeZone("GMT");
@@ -110,16 +106,13 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
          *as header to every API request.
          */
         messageContext.setProperty(AmazonLambdaConstants.X_AMZ_DATE, amzDate);
-
         //Generates date  in the yyyyMMdd.
         final DateFormat FORMAT_FOR_DATE_ONLY = new SimpleDateFormat(AmazonLambdaConstants.FORMAT_FOR_DATE_ONLY);
         FORMAT_FOR_DATE_ONLY.setTimeZone(timeZone);
         final String dateOnly = FORMAT_FOR_DATE_ONLY.format(date);
-
         final Map<String, String> queryParametersValueMap = parametersValueMap.getQueryValueHashMap();
         final Map<String, String> headerParametersValueMap = parametersValueMap.getHeadersValueHashMap();
         final Map<String, String> payloadParametersValueMap = parametersValueMap.getPayloadsValueHashMap();
-
         try {
             //Appending HTTP method.
             canonicalRequest.append(messageContext.getProperty(AmazonLambdaConstants.HTTP_METHOD))
@@ -258,10 +251,8 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
              * making the API request.
              */
             messageContext.setProperty(AmazonLambdaConstants.REQUEST_PAYLOAD, requestPayload);
-
             //Hashing and making it lowercase hexadecimal string for appending to canonical request.
             canonicalRequest.append(bytesToHex(hash(messageContext, requestPayload)).toLowerCase());
-
             //Creates stringToSign
             stringToSign.append(AmazonLambdaConstants.AWS4_HMAC_SHA_256);
             stringToSign.append(AmazonLambdaConstants.NEW_LINE);
@@ -276,14 +267,12 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             stringToSign.append(messageContext.getProperty(AmazonLambdaConstants.TERMINATION_STRING));
             stringToSign.append(AmazonLambdaConstants.NEW_LINE);
             stringToSign.append(bytesToHex(hash(messageContext, canonicalRequest.toString())).toLowerCase());
-
             //Creates signingKey
             final byte[] signingKey =
                     getSignatureKey(messageContext,
                             messageContext.getProperty(AmazonLambdaConstants.SECRET_ACCESS_KEY).toString(),
                             dateOnly, messageContext.getProperty(AmazonLambdaConstants.REGION).toString(),
                             messageContext.getProperty(AmazonLambdaConstants.SERVICE).toString());
-
             // Construction of authorization header value to be included in API request
             authHeader.append(AmazonLambdaConstants.AWS4_HMAC_SHA_256);
             authHeader.append(" ");
@@ -306,10 +295,8 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             authHeader.append(AmazonLambdaConstants.API_SIGNATURE);
             authHeader.append(AmazonLambdaConstants.EQUAL);
             authHeader.append(bytesToHex(hmacSHA256(signingKey, stringToSign.toString())).toLowerCase());
-
             // Adds authorization header to message context
             messageContext.setProperty(AmazonLambdaConstants.AUTHORIZATION_HEADER, authHeader.toString());
-
         } catch (InvalidKeyException exc) {
             storeErrorResponseStatus(messageContext, exc, AmazonLambdaConstants.INVALID_KEY_ERROR_CODE);
             handleException(AmazonLambdaConstants.INVALID_KEY_ERROR, exc, messageContext);
@@ -325,6 +312,14 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         }
     }
 
+    /**
+     * Add a Throwable to a message context, the message from the throwable is embedded as the Synapse.
+     * Constant ERROR_MESSAGE.
+     *
+     * @param ctxt      message context to which the error tags need to be added
+     * @param throwable Throwable that needs to be parsed and added
+     * @param errorCode errorCode mapped to the exception
+     */
     private void storeErrorResponseStatus(final MessageContext ctxt, final Throwable throwable, final int errorCode) {
 
         ctxt.setProperty(SynapseConstants.ERROR_CODE, errorCode);
@@ -332,12 +327,28 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         ctxt.setFaultResponse(true);
     }
 
+    /**
+     * Add a message to message context, the message from the throwable is embedded as the Synapse Constant
+     * ERROR_MESSAGE.
+     *
+     * @param ctxt      message context to which the error tags need to be added
+     * @param message   message to be returned to the user
+     * @param errorCode errorCode mapped to the exception
+     */
     private void storeErrorResponseStatus(final MessageContext ctxt, final String message, final int errorCode) {
 
         ctxt.setProperty(SynapseConstants.ERROR_CODE, errorCode);
         ctxt.setProperty(SynapseConstants.ERROR_MESSAGE, message);
         ctxt.setFaultResponse(true);
     }
+
+    /**
+     * Hashes the string contents (assumed to be UTF-8) using the SHA-256 algorithm.
+     *
+     * @param messageContext of the connector
+     * @param text           text to be hashed
+     * @return SHA-256 hashed text
+     */
 
     private byte[] hash(final MessageContext messageContext, final String text) {
 

@@ -20,6 +20,7 @@ package org.wso2.carbon.esb.connector.auth;
 
 import org.apache.synapse.MessageContext;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import java.util.Map;
  * ParametersValueMap class is used to store the map of parameters' name and its value.
  */
 public class ParametersValueMap {
+
     private final MessageContext messageContext;
     private final Map<String, String> headersParametersValueMap;
     private final Map<String, String> queryParametersValueMap;
@@ -49,7 +51,6 @@ public class ParametersValueMap {
 
         String[] keys = KeysStore.getHeaderKeys();
         Map<String, String> parametersMap = new HashMap<>();
-
         for (String key : keys) {
             String paramValue =
                     (messageContext.getProperty(key) != null) ? (String) messageContext
@@ -57,7 +58,6 @@ public class ParametersValueMap {
             parametersMap.put(key, paramValue);
         }
         return parametersMap;
-
     }
 
     /**
@@ -68,19 +68,15 @@ public class ParametersValueMap {
     private Map<String, String> queryHashMap() {
 
         Map<String, String> parametersMap = new HashMap<>();
-
         for (String key : KeysStore.getQueryKeys()) {
             Object property = messageContext.getProperty(key);
             if (property == null) {
                 parametersMap.put(key, "");
                 continue;
             }
-
             String value = (String) property;
             parametersMap.put(key, value);
-
         }
-
         return parametersMap;
     }
 
@@ -100,19 +96,33 @@ public class ParametersValueMap {
             parametersMap.put(key, paramValue);
         }
         return parametersMap;
-
     }
 
+    /**
+     * getQueryValueHashMap method returns queryParametersValueMap.
+     *
+     * @return queryParametersValueMap.
+     */
     public Map<String, String> getQueryValueHashMap() {
 
         return queryParametersValueMap;
     }
 
+    /**
+     * getHeadersValueHashMap method returns headersParametersValueMap.
+     *
+     * @return headersParametersValueMap.
+     */
     public Map<String, String> getHeadersValueHashMap() {
 
         return headersParametersValueMap;
     }
 
+    /**
+     * getPayloadsValueHashMap method returns payloadParametersValueMap.
+     *
+     * @return payloadParametersValueMap.
+     */
     public Map<String, String> getPayloadsValueHashMap() {
 
         return payloadParametersValueMap;

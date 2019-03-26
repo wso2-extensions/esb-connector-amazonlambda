@@ -42,16 +42,16 @@
                    $ctx:uri.var.versionNumber, '/policy')"/>
         <script language="js">
             <![CDATA[
-            var queryParameter = '';
-            var revisionId = mc.getProperty('uri.var.revisionId');
+                var queryParameter = '';
+                var revisionId = mc.getProperty('uri.var.revisionId');
 
-            if (revisionId != null && revisionId != "")
-            {
-                queryParameter = "?RevisionId=" + encodeURIComponent(revisionId);
-            }
+                if (revisionId != null && revisionId != "")
+                {
+                    queryParameter = "?RevisionId=" + encodeURIComponent(revisionId);
+                }
 
-            mc.setProperty('uri.var.queryParameter', queryParameter.toString());
-           ]]>
+                mc.setProperty('uri.var.queryParameter', queryParameter.toString());
+            ]]>
         </script>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>

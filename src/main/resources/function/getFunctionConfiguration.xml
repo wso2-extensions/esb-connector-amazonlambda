@@ -31,15 +31,15 @@
                    '/configuration')"/>
         <script language="js">
             <![CDATA[
-            var queryParameter = '';
-            var qualifier = mc.getProperty('uri.var.qualifier');
+                var queryParameter = '';
+                var qualifier = mc.getProperty('uri.var.qualifier');
 
-            if (qualifier != null && qualifier != "")
-            {
-                queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
-            }
-            mc.setProperty('uri.var.queryParameter', queryParameter.toString());
-           ]]>
+                if (qualifier != null && qualifier != "")
+                {
+                    queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
+                }
+                mc.setProperty('uri.var.queryParameter', queryParameter.toString());
+            ]]>
         </script>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
