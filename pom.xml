@@ -44,7 +44,7 @@
         <rampart.wso2.version>1.6.1.wso2v18</rampart.wso2.version>
         <httpmime.version>4.3.6</httpmime.version>
         <json.version>20080701</json.version>
-        <skip-tests>false</skip-tests>
+        <skip-tests>true</skip-tests>
     </properties>
     <dependencies>
         <dependency>
