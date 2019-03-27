@@ -20,14 +20,13 @@
     <!-- URI request parameters-->
     <parameter name="functionName" description="Name of the Lambda function."/>
     <parameter name="apiVersionInvoke" description="API version used for Invoke method."/>
-    <parameter name="qualifier"
-               description="Specify a version or alias to invoke a published version of the function."/>
+    <parameter name="qualifier" description="Specify a version or alias to invoke a published version of the
+        function."/>
     <!-- Header parameters-->
     <parameter name="x-amz-invocation-type" description="Invocation type."/>
     <parameter name="x-amz-log-type" description="Set to Tail to include the execution log in the response."/>
-    <parameter name="x-amz-client-context"
-               description="Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function
-                in the context object."/>
+    <parameter name="x-amz-client-context" description="Up to 3583 bytes of base64-encoded data about the invoking
+        client to pass to the function in the context object."/>
     <!-- Payloads-->
     <parameter name="payload" description="Payloads for the HTTP request."/>
     <sequence>
@@ -41,15 +40,13 @@
 
         <property name="payload" expression="$func:payload"/>
         <property name="httpMethod" value="POST"/>
-        <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
-                   '/invocations')"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/',
+            $ctx:uri.var.functionName, '/invocations')"/>
         <script language="js">
             <![CDATA[
                 var queryParameter = '';
                 var qualifier = mc.getProperty('uri.var.qualifier');
-                if (qualifier != null && qualifier != "")
-                {
+                if (qualifier != null && qualifier != "") {
                     queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
                 }
                 mc.setProperty('uri.var.queryParameter', queryParameter);

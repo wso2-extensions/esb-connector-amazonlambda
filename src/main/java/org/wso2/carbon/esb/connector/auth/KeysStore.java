@@ -33,7 +33,7 @@ public class KeysStore {
      */
     public static String[] getHeaderKeys() {
 
-        return new String[]{
+        return new String[] {
                 AmazonLambdaConstants.CONTENT_TYPE, AmazonLambdaConstants.X_AMZ_INVOCATION_TYPE,
                 AmazonLambdaConstants.X_AMZ_LOG_TYPE, AmazonLambdaConstants.X_AMZ_CLIENT_CONTEXT,
                 AmazonLambdaConstants.X_AMZ_DATE, AmazonLambdaConstants.HOST
@@ -48,7 +48,7 @@ public class KeysStore {
      */
     public static String[] getQueryKeys() {
 
-        return new String[]{
+        return new String[] {
                 AmazonLambdaConstants.URI_REVISION_ID, AmazonLambdaConstants.URI_QUALIFIER,
                 AmazonLambdaConstants.URI_MAX_ITEM, AmazonLambdaConstants.URI_MASTER_REGION,
                 AmazonLambdaConstants.URI_MARKER, AmazonLambdaConstants.URI_FUNCTION_VERSION
@@ -63,30 +63,17 @@ public class KeysStore {
      */
     public static String[] getPayloadKeys() {
 
-        return new String[]{
+        return new String[] {
 
-                AmazonLambdaConstants.DESCRIPTION,
-                AmazonLambdaConstants.FUNCTION_NAME,
-                AmazonLambdaConstants.HANDLER,
-                AmazonLambdaConstants.KMS_KEY_ARN,
-                AmazonLambdaConstants.LAYERS,
-                AmazonLambdaConstants.MEMORY_SIZE,
-                AmazonLambdaConstants.PUBLISH,
-                AmazonLambdaConstants.ROLE,
-                AmazonLambdaConstants.RUNTIME,
-                AmazonLambdaConstants.TAGS,
-                AmazonLambdaConstants.TIMEOUT,
-                AmazonLambdaConstants.ACTION,
-                AmazonLambdaConstants.ORGANIZATION_ID,
-                AmazonLambdaConstants.PRINCIPAL,
-                AmazonLambdaConstants.STATEMENT_ID,
-                AmazonLambdaConstants.EVENT_SOURCE_TOKEN,
-                AmazonLambdaConstants.REVISION_ID,
-                AmazonLambdaConstants.SOURCE_ACCOUNT,
-                AmazonLambdaConstants.SOURCE_ARN,
-                AmazonLambdaConstants.FUNCTION_VERSION,
-                AmazonLambdaConstants.ALIAS_NAME,
-                AmazonLambdaConstants.PAYLOAD
+                AmazonLambdaConstants.DESCRIPTION, AmazonLambdaConstants.FUNCTION_NAME, AmazonLambdaConstants.HANDLER,
+                AmazonLambdaConstants.KMS_KEY_ARN, AmazonLambdaConstants.LAYERS, AmazonLambdaConstants.MEMORY_SIZE,
+                AmazonLambdaConstants.PUBLISH, AmazonLambdaConstants.ROLE, AmazonLambdaConstants.RUNTIME,
+                AmazonLambdaConstants.TAGS, AmazonLambdaConstants.TIMEOUT, AmazonLambdaConstants.ACTION,
+                AmazonLambdaConstants.ORGANIZATION_ID, AmazonLambdaConstants.PRINCIPAL,
+                AmazonLambdaConstants.STATEMENT_ID, AmazonLambdaConstants.EVENT_SOURCE_TOKEN,
+                AmazonLambdaConstants.REVISION_ID, AmazonLambdaConstants.SOURCE_ACCOUNT,
+                AmazonLambdaConstants.SOURCE_ARN, AmazonLambdaConstants.FUNCTION_VERSION,
+                AmazonLambdaConstants.ALIAS_NAME, AmazonLambdaConstants.PAYLOAD
         };
     }
 }

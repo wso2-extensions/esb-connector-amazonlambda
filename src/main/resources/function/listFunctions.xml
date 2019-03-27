@@ -17,10 +17,10 @@
   ~ under the License.
   -->
 <template xmlns="http://ws.apache.org/ns/synapse" name="listFunctions">
-    <parameter name="functionVersionToBeListed"
-               description="Set to ALL to include entries for all published versions of each function."/>
-    <parameter name="marker"
-               description="Specify the pagination token returned by a previous request to retrieve the next page of results. "/>
+    <parameter name="functionVersionToBeListed" description="Set to ALL to include entries for all published versions
+        of each function."/>
+    <parameter name="marker" description="Specify the pagination token returned by a previous request to retrieve the
+        next page of results. "/>
     <parameter name="masterRegion" description="The region of the master function."/>
     <parameter name="apiVersionListFunctions" description="API version used for ListFunctions method."/>
     <parameter name="maxItems" description="Number of functions to get in the response."/>
@@ -31,8 +31,7 @@
         <property name="uri.var.apiVersion" expression="$func:apiVersionListFunctions"/>
         <property name="uri.var.maxItems" expression="$func:maxItems"/>
         <property name="httpMethod" value="GET"/>
-        <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/')"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/')"/>
         <script language="js">
             <![CDATA[
                 var queryParameters = '';
@@ -40,24 +39,19 @@
                 var marker = mc.getProperty('uri.var.marker');
                 var masterRegion = mc.getProperty('uri.var.masterRegion');
                 var maxItems = mc.getProperty('uri.var.maxItems');
-                if (functionVersion != null && functionVersion != "")
-                {
+                if (functionVersion != null && functionVersion != "") {
                     queryParameters = queryParameters + "FunctionVersion=" + encodeURIComponent(functionVersion) + '&';
                 }
-                if (marker != null && marker != "")
-                {
+                if (marker != null && marker != "") {
                     queryParameters = queryParameters + "Marker=" + encodeURIComponent(marker) + '&';
                 }
-                if (masterRegion != null && masterRegion != "")
-                {
+                if (masterRegion != null && masterRegion != "") {
                     queryParameters = queryParameters + "MasterRegion=" + encodeURIComponent(masterRegion) + '&';
                 }
-                if (maxItems != null && maxItems != "")
-                {
+                if (maxItems != null && maxItems != "") {
                     queryParameters = queryParameters + "MaxItems=" + encodeURIComponent(maxItems) + '&';
                 }
-                if (queryParameters != "")
-                {
+                if (queryParameters != "") {
                     queryParameters = String(queryParameters);
                     queryParameters = '?' + queryParameters.substring(0, queryParameters.length - 1);
                 }
@@ -67,10 +61,6 @@
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
-        <payloadFactory media-type="json">
-            <format/>
-            <args/>
-        </payloadFactory>
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">

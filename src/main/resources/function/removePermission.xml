@@ -19,10 +19,10 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="removePermission">
     <parameter name="functionName" description="The name of the function."/>
     <parameter name="permissionStatementId" description="Statement Id of the permission to remove"/>
-    <parameter name="permissionQualifier"
-               description="Specify a version/alias to remove permissions from a published version of the function."/>
-    <parameter name="permissionRevisionId"
-               description="To update the policy if the revision ID matched the ID specified"/>
+    <parameter name="permissionQualifier" description="Specify a version/alias to remove permissions from a published
+        version of the function."/>
+    <parameter name="permissionRevisionId" description="To update the policy if the revision ID matched the ID
+        specified"/>
     <parameter name="apiVersionRemovePermission" description="API version used for RemovePermission method."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
@@ -31,24 +31,20 @@
         <property name="uri.var.revisionId" expression="$func:permissionRevisionId"/>
         <property name="uri.var.apiVersion" expression="$func:apiVersionRemovePermission"/>
         <property name="httpMethod" value="DELETE"/>
-        <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
-                   '/policy/', $ctx:uri.var.statementId)"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/',
+            $ctx:uri.var.functionName, '/policy/', $ctx:uri.var.statementId)"/>
         <script language="js">
             <![CDATA[
                 var queryParameters = '';
                 var qualifier = mc.getProperty('uri.var.qualifier');
                 var revisionId = mc.getProperty('uri.var.revisionId');
-                if (qualifier != null && qualifier != "")
-                {
+                if (qualifier != null && qualifier != "") {
                     queryParameters = queryParameters + "Qualifier=" + encodeURIComponent(qualifier) + '&';
                 }
-                if (revisionId != null && revisionId != "")
-                {
+                if (revisionId != null && revisionId != "") {
                     queryParameters = queryParameters + "RevisionId=" + encodeURIComponent(revisionId) + '&';
                 }
-                 if (queryParameters != "")
-                {
+                 if (queryParameters != "") {
                     queryParameters = String(queryParameters);
                     queryParameters = '?' + queryParameters.substring(0, queryParameters.length - 1);
                 }
@@ -58,10 +54,6 @@
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
-        <payloadFactory media-type="json">
-            <format/>
-            <args/>
-        </payloadFactory>
         <property name="NO_ENTITY_BODY" value="true" scope="axis2" type="BOOLEAN"/>
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>

@@ -18,11 +18,11 @@
   -->
 <template name="init" onError="fault" xmlns="http://ws.apache.org/ns/synapse">
     <parameter name="region" description="The region of the application access."/>
-    <parameter name="accessKeyId"
-               description="The access key ID that corresponds to the secret access key that is used to sign the request"/>
+    <parameter name="accessKeyId" description="The access key ID that corresponds to the secret access key that
+        is used to sign the request"/>
     <parameter name="secretAccessKey" description="The secret access key of the account."/>
-    <parameter name="blocking"
-               description="The blocking parameter is helping connector performs the blocking invocation to amazon lambda"/>
+    <parameter name="blocking" description="The blocking parameter is helping connector performs the blocking
+        invocation to amazon lambda"/>
     <sequence>
         <property name="region" expression="$func:region"/>
         <property name="accessKeyId" expression="$func:accessKeyId"/>

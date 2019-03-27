@@ -55,7 +55,7 @@ public class InnerPayloadParameterBuilder {
      * buildFunctionCode method builds the inner payload needed for the
      * API payload parameter "Code" in createFunction method.
      *
-     * @return String String that is built as payload from the inner payload parameter/s of Code parameter.
+     * @return String that is built as payload from the inner payload parameter/s of Code parameter.
      */
     private String buildFunctionCode() {
 
@@ -66,15 +66,13 @@ public class InnerPayloadParameterBuilder {
         StringBuilder codeBuilder = new StringBuilder();
         Object zipFile = messageContext.getProperty(AmazonLambdaConstants.S3_ZIP_FILE);
         if (zipFile != null && !((String) zipFile).trim().isEmpty()) {
-            codeBuilder.append(String.format("\"%s\":%s", "ZipFile", zipFile));
-            codeBuilder.append(",");
+            codeBuilder.append(String.format("\"%s\":%s", "ZipFile", zipFile)).append(",");
         }
         for (Map.Entry<String, Object> entry : codes.entrySet()) {
             if (entry.getValue() == null || ((String) entry.getValue()).trim().isEmpty()) {
                 continue;
             }
-            codeBuilder.append(String.format("\"%s\":\"%s\"", entry.getKey(), entry.getValue()));
-            codeBuilder.append(",");
+            codeBuilder.append(String.format("\"%s\":\"%s\"", entry.getKey(), entry.getValue())).append(",");
         }
         if (codeBuilder.length() == 0) {
             return "";
@@ -87,7 +85,7 @@ public class InnerPayloadParameterBuilder {
      * buildDeadLetterConfig  method build the inner payload needed for the
      * API payload parameter "DeadLetterConfig" in createFunction method.
      *
-     * @return String String that is built as payload from the inner payload parameter of DeadLetterConfig parameter.
+     * @return String that is built as payload from the inner payload parameter of DeadLetterConfig parameter.
      */
     private String buildDeadLetterConfig() {
 
@@ -160,8 +158,7 @@ public class InnerPayloadParameterBuilder {
         if (StringUtils.isNotEmpty(securityGroupIdsStr) || StringUtils.isNotEmpty(subnetIdsStr)) {
             vpcConfigBuilder.append('{');
             if (StringUtils.isNotEmpty(securityGroupIdsStr)) {
-                vpcConfigBuilder
-                        .append(String.format("\"SecurityGroupIds\":[\"%s\"]", securityGroupIdsStr))
+                vpcConfigBuilder.append(String.format("\"SecurityGroupIds\":[\"%s\"]", securityGroupIdsStr))
                         .append(',');
             }
             if (StringUtils.isNotEmpty(subnetIdsStr)) {
@@ -181,8 +178,8 @@ public class InnerPayloadParameterBuilder {
      */
     public String buildRoutingConfig() {
 
-        Object additionalVersionWeightsObj = messageContext
-                .getProperty(AmazonLambdaConstants.ADDITIONAL_VERSION_WEIGHTS);
+        Object additionalVersionWeightsObj = messageContext.getProperty(AmazonLambdaConstants.
+                ADDITIONAL_VERSION_WEIGHTS);
         if (additionalVersionWeightsObj == null) {
             return "";
         }

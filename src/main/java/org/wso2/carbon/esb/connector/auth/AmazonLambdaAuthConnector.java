@@ -23,6 +23,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.synapse.MessageContext;
 import org.apache.synapse.SynapseConstants;
+import org.apache.synapse.SynapseException;
 import org.wso2.carbon.connector.core.AbstractConnector;
 import org.wso2.carbon.connector.core.ConnectException;
 import org.wso2.carbon.esb.connector.constants.AmazonLambdaConstants;
@@ -53,8 +54,8 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
     /**
      * Connect method which is generating authentication of the connector for each request.
      *
-     * @param messageContext
-     * @throws ConnectException
+     * @param messageContext ESB messageContext
+     * @throws ConnectException Connect Exception
      */
     @Override
     public void connect(MessageContext messageContext) throws ConnectException {
@@ -120,12 +121,10 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             //Setting canonicalUri.
             String canonicalUri = (String) messageContext.getProperty(AmazonLambdaConstants.URI_REMAINDER);
             if (StringUtils.isNotEmpty(canonicalUri)) {
-                canonicalRequest.append(canonicalUri.replaceAll
-                        (AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR))
-                        .append(AmazonLambdaConstants.NEW_LINE);
+                canonicalRequest.append(canonicalUri.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX,
+                        AmazonLambdaConstants.EMPTY_STR)).append(AmazonLambdaConstants.NEW_LINE);
             } else {
-                canonicalRequest.append(AmazonLambdaConstants.FORWARD_SLASH)
-                        .append(AmazonLambdaConstants.NEW_LINE);
+                canonicalRequest.append(AmazonLambdaConstants.FORWARD_SLASH).append(AmazonLambdaConstants.NEW_LINE);
             }
             //Setting canonicalQueryString
             final StringBuilder canonicalQueryString = new StringBuilder();
@@ -162,29 +161,26 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                 String tempParam = headerParametersValueMap.get(key);
                 if (StringUtils.isNotEmpty(tempParam)) {
                     headersParamsMap.put(headerParametersMap.get(key),
-                            tempParam.replaceAll
-                                    (AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
+                            tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX,
+                                    AmazonLambdaConstants.EMPTY_STR));
                 }
             }
             final SortedSet<String> headerKeys = new TreeSet<>(headersParamsMap.keySet());
             for (String key : headerKeys) {
                 String headerValues = headersParamsMap.get(key);
-                canonicalHeader.append(key.toLowerCase()).append(AmazonLambdaConstants.COLON)
-                        .append(headerValues).append(AmazonLambdaConstants.NEW_LINE);
-                signedHeader.append(key.toLowerCase());
-                signedHeader.append(AmazonLambdaConstants.SEMI_COLON);
+                canonicalHeader.append(key.toLowerCase()).append(AmazonLambdaConstants.COLON).append(headerValues).
+                        append(AmazonLambdaConstants.NEW_LINE);
+                signedHeader.append(key.toLowerCase()).append(AmazonLambdaConstants.SEMI_COLON);
             }
             //Appending canonicalHeader to canonicalRequest.
-            canonicalRequest.append(canonicalHeader.toString());
-            canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
+            canonicalRequest.append(canonicalHeader.toString()).append(AmazonLambdaConstants.NEW_LINE);
             // Removes unwanted semi-colon at the end of the signedHeader string
             String signedHeaders = "";
             if (signedHeader.length() > 0) {
                 signedHeaders = signedHeader.substring(0, signedHeader.length() - 1);
             }
             //Appending signedHeaders to canonicalRequest.
-            canonicalRequest.append(signedHeaders);
-            canonicalRequest.append(AmazonLambdaConstants.NEW_LINE);
+            canonicalRequest.append(signedHeaders).append(AmazonLambdaConstants.NEW_LINE);
             //Payload Building from the payload parameter and value given by user.
             String requestPayload = "";
             final Map<String, String> payloadParametersMap = ParameterNamesMap.getPayloadParameterNamesMap();
@@ -194,8 +190,8 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                 String tempParam = payloadParametersValueMap.get(key);
                 if (StringUtils.isNotEmpty(tempParam)) {
                     payloadParamsMap.put(payloadParametersMap.get(key),
-                            tempParam.replaceAll
-                                    (AmazonLambdaConstants.TRIM_SPACE_REGEX, AmazonLambdaConstants.EMPTY_STR));
+                            tempParam.replaceAll(AmazonLambdaConstants.TRIM_SPACE_REGEX,
+                                    AmazonLambdaConstants.EMPTY_STR));
                 }
             }
             final SortedSet<String> payloadKeys = new TreeSet<>(payloadParamsMap.keySet());
@@ -204,18 +200,14 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             } else {
                 for (String key : payloadKeys) {
                     String payloadValues = payloadParamsMap.get(key);
-                    payloadBuilder.append('"');
-                    payloadBuilder.append(key);
-                    payloadBuilder.append('"');
-                    payloadBuilder.append(':');
+                    payloadBuilder.append('"').append(key).append('"').append(':');
                     /**
                      * Checks for "{" and "[", to omit putting payload value inside quotation mark, which
                      * represents either the value has nested-payload-like parameter or is an array. In both
                      * case the value need not to be inside the quotation mark.
                      */
                     if (payloadValues.substring(0, 1).equals("{") || payloadValues.substring(0, 1).equals("[")) {
-                        payloadBuilder.append(payloadValues)
-                                .append(',');
+                        payloadBuilder.append(payloadValues).append(',');
                     }
                     /**
                      * Checks for the parameter which contains integer value. If it is such parameters then
@@ -223,19 +215,14 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                      */
                     else if (key.equals(AmazonLambdaConstants.API_PUBLISH) ||
                             key.equals(AmazonLambdaConstants.API_TIMEOUT)) {
-                        payloadBuilder.append(payloadValues)
-                                .append(',');
+                        payloadBuilder.append(payloadValues).append(',');
                     }
                     /**
                      *If both conditions mentioned above fails then the values should be inside the quotation mark.
                      * This condition does so.
                      */
                     else {
-                        payloadBuilder.append('"');
-                        payloadBuilder.append(payloadValues);
-                        payloadBuilder.append('"');
-
-                        payloadBuilder.append(',');
+                        payloadBuilder.append('"').append(payloadValues).append('"').append(',');
                     }
                 }
             }
@@ -254,19 +241,16 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
             //Hashing and making it lowercase hexadecimal string for appending to canonical request.
             canonicalRequest.append(bytesToHex(hash(messageContext, requestPayload)).toLowerCase());
             //Creates stringToSign
-            stringToSign.append(AmazonLambdaConstants.AWS4_HMAC_SHA_256);
-            stringToSign.append(AmazonLambdaConstants.NEW_LINE);
-            stringToSign.append(amzDate);
-            stringToSign.append(AmazonLambdaConstants.NEW_LINE);
-            stringToSign.append(dateOnly);
-            stringToSign.append(AmazonLambdaConstants.FORWARD_SLASH);
-            stringToSign.append(messageContext.getProperty(AmazonLambdaConstants.REGION));
-            stringToSign.append(AmazonLambdaConstants.FORWARD_SLASH);
-            stringToSign.append(messageContext.getProperty(AmazonLambdaConstants.SERVICE));
-            stringToSign.append(AmazonLambdaConstants.FORWARD_SLASH);
-            stringToSign.append(messageContext.getProperty(AmazonLambdaConstants.TERMINATION_STRING));
-            stringToSign.append(AmazonLambdaConstants.NEW_LINE);
-            stringToSign.append(bytesToHex(hash(messageContext, canonicalRequest.toString())).toLowerCase());
+            stringToSign.append(AmazonLambdaConstants.AWS4_HMAC_SHA_256).append(AmazonLambdaConstants.NEW_LINE)
+                    .append(amzDate).append(AmazonLambdaConstants.NEW_LINE).append(dateOnly)
+                    .append(AmazonLambdaConstants.FORWARD_SLASH)
+                    .append(messageContext.getProperty(AmazonLambdaConstants.REGION))
+                    .append(AmazonLambdaConstants.FORWARD_SLASH)
+                    .append(messageContext.getProperty(AmazonLambdaConstants.SERVICE))
+                    .append(AmazonLambdaConstants.FORWARD_SLASH)
+                    .append(messageContext.getProperty(AmazonLambdaConstants.TERMINATION_STRING))
+                    .append(AmazonLambdaConstants.NEW_LINE)
+                    .append(bytesToHex(hash(messageContext, canonicalRequest.toString())).toLowerCase());
             //Creates signingKey
             final byte[] signingKey =
                     getSignatureKey(messageContext,
@@ -274,27 +258,20 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
                             dateOnly, messageContext.getProperty(AmazonLambdaConstants.REGION).toString(),
                             messageContext.getProperty(AmazonLambdaConstants.SERVICE).toString());
             // Construction of authorization header value to be included in API request
-            authHeader.append(AmazonLambdaConstants.AWS4_HMAC_SHA_256);
-            authHeader.append(" ");
-            authHeader.append(AmazonLambdaConstants.CREDENTIAL);
-            authHeader.append(AmazonLambdaConstants.EQUAL);
-            authHeader.append(messageContext.getProperty(AmazonLambdaConstants.ACCESS_KEY_ID));
-            authHeader.append(AmazonLambdaConstants.FORWARD_SLASH);
-            authHeader.append(dateOnly);
-            authHeader.append(AmazonLambdaConstants.FORWARD_SLASH);
-            authHeader.append(messageContext.getProperty(AmazonLambdaConstants.REGION));
-            authHeader.append(AmazonLambdaConstants.FORWARD_SLASH);
-            authHeader.append(messageContext.getProperty(AmazonLambdaConstants.SERVICE));
-            authHeader.append(AmazonLambdaConstants.FORWARD_SLASH);
-            authHeader.append(messageContext.getProperty(AmazonLambdaConstants.TERMINATION_STRING));
-            authHeader.append(AmazonLambdaConstants.COMMA);
-            authHeader.append(AmazonLambdaConstants.SIGNED_HEADERS);
-            authHeader.append(AmazonLambdaConstants.EQUAL);
-            authHeader.append(signedHeaders);
-            authHeader.append(AmazonLambdaConstants.COMMA);
-            authHeader.append(AmazonLambdaConstants.API_SIGNATURE);
-            authHeader.append(AmazonLambdaConstants.EQUAL);
-            authHeader.append(bytesToHex(hmacSHA256(signingKey, stringToSign.toString())).toLowerCase());
+            authHeader.append(AmazonLambdaConstants.AWS4_HMAC_SHA_256)
+                    .append(" ").append(AmazonLambdaConstants.CREDENTIAL).append(AmazonLambdaConstants.EQUAL)
+                    .append(messageContext.getProperty(AmazonLambdaConstants.ACCESS_KEY_ID))
+                    .append(AmazonLambdaConstants.FORWARD_SLASH).append(dateOnly)
+                    .append(AmazonLambdaConstants.FORWARD_SLASH)
+                    .append(messageContext.getProperty(AmazonLambdaConstants.REGION))
+                    .append(AmazonLambdaConstants.FORWARD_SLASH)
+                    .append(messageContext.getProperty(AmazonLambdaConstants.SERVICE))
+                    .append(AmazonLambdaConstants.FORWARD_SLASH)
+                    .append(messageContext.getProperty(AmazonLambdaConstants.TERMINATION_STRING))
+                    .append(AmazonLambdaConstants.COMMA).append(AmazonLambdaConstants.SIGNED_HEADERS)
+                    .append(AmazonLambdaConstants.EQUAL).append(signedHeaders).append(AmazonLambdaConstants.COMMA)
+                    .append(AmazonLambdaConstants.API_SIGNATURE).append(AmazonLambdaConstants.EQUAL)
+                    .append(bytesToHex(hmacSHA256(signingKey, stringToSign.toString())).toLowerCase());
             // Adds authorization header to message context
             messageContext.setProperty(AmazonLambdaConstants.AUTHORIZATION_HEADER, authHeader.toString());
         } catch (InvalidKeyException exc) {
@@ -316,40 +293,39 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
      * Add a Throwable to a message context, the message from the throwable is embedded as the Synapse.
      * Constant ERROR_MESSAGE.
      *
-     * @param ctxt      message context to which the error tags need to be added
-     * @param throwable Throwable that needs to be parsed and added
-     * @param errorCode errorCode mapped to the exception
+     * @param msgContext message context to which the error tags need to be added
+     * @param throwable  Throwable that needs to be parsed and added
+     * @param errorCode  errorCode mapped to the exception
      */
-    private void storeErrorResponseStatus(final MessageContext ctxt, final Throwable throwable, final int errorCode) {
+    private void storeErrorResponseStatus(final MessageContext msgContext, final Throwable throwable, final int errorCode) {
 
-        ctxt.setProperty(SynapseConstants.ERROR_CODE, errorCode);
-        ctxt.setProperty(SynapseConstants.ERROR_MESSAGE, throwable.getMessage());
-        ctxt.setFaultResponse(true);
+        msgContext.setProperty(SynapseConstants.ERROR_CODE, errorCode);
+        msgContext.setProperty(SynapseConstants.ERROR_MESSAGE, throwable.getMessage());
+        msgContext.setFaultResponse(true);
     }
 
     /**
      * Add a message to message context, the message from the throwable is embedded as the Synapse Constant
      * ERROR_MESSAGE.
      *
-     * @param ctxt      message context to which the error tags need to be added
-     * @param message   message to be returned to the user
-     * @param errorCode errorCode mapped to the exception
+     * @param msgContext message context to which the error tags need to be added
+     * @param message    message to be returned to the user
+     * @param errorCode  errorCode mapped to the exception
      */
-    private void storeErrorResponseStatus(final MessageContext ctxt, final String message, final int errorCode) {
+    private void storeErrorResponseStatus(final MessageContext msgContext, final String message, final int errorCode) {
 
-        ctxt.setProperty(SynapseConstants.ERROR_CODE, errorCode);
-        ctxt.setProperty(SynapseConstants.ERROR_MESSAGE, message);
-        ctxt.setFaultResponse(true);
+        msgContext.setProperty(SynapseConstants.ERROR_CODE, errorCode);
+        msgContext.setProperty(SynapseConstants.ERROR_MESSAGE, message);
+        msgContext.setFaultResponse(true);
     }
 
     /**
      * Hashes the string contents (assumed to be UTF-8) using the SHA-256 algorithm.
      *
-     * @param messageContext of the connector
+     * @param messageContext message context of the connector
      * @param text           text to be hashed
      * @return SHA-256 hashed text
      */
-
     private byte[] hash(final MessageContext messageContext, final String text) {
 
         MessageDigest messageDigest = null;
@@ -414,7 +390,7 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
     /**
      * Returns the encoded signature key to be used for further encodings as per API doc.
      *
-     * @param ctx         message context of the connector
+     * @param mesgContext message context of the connector
      * @param key         key to be used for signing
      * @param dateStamp   current date stamp
      * @param regionName  region name given to the connector
@@ -425,7 +401,7 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
      * @throws NoSuchAlgorithmException     No Such Algorithm Exception
      * @throws InvalidKeyException          Invalid Key Exception
      */
-    private static byte[] getSignatureKey(final MessageContext ctx, final String key, final String dateStamp,
+    private static byte[] getSignatureKey(final MessageContext mesgContext, final String key, final String dateStamp,
                                           final String regionName, final String serviceName)
             throws UnsupportedEncodingException, InvalidKeyException, NoSuchAlgorithmException, IllegalStateException {
 
@@ -433,6 +409,6 @@ public class AmazonLambdaAuthConnector extends AbstractConnector {
         final byte[] kDate = hmacSHA256(kSecret, dateStamp);
         final byte[] kRegion = hmacSHA256(kDate, regionName);
         final byte[] kService = hmacSHA256(kRegion, serviceName);
-        return hmacSHA256(kService, ctx.getProperty(AmazonLambdaConstants.TERMINATION_STRING).toString());
+        return hmacSHA256(kService, mesgContext.getProperty(AmazonLambdaConstants.TERMINATION_STRING).toString());
     }
 }

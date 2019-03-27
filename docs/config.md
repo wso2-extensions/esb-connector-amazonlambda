@@ -8,7 +8,7 @@ To use the AmazonLambda service, you must have an AWS account. If you don't alre
 
 * **To sign up for AWS:**
 
-    1. Open https://aws.amazon.com/, and then choose Create an AWS Account.
+    1. Navigate to this link https://aws.amazon.com/, and then choose Create an AWS Account.
 
         > NOTE: If you previously signed in to the AWS Management Console using AWS account root user credentials, choose Sign in to a different account. If you previously signed in to the console using IAM credentials, choose Sign-in using root account credentials. Then choose Create a new AWS account.
 

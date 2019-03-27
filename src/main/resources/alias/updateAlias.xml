@@ -24,10 +24,10 @@
     <!-- URI request parameters-->
     <parameter name="updatedAliasDescription" description="The description of the alias."/>
     <parameter name="functionVersion" description="The version of the function that the alias invokes."/>
-    <parameter name="aliasRevisionId"
-               description="Only update the alias if the revision ID matches the ID that's specified."/>
-    <parameter name="updatedAliasAdditionalVersionWeights"
-               description="The name of the second alias, and the percentage of traffic that's routed to it."/>
+    <parameter name="aliasRevisionId" description="Only update the alias if the revision ID matches the ID that's
+        specified."/>
+    <parameter name="updatedAliasAdditionalVersionWeights" description="The name of the second alias, and the
+        percentage of traffic that's routed to it."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.aliasName" expression="$func:aliasName"/>
@@ -37,9 +37,8 @@
         <property name="payloadRevisionId" expression="$func:aliasRevisionId"/>
         <property name="payloadAdditionalVersionWeights" expression="$func:updatedAliasAdditionalVersionWeights"/>
         <property name="httpMethod" value="PUT"/>
-        <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
-                   '/aliases/', $ctx:uri.var.aliasName)"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/',
+            $ctx:uri.var.functionName, '/aliases/', $ctx:uri.var.aliasName)"/>
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>

@@ -20,204 +20,124 @@ package org.wso2.carbon.esb.connector.constants;
 
 public class AmazonLambdaConstants {
 
-    /**
-     * Constant for Secret Access Key.
-     */
+    //Constant for Secret Access Key.
     public static final String SECRET_ACCESS_KEY = "secretAccessKey";
 
-    /**
-     * Constant for Access Key Id.
-     */
+    //Constant for Access Key Id.
     public static final String ACCESS_KEY_ID = "accessKeyId";
 
-    /**
-     * Constant for HTTP method.
-     */
+    //Constant for HTTP method.
     public static final String HTTP_METHOD = "httpMethod";
 
-    /**
-     * Constant for request payload to later use in signature generation process.
-     */
+    //Constant for request payload to later use in signature generation process.
     public static final String REQUEST_PAYLOAD = "requestPayload";
 
-    /**
-     * Constant for payload parameter.
-     */
+    //Constant for payload parameter.
     public static final String PAYLOAD = "payload";
 
-    /**
-     * Constant for API payload parameter.
-     */
+    //Constant for API payload parameter.
     public static final String API_PAYLOAD = "Payload";
 
-    /**
-     * Constant for region.
-     */
+    // Constant for region.
     public static final String REGION = "region";
 
-    /**
-     * Constant for service.
-     */
+    //Constant for service.
     public static final String SERVICE = "service";
 
-    /**
-     * Constant for termination string.
-     */
+    //Constant for termination string.
     public static final String TERMINATION_STRING = "terminationString";
 
-    /**
-     * Constant for semi colon.
-     */
+    //Constant for semi colon.
     public static final String SEMI_COLON = ";";
 
-    /**
-     * Constant for new line.
-     */
+    //Constant for new line.
     public static final String NEW_LINE = "\n";
 
-    /**
-     * Constant for signature.
-     */
+    //Constant for signature.
     public static final String API_SIGNATURE = "Signature";
 
-    /**
-     * Constant for credential.
-     */
+    //Constant for credential.
     public static final String CREDENTIAL = "Credential";
 
-    /**
-     * Constant for Signed Headers.
-     */
+    //Constant for Signed Headers.
     public static final String SIGNED_HEADERS = "SignedHeaders";
 
-    /**
-     * Constant for Authorization Header.
-     */
+    //Constant for Authorization Header.
     public static final String AUTHORIZATION_HEADER = "authorizationHeader";
 
-    /**
-     * Constant for Comma.
-     */
+    //Constant for Comma.
     public static final String COMMA = ",";
 
-    /**
-     * Constant for Colon.
-     */
+    //Constant for Colon.
     public static final String COLON = ":";
 
-    /**
-     * Constant for Forward Slash.
-     */
+    //Constant for Forward Slash.
     public static final String FORWARD_SLASH = "/";
 
-    /**
-     * Constant for Equal.
-     */
+    //Constant for Equal.
     public static final String EQUAL = "=";
 
-    /**
-     * Constant for Ampersand.
-     */
+    //Constant for Ampersand.
     public static final String AMPERSAND = "&";
 
-    /**
-     * Error code constant for generic exception.
-     */
+    //Error code constant for generic exception.
     public static final int ERROR_CODE_EXCEPTION = 900001;
 
-    /**
-     * Constant for sha 256.
-     */
+    //Constant for sha 256.
     public static final String SHA_256 = "SHA-256";
 
-    /**
-     * Constant for aws4-hmac-sha256. Hashing algorithm used for creating string-to-sign.
-     */
+    //Constant for aws4-hmac-sha256. Hashing algorithm used for creating string-to-sign.
     public static final String AWS4_HMAC_SHA_256 = "AWS4-HMAC-SHA256";
 
-    /**
-     * Constant for Date format.
-     */
+    //Constant for Date format.
     public static final String ISO8601_BASIC_DATE_FORMAT = "yyyyMMdd'T'HHmmss'Z'";
 
-    /**
-     * Constant for Short Date Format.
-     */
+    //Constant for Short Date Format.
     public static final String FORMAT_FOR_DATE_ONLY = "yyyyMMdd";
 
-    /**
-     * Constant for UTF-8.
-     */
+    //Constant for UTF-8.
     public static final String UTF_8 = "UTF-8";
 
-    /**
-     * Constant for UTF8.
-     */
+    //Constant for UTF8.
     public static final String UTF8 = "UTF8";
 
-    /**
-     * Constant for HmacSha256. Used in signature method.
-     */
+    //Constant for HmacSha256. Used in signature method.
     public static final String HAMC_SHA_256 = "HmacSHA256";
 
-    /**
-     * Constant for AWS4.
-     */
+    //Constant for AWS4.
     public static final String AWS4 = "AWS4";
 
-    /**
-     * Constant for Hex Array String.
-     */
+    //Constant for Hex Array String.
     public static final String HEX_ARRAY_STRING = "0123456789ABCDEF";
 
-    /**
-     * Constant for Trim Spaces Regex.
-     */
+    //Constant for Trim Spaces Regex.
     public static final String TRIM_SPACE_REGEX = "  ++(?=(?:[^\"]*+\"[^\"]*+\")*+[^\"]*+$)";
 
-    /**
-     * Constant for Emptyspace.
-     */
+    //Constant for Empty space.
     public static final String EMPTY_STR = "";
 
-    /**
-     * Constant for Connector Error.
-     */
+    //Constant for Connector Error.
     public static final String CONNECTOR_ERROR = "Error occurred in connector";
 
-    /**
-     * Constant for Illegal State Error Code.
-     */
+    //Constant for Illegal State Error Code.
     public static final int ILLEGAL_STATE_ERROR_CODE = 700015;
 
-    /**
-     * Constant errorCode for UnsupportedEncodingException.
-     */
+    //Constant errorCode for UnsupportedEncodingException.
     public static final int UNSUPPORTED_ENCODING_ERROR_CODE = 700009;
 
-    /**
-     * Constant fot Invalid Key Error.
-     */
+    //Constant fot Invalid Key Error.
     public static final String INVALID_KEY_ERROR = "Invalid key";
 
-    /**
-     * Constant errorCode for InvalidKeyException.
-     */
+    //Constant errorCode for InvalidKeyException.
     public static final int INVALID_KEY_ERROR_CODE = 700007;
 
-    /**
-     * Constant for Invalid Error.
-     */
+    //Constant for Invalid Error.
     public static final String NO_SUCH_ALGORITHM_ERROR = "Invalid Algorithm";
 
-    /**
-     * Constant errorCode for NoSuchAlgorithmException.
-     */
+    //Constant errorCode for NoSuchAlgorithmException.
     public static final int NO_SUCH_ALGORITHM_ERROR_CODE = 700008;
 
-    /**
-     * Constant for URI Remainder.
-     */
+    //Constant for URI Remainder.
     public static final String URI_REMAINDER = "uri.var.uriRemainder";
 
     /**

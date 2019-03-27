@@ -52,9 +52,8 @@ public class ParametersValueMap {
         String[] keys = KeysStore.getHeaderKeys();
         Map<String, String> parametersMap = new HashMap<>();
         for (String key : keys) {
-            String paramValue =
-                    (messageContext.getProperty(key) != null) ? (String) messageContext
-                            .getProperty(key) : AmazonLambdaConstants.EMPTY_STR;
+            Object temp = messageContext.getProperty(key);
+            String paramValue =(temp != null) ? (String) temp : AmazonLambdaConstants.EMPTY_STR;
             parametersMap.put(key, paramValue);
         }
         return parametersMap;
@@ -90,9 +89,8 @@ public class ParametersValueMap {
         String[] keys = KeysStore.getPayloadKeys();
         Map<String, String> parametersMap = new HashMap<>();
         for (String key : keys) {
-            String paramValue =
-                    (messageContext.getProperty(key) != null) ? (String) messageContext
-                            .getProperty(key) : AmazonLambdaConstants.EMPTY_STR;
+            Object temp = messageContext.getProperty(key);
+            String paramValue =(temp != null) ? (String) temp : AmazonLambdaConstants.EMPTY_STR;
             parametersMap.put(key, paramValue);
         }
         return parametersMap;

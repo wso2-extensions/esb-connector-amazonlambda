@@ -19,23 +19,21 @@
 <template xmlns="http://ws.apache.org/ns/synapse" name="getFunctionConfiguration">
     <parameter name="functionName" description="Name of the Lambda function."/>
     <parameter name="qualifier" description="version/alias to specify"/>
-    <parameter name="apiVersionGetFunctionConfiguration"
-               description="API version used for GetFunctionConfiguration method."/>
+    <parameter name="apiVersionGetFunctionConfiguration" description="API version used for GetFunctionConfiguration
+        method."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:qualifier"/>
         <property name="uri.var.apiVersion" expression="$func:apiVersionGetFunctionConfiguration"/>
         <property name="httpMethod" value="GET"/>
-        <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
-                   '/configuration')"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/',
+            $ctx:uri.var.functionName, '/configuration')"/>
         <script language="js">
             <![CDATA[
                 var queryParameter = '';
                 var qualifier = mc.getProperty('uri.var.qualifier');
 
-                if (qualifier != null && qualifier != "")
-                {
+                if (qualifier != null && qualifier != "") {
                     queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
                 }
                 mc.setProperty('uri.var.queryParameter', queryParameter.toString());
@@ -44,10 +42,6 @@
         <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
         <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
         <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
-        <payloadFactory media-type="json">
-            <format/>
-            <args/>
-        </payloadFactory>
         <filter source="$ctx:amazonLambdaBlocking" regex="true">
             <then>
                 <call blocking="true">

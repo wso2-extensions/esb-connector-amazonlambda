@@ -22,10 +22,10 @@
     <parameter name="apiVersionAddPermission" description="API version used for AddPermission method."/>
     <parameter name="permissionAction" description="The AWS Lambda action to allow."/>
     <parameter name="eventSourceToken" description="A unique token supplied by the principal invoking the function."/>
-    <parameter name="permissionPrincipal"
-               description="The principal who is getting this permission to invoke the function."/>
-    <parameter name="permissionRevisionId"
-               description="Only update the policy if the revision ID matches the ID specified."/>
+    <parameter name="permissionPrincipal" description="The principal who is getting this permission to invoke the
+        function."/>
+    <parameter name="permissionRevisionId" description="Only update the policy if the revision ID matches the ID
+        specified."/>
     <parameter name="sourceAccount" description="The source account."/>
     <parameter name="sourceArn" description="The ARN of the source."/>
     <parameter name="permissionStatementId" description="A unique statement identifier."/>
@@ -41,15 +41,13 @@
         <property name="payloadSourceArn" expression="$func:sourceArn"/>
         <property name="payloadStatementId" expression="$func:permissionStatementId"/>
         <property name="httpMethod" value="POST"/>
-        <property name="uri.var.uriRemainder"
-                  expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/', $ctx:uri.var.functionName,
-                   '/policy')"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/',
+            $ctx:uri.var.functionName, '/policy')"/>
         <script language="js">
             <![CDATA[
                 var queryParameter = '';
                 var qualifier = mc.getProperty('uri.var.qualifier');
-                if (qualifier != null && qualifier != "")
-                {
+                if (qualifier != null && qualifier != "") {
                     queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
                 }
                 mc.setProperty('uri.var.queryParameter', queryParameter.toString());
