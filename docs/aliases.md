@@ -26,14 +26,16 @@ The createAlias implementation of the POST operation creates an alias for a Lamb
     <functionVersion>{$ctx:functionVersion}</functionVersion>
     <aliasName>{$ctx:aliasName}</aliasName>
     <aliasAdditionalVersionWeights>{$ctx:aliasAdditionalVersionWeights}</aliasAdditionalVersionWeights>
+    <apiVersionCreateAlias>{$ctx:apiVersionCreateAlias}</apiVersionCreateAlias>
 </amazonlambda.createAlias>
 ```
 
 **Properties**
+* apiVersionCreateAlias : API version for CreateAlias method.
 * functionName : The name of the Lambda function that the alias invokes.
-* createAliasDescription: The description of the alias.
+* createAliasDescription : The description of the alias.
 * functionVersion : The function version that the alias invokes.
-* aliasName: The name of the alias.
+* aliasName : The name of the alias.
 * aliasAdditionalVersionWeights : The name of second alias, and the percentage of traffic that's routed to it.
 
 **Sample request**
@@ -47,7 +49,8 @@ Following is a sample REST request that can be handled by the createAlias operat
     "blocking":"false",
     "functionName":"test",
     "functionVersion":"$LATEST",
-    "aliasName":"alias2"
+    "aliasName":"alias2",
+    "apiVersionCreateAlias":"2015-03-31"
 }
 ```
 
@@ -77,12 +80,14 @@ The deleteAlias implementation deletes a Lambda function alias.
 <amazonlambda.deleteAlias>
     <functionName>{$ctx:functionName}</functionName>
     <aliasName>{$ctx:aliasName}</aliasName>
+    <apiVersionDeleteAlias>{$ctx:apiVersionDeleteAlias}</apiVersionDeleteAlias>
 </amazonlambda.deleteAlias>
 ```
 
 **Properties**
+* apiVersionDeleteAlias : API version for DeleteAlias method.
 * functionName : The name of the Lambda function that the alias invokes.
-* aliasName: The name of the alias.
+* aliasName : The name of the alias.
 
 **Sample request**
 
@@ -94,7 +99,8 @@ Following is a sample REST request that can be handled by the deleteAlias operat
   "region":"us-east-2",
   "blocking":"false",
   "functionName":"test",
-  "aliasName":"alias2"
+  "aliasName":"alias2",
+  "apiVersionDeleteAlias":"2015-03-31"
 }
 ```
 
@@ -115,12 +121,14 @@ The getAlias implementation of the GET operation returns details about a Lambda 
 <amazonlambda.getAlias>
     <functionName>{$ctx:functionName}</functionName>
     <aliasName>{$ctx:aliasName}</aliasName>
+    <apiVersionGetAlias>{$ctx:apiVersionGetAlias}</apiVersionGetAlias>    
 </amazonlambda.getAlias>
 ```
 
 **Properties**
 * functionName : The name of the Lambda function that the alias invokes.
-* aliasName: The name of the alias.
+* aliasName : The name of the alias.
+* apiVersionGetAlias : API version for GetAlias method.
 
 **Sample request**
 
@@ -132,7 +140,8 @@ Following is a sample REST request that can be handled by the getAlias operation
   "region":"us-east-2",
   "blocking":"false",
   "functionName":"test",
-  "aliasName":"alias2"
+  "aliasName":"alias2",
+  "apiVersionGetAlias":"2015-03-31"
 }
 ```
 
@@ -166,15 +175,17 @@ The updateAlias method implementation updates the configuration of a Lambda func
     <functionVersion>{$ctx:functionVersion}</functionVersion>
     <aliasName>{$ctx:aliasName}</aliasName>
     <updatedAliasAdditionalVersionWeight>{$ctx:updatedAliasAdditionalVersionWeight}</updatedAliasAdditionalVersionWeight>
+    <apiVersionUpdateAlias>{$ctx:apiVersionUpdateAlias}</apiVersionUpdateAlias>
 </amazonlambda.updateAlias>
 ```
 
 **Properties**
 * functionName : The name of the Lambda function that the alias invokes.
-* updatedAliasDescription: The description of the alias.
+* updatedAliasDescription : The description of the alias.
 * functionVersion : The function version that the alias invokes.
-* aliasName: The name of the alias.
+* aliasName : The name of the alias.
 * updatedAliasAdditionalVersionWeight : The name of second alias, and the percentage of traffic that's routed to it.
+* apiVersionUpdateAlias : API version for UpdateAlias method.
 
 **Sample request**
 
@@ -187,7 +198,8 @@ Following is a sample REST request that can be handled by the updateAlias operat
   "blocking":"false",
   "functionName":"test",
   "aliasName":"alias2",
-  "functionVersion":"$LATEST"
+  "functionVersion":"$LATEST",
+  "apiVersionUpdateAlias":"2015-03-31"
 }
 ```
 
@@ -235,6 +247,7 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
          <property expression="json-eval($.functionVersion)" name="functionVersion"/>
          <property expression="json-eval($.aliasName)" name="aliasName"/>
          <property expression="json-eval($.aliasAdditionalVersionWeights)" name="aliasAdditionalVersionWeights"/>
+         <property expression="json-eval($.apiVersionCreateAlias)" name="apiVersionCreateAlias"/>
          <amazonlambda.init>
             <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
             <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
@@ -247,6 +260,7 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
             <functionVersion>{$ctx:functionVersion}</functionVersion>
             <aliasName>{$ctx:aliasName}</aliasName>
             <aliasAdditionalVersionWeights>{$ctx:aliasAdditionalVersionWeights}</aliasAdditionalVersionWeights>
+            <apiVersionCreateAlias>{$ctx:apiVersionCreateAlias}</apiVersionCreateAlias>
          </amazonlambda.createAlias>           
          <respond/>
       </inSequence>
@@ -263,7 +277,8 @@ Following is a sample proxy service that illustrates how to connect to Amazon La
     "blocking":"false",
     "functionName":"createdFuncLast",
     "functionVersion":"$LATEST",
-    "aliasName":"aliasJ7"
+    "aliasName":"aliasJ7",
+    "apiVersionCreateAlias":"2015-03-31"
 }
 ```
 

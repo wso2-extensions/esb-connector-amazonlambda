@@ -28,17 +28,19 @@ Adds permissions to the resource-based policy of a version of an [AWS Lambda lay
     <layerOrganizationId>{$ctx:layerOrganizationId}</layerOrganizationId>
     <layerPrincipal>{$ctx:layerPrincipal}</layerPrincipal>
     <layerStatementId>{$ctx:layerStatementId}</layerStatementId>
+    <apiVersionAddLayerVersionPermission>{$ctx:apiVersionAddLayerVersionPermission}</apiVersionAddLayerVersionPermission>
 </amazonlambda.addLayerVersionPermission>
 ```
 
 **Properties**
-* layerName: The name or Amazon Resource Name (ARN) of the layer.
-* layerVersionNumber: The version number.
-* layerRevisionId: Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
-* layerAction: The API action that grants access to the layer. For example, lambda:GetLayerVersion.
-* layerOrganizationId: With the principal set to *, grant permission to all accounts in the specified organization.
-* layerPrincipal: An account ID, or * to grant permission to all AWS accounts.
-* layerStatementId: An identifier that distinguishes the policy from others on the same layer version.
+* apiVersionAddLayerVersionPermission : API version for AddLayerVersionPermission method.
+* layerName : The name or Amazon Resource Name (ARN) of the layer.
+* layerVersionNumber : The version number.
+* layerRevisionId : Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+* layerAction : The API action that grants access to the layer. For example, lambda:GetLayerVersion.
+* layerOrganizationId : With the principal set to *, grant permission to all accounts in the specified organization.
+* layerPrincipal : An account ID, or * to grant permission to all AWS accounts.
+* layerStatementId : An identifier that distinguishes the policy from others on the same layer version.
 
 **Sample request**
 
@@ -53,7 +55,8 @@ Following is a sample REST request that can be handled by the addLayerVersionPer
   "layerPrincipal":"*",
   "layerStatementId":"Permisssion_Added",
   "layerAction":"lambda:GetLayerVersion",
-  "layerName":"CustomFunction"
+  "layerName":"CustomFunction",
+  "apiVersionAddLayerVersionPermission":"2018-10-31"
 }
 ```
 
@@ -81,14 +84,16 @@ Removes a statement from the permissions policy for a version of an AWS Lambda l
     <layerVersionNumber>{$ctx:layerVersionNumber}</layerVersionNumber>
     <layerStatementId>{$ctx:layerStatementId}</layerStatementId>
     <layerRevisionId>{$ctx:layerRevisionId}</layerRevisionId>
+    <apiVersionRemoveLayerVersionPermission>{$ctx:apiVersionRemoveLayerVersionPermission}</apiVersionRemoveLayerVersionPermission>
 </amazonlambda.removeLayerVersionPermission>
 ```
 
 **Properties**
-* layerName: The name or Amazon Resource Name (ARN) of the layer.
-* layerVersionNumber: The version number of layer.
-* layerRevisionId: Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
-* layerStatementId: An identifier that distinguishes the policy from others on the same layer version.
+* apiVersionRemoveLayerVersionPermission : API version for RemoveLayerVersionPermission method.
+* layerName : The name or Amazon Resource Name (ARN) of the layer.
+* layerVersionNumber : The version number of layer.
+* layerRevisionId : Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+* layerStatementId : An identifier that distinguishes the policy from others on the same layer version.
 
 **Sample request**
 
@@ -101,7 +106,8 @@ Following is a sample REST request that can be handled by the removeLayerVersion
 	"blocking":"false",
 	"layerVersionNumber":"1",
 	"layerStatementId":"Layer_Version_Permisssion_Added",
-	"layerName":"CustomFunction"
+	"layerName":"CustomFunction",
+	"apiVersionRemoveLayerVersionPermission":"2018-10-31"
 }
 ```
 
@@ -142,6 +148,7 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
         <property expression="json-eval($.layerOrganizationId)" name="layerOrganizationId"/>
         <property expression="json-eval($.layerPrincipal)" name="layerPrincipal"/>        
         <property expression="json-eval($.layerStatementId)" name="layerStatementId"/>
+        <property expression="json-eval($.apiVersionAddLayerVersionPermission)" name="apiVersionAddLayerVersionPermission"/>
         <amazonlambda.init>
            <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
            <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
@@ -150,6 +157,7 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
         </amazonlambda.init>
         <amazonlambda.addLayerVersionPermission>
             <layerName>{$ctx:layerName}</layerName>
+            <apiVersionAddLayerVersionPermission>{$ctx:apiVersionAddLayerVersionPermission}</apiVersionAddLayerVersionPermission>
             <layerVersionNumber>{$ctx:layerVersionNumber}</layerVersionNumber>
             <layerRevisionId>{$ctx:layerRevisionId}</layerRevisionId>
             <layerAction>{$ctx:layerAction}</layerAction>
@@ -176,7 +184,8 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
     "layerPrincipal":"*",
     "layerStatementId":"Layer_Version_Permisssion_Added",
     "layerAction":"lambda:GetLayerVersion",
-    "layerName":"CustomFunction"
+    "layerName":"CustomFunction",
+    "apiVersionAddLayerVersionPermission":"2018-10-31"
 }
 ```
 

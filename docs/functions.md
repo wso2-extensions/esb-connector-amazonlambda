@@ -30,16 +30,18 @@ The addPermission implementation of the POST operation grants an AWS service or 
     <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
     <permissionPrincipal>{$ctx:permissionPrincipal}</permissionPrincipal>
     <permissionQualifier>{$ctx:permissionQualifier}</permissionQualifier>
+    <apiVersionAddPermission>{$ctx:apiVersionAddPermission}</apiVersionAddPermission>
 
 </amazonlambda.addPermission>
 ```
 
 **Properties**
-* functionName: Name of the Lambda function, version, or alias.
-* permissionAction: The action that the principal can use on the function.For example, lambda:InvokeFunction or lambda:GetFunction.
-* permissionStatementId: A statement identifier that differentiates the statement from others in the same policy.
-* permissionPrincipal: The AWS service or account that invokes the function. If you specify a service, use SourceArn or SourceAccount to limit who can invoke the function through that service.
-* permissionQualifier: Specify a version or alias.
+* apiVersionAddPermission : API version for AddPermission method.
+* functionName : Name of the Lambda function, version, or alias.
+* permissionAction : The action that the principal can use on the function.For example, lambda:InvokeFunction or lambda:GetFunction.
+* permissionStatementId : A statement identifier that differentiates the statement from others in the same policy.
+* permissionPrincipal : The AWS service or account that invokes the function. If you specify a service, use SourceArn or SourceAccount to limit who can invoke the function through that service.
+* permissionQualifier : Specify a version or alias.
 
 **Sample request**
 
@@ -53,7 +55,8 @@ Following is a sample REST request that can be handled by the addPermission oper
     "functionName":"testFunction",
     "permissionAction":"lambda:addPermission",
     "permissionPrincipal":"s3.amazonaws.com",
-    "permissionStatementId":"Permisssion_Added182p"
+    "permissionStatementId":"Permisssion_Added182p",
+    "apiVersionAddPermission":"2015-03-31"
 }
 ```
 
@@ -76,6 +79,7 @@ The createFunction operation creates a Lambda function. To create a function, yo
 **createFunction**
 ```xml
 <amazonlambda.createFunction>
+    <apiVersionCreateFunction>{$ctx:apiVersionCreateFunction}</apiVersionCreateFunction>
     <functionName>{$ctx:functionName}</functionName>
     <functionDescription>{$ctx:functionDescription}</functionDescription>
     <s3Bucket>{$ctx:s3Bucket}</s3Bucket>
@@ -100,26 +104,27 @@ The createFunction operation creates a Lambda function. To create a function, yo
 ```
 
 **Properties**
-* functionName: The name of the Lambda function.
-* functionDescription: Contains description of the function.
-* s3Bucket: An Amazon S3 bucket name in the same region as your function.
-* s3Key: The Amazon S3 key of the deployment package.
-* s3ObjectVersion: For versioned objects, the version of the deployment package object to use.
-* zipFile: The base64-encoded contents of zip file containing your deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
-* targetArn: The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
-* environmentVariables: Environment variable key-value pairs.
-* handler: The name of the method within your code that Lambda calls to execute your function.
-* kmsKeyArn: The ARN of the KMS key used to encrypt your function's environment variables. If not provided, AWS Lambda will use a default service key. 
-* layers: A list of function layers to add to the function's execution environment.
-* memorySize: The amount of memory that your function has access to. Increasing the function's memory also increases it's CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
-* publish: Set to true to publish the first version of the function during creation.
-* role: The Amazon Resource Name (ARN) of the function’s execution role.
-* runtime: The runtime version for the function.Valid Values: nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 |.
-* tags: The list of tags (key-value-pairs) assigned to the new function. For more information see Tagging Lambda Functions in the AWS Lambda Developer Guide.
-* timeout: The amount of time that Lambda allows a function to run before terminating it. The default is 3 seconds. The maximum allowed value is 900 seconds.
-* mode: Set Mode to Activate to sample and trace a subset of incoming requests with AWS X-Ray. The tracing mode to Activate to sample and trace a subset of incoming requests with AWS X-Ray.
-* securityGroupIds: A list of VPC security groups IDs.
-* subnetIds: A list of VPC subnet IDs.
+* apiVersionCreateFunction : The API version for the CreateFunction method.
+* functionName : The name of the Lambda function.
+* functionDescription : Contains description of the function.
+* s3Bucket : An Amazon S3 bucket name in the same region as your function.
+* s3Key : The Amazon S3 key of the deployment package.
+* s3ObjectVersion : For versioned objects, the version of the deployment package object to use.
+* zipFile : The base64-encoded contents of zip file containing your deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+* targetArn : The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+* environmentVariables : Environment variable key-value pairs.
+* handler : The name of the method within your code that Lambda calls to execute your function.
+* kmsKeyArn : The ARN of the KMS key used to encrypt your function's environment variables. If not provided, AWS Lambda will use a default service key. 
+* layers : A list of function layers to add to the function's execution environment.
+* memorySize : The amount of memory that your function has access to. Increasing the function's memory also increases it's CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+* publish : Set to true to publish the first version of the function during creation.
+* role : The Amazon Resource Name (ARN) of the function’s execution role.
+* runtime : The runtime version for the function.Valid Values: nodejs | nodejs4.3 | nodejs6.10 | nodejs8.10 | java8 | python2.7 | python3.6 | python3.7 | dotnetcore1.0 | dotnetcore2.0 | dotnetcore2.1 | nodejs4.3-edge | go1.x | ruby2.5 |.
+* tags : The list of tags (key-value-pairs) assigned to the new function. For more information see Tagging Lambda Functions in the AWS Lambda Developer Guide.
+* timeout : The amount of time that Lambda allows a function to run before terminating it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+* mode : Set Mode to Activate to sample and trace a subset of incoming requests with AWS X-Ray. The tracing mode to Activate to sample and trace a subset of incoming requests with AWS X-Ray.
+* securityGroupIds : A list of VPC security groups IDs.
+* subnetIds : A list of VPC subnet IDs.
 
 **Sample request**
 
@@ -136,7 +141,8 @@ Following is a sample REST request that can be handled by the createFunction ope
     "functionName":"createdFunc",
     "handler":"mdhandler",
     "role":"arn:aws:iam::14*****:role/service-role/yfuj",
-    "runtime":"python3.7"
+    "runtime":"python3.7",
+    "apiVersionCreateFunction":"2015-03-31"
 }
 ```
 
@@ -182,11 +188,13 @@ Implementation of deleteFunction method deletes a Lambda function. To delete a s
 <amazonlambda.deleteFunction>
     <functionName>{$ctx:functionName}</functionName>
     <deleteFunctionQualifier>{$ctx:deleteFunctionQualifier}</deleteFunctionQualifier>
+    <apiVersionDeleteFunction>{$ctx:apiVersionDeleteFunction}</apiVersionDeleteFunction>
 </amazonlambda.deleteFunction>
 ```
 
 **Properties**
-* functionName: The name of the Lambda function.
+* apiVersionDeleteFunction : API version for DeleteFunction method.
+* functionName  : The name of the Lambda function.
 * deleteFunctionQualifier: Specify a version to delete. You can't delete a version that's referenced by an alias.
 
 **Sample request**
@@ -198,7 +206,8 @@ Following is a sample REST request that can be handled by the deleteFunction ope
   "accessKeyId":"AKIAJHJX************",
   "region":"us-east-1",
   "blocking":"false",
-  "functionName":"func"
+  "functionName":"func",
+  "apiVersionDeleteFunction":"2015-03-31"
 }
 ```
 
@@ -220,12 +229,14 @@ Implementation of getFunction operation return information about the function or
 <amazonlambda.getFunction>
     <functionName>{$ctx:functionName}</functionName>
     <qualifier>{$ctx:qualifier}</qualifier>
+    <apiVersionGetFunction>{$ctx:apiVersionGetFunction}</apiVersionGetFunction>
 </amazonlambda.getFunction>
 ```
 
 **Properties**
-* functionName: The name of the Lambda function.
-* qualifier: Specify a version or alias.
+* apiVersionGetFunction : API version for GetFunction method.
+* functionName : The name of the Lambda function.
+* qualifier : Specify a version or alias.
 
 **Sample request**
 
@@ -237,7 +248,8 @@ Following is a sample REST request that can be handled by the getFunction operat
   "region":"us-east-2",
   "blocking":"false",
   "functionName":"Fn",
-  "qualifier":"$LATEST"
+  "qualifier":"$LATEST",
+  "apiVersionGetFunction":"2015-03-31"
 }
 ```
 
@@ -303,12 +315,14 @@ Implementation of getFunctionConfiguration operation returns the version-specifi
 <amazonlambda.getFunctionConfiguration>
     <functionName>{$ctx:functionName}</functionName>
     <qualifier>{$ctx:qualifier}</qualifier>
+    <apiVersionGetFunctionConfiguration>{$ctx:apiVersionGetFunctionConfiguration}</apiVersionGetFunctionConfiguration>
 </amazonlambda.getFunctionConfiguration>
 ```
 
 **Properties**
-* functionName: The name of the Lambda function.
-* qualifier: Specify a version or alias.
+* apiVersionGetFunctionConfiguration : API version for GetFunctionConfiguration method.
+* functionName : The name of the Lambda function.
+* qualifier : Specify a version or alias.
 
 **Sample request**
 
@@ -320,7 +334,8 @@ Following is a sample REST request that can be handled by the getFunctionConfigu
   "region":"us-east-2",
   "blocking":"false",
   "functionName":"test",
-  "qualifier":"$LATEST"
+  "qualifier":"$LATEST",
+  "apiVersionGetFunctionConfiguration":"2015-03-31"
 }
 ```
 
@@ -378,6 +393,7 @@ Implementation of invoke operation invokes a Lambda function. You can invoke a f
 ```xml
 <amazonlambda.invoke>
     <functionName>{$ctx:functionName}</functionName>
+    <apiVersionInvoke>{$ctx:apiVersionInvoke}</apiVersionInvoke>
     <qualifier>{$ctx:qualifier}</qualifier>
     <x-amz-invocation-type>{$ctx:x-amz-invocation-type}</x-amz-invocation-type>
     <x-amz-log-type>{$ctx:x-amz-log-type}</x-amz-log-type>
@@ -387,9 +403,10 @@ Implementation of invoke operation invokes a Lambda function. You can invoke a f
 ```
 
 **Properties**
-* functionName: The name of the Lambda function.
-* qualifier: Specify a version or alias to invoke.
-* x-amz-invocation-type: It specifies the way you want to invoke the function.
+* apiVersionInvoke : API version for Invoke method.
+* functionName : The name of the Lambda function.
+* qualifier : Specify a version or alias to invoke.
+* x-amz-invocation-type : It specifies the way you want to invoke the function.
         
     Choose from the following options.
         
@@ -412,7 +429,8 @@ Following is a sample REST request that can be handled by the invoke operation.
 	"accessKeyId":"AKIAJHJXWUY*********",
 	"region":"us-east-1",
 	"blocking":"false",
-	"functionName":"LambdawithLayer"
+	"functionName":"LambdawithLayer",
+	"apiVersionInvoke":"2015-03-31"
 }
 ```
 
@@ -437,6 +455,7 @@ The listMethod implementation returns a list of Lambda functions, with the versi
 ```xml
 <amazonlambda.listFunctions>
     <functionVersion>{$ctx:functionVersion}</functionVersion>
+    <apiVersionListFunctions>{$ctx:apiVersionListFunctions}</apiVersionListFunctions>
     <marker>{$ctx:marker}</marker>
     <masterRegion>{$ctx:masterRegion}</masterRegion>
     <maxItems>{$ctx:maxItems}</maxItems>
@@ -444,10 +463,11 @@ The listMethod implementation returns a list of Lambda functions, with the versi
 ```
 
 **Properties**
-* functionVersion: Version name which specifies the version to include in entries for each function. Set to ALL to include entries for all published versions of each function.
-* marker: It specifies the pagination token that is returned by a previous request to retrieve the next page of results.
-* masterRegion: For Lambda@Edge functions, the AWS Region of the master function. For example, us-east-2 or ALL. If specified, you must set FunctionVersion to ALL..
-* maxItems: It specifies the value, ranging from 1 to 10000, to limit the number of functions in the response. 
+* apiVersionListFunction : API version for ListFunctions method.
+* functionVersion : Version name which specifies the version to include in entries for each function. Set to ALL to include entries for all published versions of each function.
+* marker : It specifies the pagination token that is returned by a previous request to retrieve the next page of results.
+* masterRegion : For Lambda@Edge functions, the AWS Region of the master function. For example, us-east-2 or ALL. If specified, you must set FunctionVersion to ALL..
+* maxItems : It specifies the value, ranging from 1 to 10000, to limit the number of functions in the response. 
 
 **Sample request**
 
@@ -461,7 +481,8 @@ Following is a sample REST request that can be handled by the listFunctions oper
     "functionVersion":"ALL",
     "marker":"1",
     "masterRegion":"us-east-1",
-    "maxItems":"3"
+    "maxItems":"3",
+    "apiVersionListFunctions":"2015-03-31"
 }
 ```
 
@@ -475,6 +496,7 @@ The removePermission implementation of the DELETE method revokes function-use pe
 ```xml
 <amazonlambda.removePermission>
     <functionName>{$ctx:functionName}</functionName>
+    <apiVersionRemovePermission>{$ctx:apiVersionRemovePermission}</apiVersionRemovePermission>
     <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
     <permissionQualifier>{$ctx:permissionQualifier}</permissionQualifier>
     <permissionRevisionId>{$ctx:permissionRevisionId}</permissionRevisionId>
@@ -482,10 +504,11 @@ The removePermission implementation of the DELETE method revokes function-use pe
 ```
 
 **Properties**
-* functionName: Name of the Lambda function.
-* permissionStatementId: Statement ID of the permission to remove.
-* permissionQualifier: It specifies a version or alias to remove permission from a published version of the function.
-* permissionRevisionId: It's a Id which allow to update the policy only if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
+* apiVersionRemovePermission : API version for RemovePermission method.
+* functionName : Name of the Lambda function.
+* permissionStatementId : Statement ID of the permission to remove.
+* permissionQualifier : It specifies a version or alias to remove permission from a published version of the function.
+* permissionRevisionId : It's a Id which allow to update the policy only if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
 
 **Sample request**
 
@@ -497,7 +520,8 @@ Following is a sample REST request that can be handled by the removePermission o
   "region":"us-east-1",
   "blocking":"false",
   "functionName":"Fn",
-  "permissionStatementId":"Permisssion_Added1443p"
+  "permissionStatementId":"Permisssion_Added1443p",
+  "apiVersionRemovePermission":"2015-03-31"
 }
 ```
 
@@ -533,6 +557,7 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
         <property expression="json-eval($.action)" name="action"/>
         <property expression="json-eval($.statementId)" name="statementId"/>
 	    <property expression="json-eval($.principal)" name="principal"/>
+	    <property expression="json-eval($.apiVersionAddPermission)" name="apiVersionAddPermission"/>
         <amazonlambda.init>
            <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
            <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
@@ -543,7 +568,8 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
             <functionName>{$ctx:functionName}</functionName>
             <permissionAction>{$ctx:permissionAction}</permissionAction>
             <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
-            <permissionPrincipal>{$ctx:permissionPrincipal}</permissionPrincipal>	
+            <permissionPrincipal>{$ctx:permissionPrincipal}</permissionPrincipal>
+            <apiVersionAddPermission>{$ctx:apiVersionAddPermission}</apiVersionAddPermission>	
 	    </amazonlambda.addPermission>           
         <respond/>
      </inSequence>
@@ -563,7 +589,8 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
     "functionName":"createdFuncLast",
     "permissionAction":"lambda:addPermission",
     "permissionPrincipal":"s3.amazonaws.com",
-    "permissionStatementId":"Permisssion_Added"
+    "permissionStatementId":"Permisssion_Added",
+    "apiVersionAddPermission":"2015-03-31"
 }
 ```
 

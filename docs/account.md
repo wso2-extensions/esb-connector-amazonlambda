@@ -21,8 +21,14 @@ The getAccountSettings operation retrieves details about your account's limits a
 
 **getAccountSettings**
 ```xml
-<amazonlambda.getAccountSettings/>
+<amazonlambda.getAccountSettings>
+    <apiVersionGetAccountSettings>{$ctx:apiVersionGetAccountSettings}</apiVersionGetAccountSettings>
+</amazonlambda.getAccountSettings>
+
 ```
+
+**Properties**
+* apiVersionGetAccountSettings : API version for GetAccountSettings method.
 
 **Sample request**
 
@@ -32,7 +38,8 @@ Following is a sample REST request that can be handled by the getAccountSettings
   "secretAccessKey":"0b+fcboKq87Nf7mH6M**********************",
   "accessKeyId":"AKIAJHJ*************",
   "region":"us-east-2",
-  "blocking":"false"
+  "blocking":"false",
+  "apiVersionGetAccountSettings": "2016-08-19"
 }
 ```
 
@@ -82,14 +89,17 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
         <property expression="json-eval($.secretAccessKey)" name="secretAccessKey"/>
         <property expression="json-eval($.accessKeyId)" name="accessKeyId"/>
         <property expression="json-eval($.region)" name="region"/>
-        <property expression="json-eval($.blocking)" name="blocking"/>       
+        <property expression="json-eval($.blocking)" name="blocking"/> 
+        <property expression="json-eval($.apiVersionGetAccountSettings)" name="apiVersionGetAccountSettings"/>      
         <awslambda.init>
            <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
            <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
            <region>{$ctx:region}</region>
            <blocking>{$ctx:blocking}</blocking>
         </awslambda.init>
-        <awslambda.getAccountSettings/>           
+        <awslambda.getAccountSettings>
+            <apiVersionGetAccountSettings>{$ctx:apiVersionGetAccountSettings}</apiVersionGetAccountSettings>
+        </awslambda.getAccountSettings>           
         <respond/>
      </inSequence>
   </target>
@@ -103,7 +113,8 @@ Following example illustrates how to connect to Amazon Lambda with the init oper
     "secretAccessKey":"b+fcbf7mH6M*****************",
     "accessKeyId":"AKIAJHJ**********",
     "region":"us-east-1",
-    "blocking":"false"
+    "blocking":"false",
+    "apiVersionGetAccountSettings": "2016-08-19"
 }
 ```
 
