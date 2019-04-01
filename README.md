@@ -17,7 +17,7 @@ which lets you run code without provisioning or managing servers. With Lambda, y
 
 #### Download and install the connector
 
-1. Download the connector from the [WSO2 Store](https://store.wso2.com/store/assets/esbconnector/list) by selecting **Amazon Lambda** and clicking **Download Connector** button.
+1. Download the connector from the [WSO2 Store](https://store.wso2.com/publisher/assets/esbconnector/details/fb0aec6a-3525-4bc4-952e-0b60489a82bc) by clicking the **Download Connector** button.
 2. Then you can follow this [Documentation](https://docs.wso2.com/display/EI640/Working+with+Connectors+via+the+Management+Console) to add and enable the connector via the Management Console in your EI instance.
 3. For more information on using connectors and their operations in your EI configurations, see [Using a Connector](https://docs.wso2.com/display/EI640/Using+a+Connector).
 4. If you want to work with connectors via EI tooling, see [Working with Connectors via Tooling](https://docs.wso2.com/display/EI640/Working+with+Connectors+via+Tooling).
