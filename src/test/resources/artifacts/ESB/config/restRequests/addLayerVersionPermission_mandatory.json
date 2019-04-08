@@ -1,0 +1,12 @@
+{
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "layerVersionNumber": "%s(layerVersionNumber)",
+  "layerPrincipal": "%s(layerPrincipal)",
+  "layerStatementId": "%s(layerStatementId)",
+  "layerAction": "%s(layerAction)",
+  "layerName": "%s(layerName)",
+  "apiVersionAddLayerVersionPermission": "%s(apiVersionAddLayerVersionPermission)"
+}

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<template xmlns="http://ws.apache.org/ns/synapse" name="invoke">
+    <!-- URI request parameters-->
+    <parameter name="functionName" description="Name of the Lambda function."/>
+    <parameter name="apiVersionInvoke" description="API version used for Invoke method."/>
+    <parameter name="qualifier" description="Specify a version or alias to invoke a published version of the
+        function."/>
+    <!-- Header parameters-->
+    <parameter name="x-amz-invocation-type" description="Invocation type."/>
+    <parameter name="x-amz-log-type" description="Set to Tail to include the execution log in the response."/>
+    <parameter name="x-amz-client-context" description="Up to 3583 bytes of base64-encoded data about the invoking
+        client to pass to the function in the context object."/>
+    <!-- Payloads-->
+    <parameter name="payload" description="Payloads for the HTTP request."/>
+    <sequence>
+        <property name="uri.var.functionName" expression="$func:functionName"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionInvoke"/>
+        <property name="uri.var.qualifier" expression="$func:qualifier"/>
+
+        <property name="invocationType" expression="$func:x-amz-invocation-type"/>
+        <property name="logType" expression="$func:x-amz-log-type"/>
+        <property name="clientContext" expression="$func:x-amz-client-context"/>
+
+        <property name="payload" expression="$func:payload"/>
+        <property name="httpMethod" value="POST"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions/',
+            $ctx:uri.var.functionName, '/invocations')"/>
+        <script language="js">
+            <![CDATA[
+                var queryParameter = '';
+                var qualifier = mc.getProperty('uri.var.qualifier');
+                if (qualifier != null && qualifier != "") {
+                    queryParameter = "?Qualifier=" + encodeURIComponent(qualifier);
+                }
+                mc.setProperty('uri.var.queryParameter', queryParameter);
+            ]]>
+        </script>
+        <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
+        <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
+        <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
+        <filter source="boolean(get-property('invocationType'))" regex="true">
+            <then>
+                <header name="X-Amz-Invocation-Type" scope="transport" expression="$ctx:invocationType"/>
+            </then>
+        </filter>
+        <filter source="boolean(get-property('logType'))" regex="true">
+            <then>
+                <header name="X-Amz-Log-Type" scope="transport" expression="$ctx:logType"/>
+            </then>
+        </filter>
+        <filter source="boolean(get-property('clientContext'))" regex="true">
+            <then>
+                <header name="X-Amz-Client-Context" scope="transport" expression="$ctx:clientContext"/>
+            </then>
+        </filter>
+        <filter source="boolean(get-property('payload'))" regex="false">
+            <then>
+                <payloadFactory media-type="json">
+                    <format></format>
+                    <args></args>
+                </payloadFactory>
+                <property name="ContentType" value="application/x-www-form-urlencoded" scope="axis2"></property>
+                <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2"></property>
+                <property name="FORCE_POST_PUT_NOBODY" value="true" scope="axis2" type="BOOLEAN"></property>
+            </then>
+            <else>
+                <payloadFactory media-type="json">
+                    <format>
+                        $1
+                    </format>
+                    <args>
+                        arg expression="$ctx:payload"/>
+                    </args>
+                </payloadFactory>
+            </else>
+        </filter>
+        <filter source="$ctx:amazonLambdaBlocking" regex="true">
+            <then>
+                <log level="full"/>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="POST"
+                              uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <log level="full"/>
+                <call>
+                    <endpoint>
+                        <http method="POST"
+                              uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}{+uri.var.queryParameter}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
+    </sequence>
+</template>

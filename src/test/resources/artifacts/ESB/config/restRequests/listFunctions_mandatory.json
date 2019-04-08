@@ -1,0 +1,11 @@
+{
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "functionVersionToBeListed": "%s(functionVersionToBeListed)",
+  "masterRegion": "%s(masterRegion)",
+  "maxItems": "%s(maxItems)",
+  "apiVersionListFunctions": "%s(apiVersionListFunctions)"
+
+}

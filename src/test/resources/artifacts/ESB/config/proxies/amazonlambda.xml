@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="amazonlambda"
+       transports="https,http" statistics="disable" trace="disable"
+       startOnLoad="true">
+    <target>
+        <inSequence>
+            <!--Init parameters-->
+            <property expression="json-eval($.secretAccessKey)" name="secretAccessKey"/>
+            <property expression="json-eval($.accessKeyId)" name="accessKeyId"/>
+            <property expression="json-eval($.region)" name="region"/>
+            <property expression="json-eval($.blocking)" name="blocking"/>
+            <amazonlambda.init>
+                <secretAccessKey>{$ctx:secretAccessKey}</secretAccessKey>
+                <accessKeyId>{$ctx:accessKeyId}</accessKeyId>
+                <region>{$ctx:region}</region>
+                <blocking>{$ctx:blocking}</blocking>
+            </amazonlambda.init>
+            <switch source="get-property('transport', 'Action')">
+                <!--================addLayerVersionPermission===============-->
+                <case regex="urn:addLayerVersionPermission">
+                    <property expression="json-eval($.apiVersionAddLayerVersionPermission)" name="apiVersionAddLayerVersionPermission"/>
+                    <property expression="json-eval($.layerName)" name="layerName"/>
+                    <property expression="json-eval($.layerVersionNumber)" name="layerVersionNumber"/>
+                    <property expression="json-eval($.layerRevisionId)" name="layerRevisionId"/>
+                    <property expression="json-eval($.layerAction)" name="layerAction"/>
+                    <property expression="json-eval($.layerOrganizationId)" name="layerOrganizationId"/>
+                    <property expression="json-eval($.layerPrincipal)" name="layerPrincipal"/>
+                    <property expression="json-eval($.layerStatementId)" name="layerStatementId"/>
+                    <amazonlambda.addLayerVersionPermission>
+                        <apiVersionAddLayerVersionPermission>{$ctx:apiVersionAddLayerVersionPermission}</apiVersionAddLayerVersionPermission>
+                        <layerName>{$ctx:layerName}</layerName>
+                        <layerVersionNumber>{$ctx:layerVersionNumber}</layerVersionNumber>
+                        <layerRevisionId>{$ctx:layerRevisionId}</layerRevisionId>
+                        <layerAction>{$ctx:layerAction}</layerAction>
+                        <layerOrganizationId>{$ctx:layerOrganizationId}</layerOrganizationId>
+                        <layerPrincipal>{$ctx:layerPrincipal}</layerPrincipal>
+                        <layerStatementId>{$ctx:layerStatementId}</layerStatementId>
+                    </amazonlambda.addLayerVersionPermission>
+                </case>
+                <case regex="urn:addPermission">
+                    <property expression="json-eval($.apiVersionAddPermission)" name="apiVersionAddPermission"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.permissionAction)" name="permissionAction"/>
+                    <property expression="json-eval($.permissionStatementId)" name="permissionStatementId"/>
+                    <property expression="json-eval($.permissionPrincipal)" name="permissionPrincipal"/>
+                    <property expression="json-eval($.sourceAccount)" name="sourceAccount"/>
+                    <property expression="json-eval($.sourceArn)" name="sourceArn"/>
+                    <property expression="json-eval($.eventSourceAccount)" name="eventSourceAccount"/>
+
+                    <!-- add permission implementation-->
+                    <amazonlambda.addPermission>
+                        <apiVersionAddPermission>{$ctx:apiVersionAddPermission}</apiVersionAddPermission>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <permissionAction>{$ctx:permissionAction}</permissionAction>
+                        <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
+                        <permissionPrincipal>{$ctx:permissionPrincipal}</permissionPrincipal>
+                        <sourceAccount>{$ctx:sourceAccount}</sourceAccount>
+                        <sourceArn>{$ctx:sourceArn}</sourceArn>
+                        <eventSourceAccount>{$ctx:eventSourceAccount}</eventSourceAccount>
+                    </amazonlambda.addPermission>
+                </case>
+                <case regex="urn:createAlias">
+                    <property expression="json-eval($.apiVersionCreateAlias)" name="apiVersionCreateAlias"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.createAliasDescription)" name="createAliasDescription"/>
+                    <property expression="json-eval($.functionVersion)" name="functionVersion"/>
+                    <property expression="json-eval($.aliasName)" name="aliasName"/>
+                    <property expression="json-eval($.aliasAdditionalVersionWeights)"
+                              name="aliasAdditionalVersionWeights"/>
+                    <!--implementation of create alias-->
+                    <amazonlambda.createAlias>
+                        <apiVersionCreateAlias>{$ctx:apiVersionCreateAlias}</apiVersionCreateAlias>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <createAliasDescription>{$ctx:createAliasDescription}</createAliasDescription>
+                        <functionVersion>{$ctx:functionVersion}</functionVersion>
+                        <aliasName>{$ctx:aliasName}</aliasName>
+                        <aliasAdditionalVersionWeights>{$ctx:aliasAdditionalVersionWeights}</aliasAdditionalVersionWeights>
+                    </amazonlambda.createAlias>
+                </case>
+                <case regex="urn:createFunction">
+                    <property expression="json-eval($.apiVersionCreateFunction)" name="apiVersionCreateFunction"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.functionDescription)" name="functionDescription"/>
+                    <property expression="json-eval($.s3Bucket)" name="s3Bucket"/>
+                    <property expression="json-eval($.s3Key)" name="s3Key"/>
+                    <property expression="json-eval($.s3ObjectVersion)" name="s3ObjectVersion"/>
+                    <property expression="json-eval($.zipFile)" name="zipFile"/>
+                    <property expression="json-eval($.targetArn)" name="targetArn"/>
+                    <property expression="json-eval($.environmentVariables)" name="environmentVariables"/>
+                    <property expression="json-eval($.handler)" name="handler"/>
+                    <property expression="json-eval($.kmsKeyArn)" name="kmsKeyArn"/>
+                    <property expression="json-eval($.layers)" name="layers"/>
+                    <property expression="json-eval($.memorySize)" name="memorySize"/>
+                    <property expression="json-eval($.publish)" name="publish"/>
+                    <property expression="json-eval($.role)" name="role"/>
+                    <property expression="json-eval($.runtime)" name="runtime"/>
+                    <property expression="json-eval($.tags)" name="tags"/>
+                    <property expression="json-eval($.timeout)" name="timeout"/>
+                    <property expression="json-eval($.mode)" name="mode"/>
+                    <property expression="json-eval($.securityGroupIds)" name="securityGroupIds"/>
+                    <property expression="json-eval($.subnetIds)" name="subnetIds"/>
+                    <!--createFunction implementation-->
+                    <amazonlambda.createFunction>
+                        <apiVersionCreateFunction>{$ctx:apiVersionCreateFunction}</apiVersionCreateFunction>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <functionDescription>{$ctx:functionDescription}</functionDescription>
+                        <s3Bucket>{$ctx:s3Bucket}</s3Bucket>
+                        <s3Key>{$ctx:s3Key}</s3Key>
+                        <s3ObjectVersion>{$ctx:s3ObjectVersion}</s3ObjectVersion>
+                        <zipFile>{$ctx:zipFile}</zipFile>
+                        <targetArn>{$ctx:targetArn}</targetArn>
+                        <environmentVariables>{$ctx:environmentVariables}</environmentVariables>
+                        <handler>{$ctx:handler}</handler>
+                        <kmsKeyArn>{$ctx:kmsKeyArn}</kmsKeyArn>
+                        <layers>{$ctx:layers}</layers>
+                        <memorySize>{$ctx:memorySize}</memorySize>
+                        <publish>{$ctx:publish}</publish>
+                        <role>{$ctx:role}</role>
+                        <runtime>{$ctx:runtime}</runtime>
+                        <tags>{$ctx:tags}</tags>
+                        <timeout>{$ctx:timeout}</timeout>
+                        <mode>{$ctx:mode}</mode>
+                        <securityGroupIds>{$ctx:securityGroupIds}</securityGroupIds>
+                        <subnetIds>{$ctx:subnetIds}</subnetIds>
+                    </amazonlambda.createFunction>
+                </case>
+                <case regex="urn:deleteAlias">
+                    <property expression="json-eval($.apiVersionDeleteAlias)" name="apiVersionDeleteAlias"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.aliasName)" name="aliasName"/>
+                    <!--deleteAlias implementation-->
+                    <amazonlambda.deleteAlias>
+                        <apiVersionDeleteAlias>{$ctx:apiVersionDeleteAlias}</apiVersionDeleteAlias>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <aliasName>{$ctx:aliasName}</aliasName>
+                    </amazonlambda.deleteAlias>
+                </case>
+                <case regex="urn:deleteFunction">
+                    <property expression="json-eval($.apiVersionDeleteFunction)" name="apiVersionDeleteFunction"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.deleteFunctionQualifier)" name="deleteFunctionQualifier"/>
+                    <!--deleteFunction Implementation-->
+                    <amazonlambda.deleteFunction>
+                        <apiVersionDeleteFunction>{$ctx:apiVersionDeleteFunction}</apiVersionDeleteFunction>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <deleteFunctionQualifier>{$ctx:deleteFunctionQualifier}</deleteFunctionQualifier>
+                    </amazonlambda.deleteFunction>
+                </case>
+                <!--======================== getAccountSettings ========================-->
+                <case regex="urn:getAccountSettings">
+                    <property expression="json-eval($.apiVersionGetAccountSettings)" name="apiVersionGetAccountSettings"/>
+                    <amazonlambda.getAccountSettings>
+                        <apiVersionGetAccountSettings>{$ctx:apiVersionGetAccountSettings}</apiVersionGetAccountSettings>
+                    </amazonlambda.getAccountSettings>
+                </case>
+                <case regex="urn:getAlias">
+                    <property expression="json-eval($.apiVersionGetAlias)" name="apiVersionGetAlias"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.aliasName)" name="aliasName"/>
+                    <!--getAlias implementation-->
+                    <amazonlambda.getAlias>
+                        <apiVersionGetAlias>{$ctx:apiVersionGetAlias}</apiVersionGetAlias>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <aliasName>{$ctx:aliasName}</aliasName>
+                    </amazonlambda.getAlias>
+                </case>
+                <case regex="urn:getFunction">
+                    <property expression="json-eval($.apiVersionGetFunction)" name="apiVersionGetFunction"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.qualifier)" name="qualifier"/>
+                    <!--getFunction implementation-->
+                    <amazonlambda.getFunction>
+                        <apiVersionGetFunction>{$ctx:apiVersionGetFunction}</apiVersionGetFunction>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <qualifier>{$ctx:qualifier}</qualifier>
+                    </amazonlambda.getFunction>
+                </case>
+                <case regex="urn:getFunctionConfiguration">
+                    <property expression="json-eval($.apiVersionGetFunctionConfiguration)" name="apiVersionGetFunctionConfiguration"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.qualifier)" name="qualifier"/>
+                    <!--getFunctionConfiguration implementation-->
+                    <amazonlambda.getFunctionConfiguration>
+                        <apiVersionGetFunctionConfiguration>{$ctx:apiVersionGetFunctionConfiguration}</apiVersionGetFunctionConfiguration>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <qualifier>{$ctx:qualifier}</qualifier>
+                    </amazonlambda.getFunctionConfiguration>
+                </case>
+                <case regex="urn:invoke">
+                    <property expression="json-eval($.apiVersionInvoke)" name="apiVersionInvoke"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.qualifier)" name="qualifier"/>
+                    <property expression="json-eval($.x-amz-invocation-type)" name="x-amz-invocation-type"/>
+                    <property expression="json-eval($.x-amz-log-type)" name="x-amz-log-type"/>
+                    <property expression="json-eval($.x-amz-client-context)" name="x-amz-client-context"/>
+                    <property expression="json-eval($.payload)" name="payload"/>
+                    <!--invoke implementation-->
+                    <amazonlambda.invoke>
+                        <apiVersionInvoke>{$ctx:apiVersionInvoke}</apiVersionInvoke>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <qualifier>{$ctx:qualifier}</qualifier>
+                        <x-amz-invocation-type>{$ctx:x-amz-invocation-type}</x-amz-invocation-type>
+                        <x-amz-log-type>{$ctx:x-amz-log-type}</x-amz-log-type>
+                        <x-amz-client-context>{$ctx:x-amz-client-context}</x-amz-client-context>
+                        <payload>{$ctx:payload}</payload>
+                    </amazonlambda.invoke>
+                </case>
+                <case regex="urn:listFunctions">
+                    <property expression="json-eval($.apiVersionListFunctions)" name="apiVersionListFunctions"/>
+                    <property expression="json-eval($.functionVersionToBeListed)" name="functionVersionToBeListed"/>
+                    <property expression="json-eval($.marker)" name="marker"/>
+                    <property expression="json-eval($.masterRegion)" name="masterRegion"/>
+                    <property expression="json-eval($.maxItems)" name="maxItems"/>
+                    <!--listFunction implementation-->
+                    <amazonlambda.listFunctions>
+                        <apiVersionListFunctions>{$ctx:apiVersionListFunctions}</apiVersionListFunctions>
+                        <functionVersionToBeListed>{$ctx:functionVersionToBeListed}</functionVersionToBeListed>
+                        <marker>{$ctx:marker}</marker>
+                        <masterRegion>{$ctx:masterRegion}</masterRegion>
+                        <maxItems>{$ctx:maxItems}</maxItems>
+                    </amazonlambda.listFunctions>
+                </case>
+                <case regex="urn:removeLayerVersionPermission">
+                    <property expression="json-eval($.apiVersionRemoveLayerVersionPermission)" name="apiVersionRemoveLayerVersionPermission"/>
+                    <property expression="json-eval($.layerName)" name="layerName"/>
+                    <property expression="json-eval($.layerVersionNumber)" name="layerVersionNumber"/>
+                    <property expression="json-eval($.layerStatementId)" name="layerStatementId"/>
+                    <property expression="json-eval($.layerRevisionId)" name="layerRevisionId"/>
+                    <!--removeLayerVersionPermission implementation-->
+                    <amazonlambda.removeLayerVersionPermission>
+                        <apiVersionRemoveLayerVersionPermission>{$ctx:apiVersionRemoveLayerVersionPermission}</apiVersionRemoveLayerVersionPermission>
+                        <layerName>{$ctx:layerName}</layerName>
+                        <layerVersionNumber>{$ctx:layerVersionNumber}</layerVersionNumber>
+                        <layerStatementId>{$ctx:layerStatementId}</layerStatementId>
+                        <layerRevisionId>{$ctx:layerRevisionId}</layerRevisionId>
+                    </amazonlambda.removeLayerVersionPermission>
+                </case>
+                <case regex="urn:removePermission">
+                    <property expression="json-eval($.apiVersionRemovePermission)" name="apiVersionRemovePermission"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.permissionStatementId)" name="permissionStatementId"/>
+                    <property expression="json-eval($.permissionQualifier)" name="permissionQualifier"/>
+                    <property expression="json-eval($.permissionRevisionId)" name="permissionRevisionId"/>
+                    <!--remove Permission implementation-->
+                    <amazonlambda.removePermission>
+                        <apiVersionRemovePermission>{$ctx:apiVersionRemovePermission}</apiVersionRemovePermission>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <permissionStatementId>{$ctx:permissionStatementId}</permissionStatementId>
+                        <permissionQualifier>{$ctx:permissionQualifier}</permissionQualifier>
+                        <permissionRevisionId>{$ctx:permissionRevisionId}</permissionRevisionId>
+                    </amazonlambda.removePermission>
+                </case>
+                <case regex="urn:updateAlias">
+                    <property expression="json-eval($.apiVersionUpdateAlias)" name="apiVersionUpdateAlias"/>
+                    <property expression="json-eval($.functionName)" name="functionName"/>
+                    <property expression="json-eval($.updatedAliasDescription)" name="updatedAliasDescription"/>
+                    <property expression="json-eval($.functionVersion)" name="functionVersion"/>
+                    <property expression="json-eval($.aliasName)" name="aliasName"/>
+                    <property expression="json-eval($.aliasRevisionId)" name="aliasRevisionId"/>
+                    <property expression="json-eval($.updatedAliasAdditionalVersionWeights)" name="updatedAliasAdditionalVersionWeights"/>
+                    <!--updateAliasImplementation-->
+                    <amazonlambda.updateAlias>
+                        <apiVersionUpdateAlias>{$ctx:apiVersionUpdateAlias}</apiVersionUpdateAlias>
+                        <functionName>{$ctx:functionName}</functionName>
+                        <functionVersion>{$ctx:functionVersion}</functionVersion>
+                        <aliasName>{$ctx:aliasName}</aliasName>
+                        <updatedAliasDescription>{$ctx:updatedAliasDescription}</updatedAliasDescription>
+                        <aliasRevisionId>{$ctx:aliasRevisionId}</aliasRevisionId>
+                        <updatedAliasAdditionalVersionWeights>{$ctx:updatedAliasAdditionalVersionWeights}</updatedAliasAdditionalVersionWeights>
+                    </amazonlambda.updateAlias>
+                </case>
+            </switch>
+            <respond/>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+    </target>
+    <description/>
+</proxy>

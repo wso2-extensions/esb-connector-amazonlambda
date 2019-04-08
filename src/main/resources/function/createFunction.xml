@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2019, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied. See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<template xmlns="http://ws.apache.org/ns/synapse" name="createFunction">
+    <parameter name="functionName" description="Name of the Lambda function."/>
+    <parameter name="functionDescription" description="The description of the function."/>
+    <parameter name="apiVersionCreateFunction" description="API version used for CreateFunction method."/>
+    <!-- Code parameters -->
+    <parameter name="s3Bucket" description="S3 bucket name in the same AWS Region."/>
+    <parameter name="s3Key" description="The Amazon S3 key of the deployment package."/>
+    <parameter name="s3ObjectVersion" description="The version of the deployment package object to use for versioned
+        objects."/>
+    <parameter name="zipFile" description="The base64-encoded contents of the deployment package."/>
+    <!-- DeadLetterConfig parameters -->
+    <parameter name="targetArn" description="The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS
+        topic."/>
+    <!-- Environment parameters -->
+    <parameter name="environmentVariables" description="Environment variable key-value pairs."/>
+    <parameter name="handler" description="The name of the method within your code that Lambda calls to execute your
+        function."/>
+    <parameter name="kmsKeyArn" description="The ARN of the AWS Key Management Service (AWS KMS) key that's used to
+        encrypt your function's environment variables."/>
+    <parameter name="layers" description="A list of function layers to add to the function's execution environment.
+        Specify each layer by its ARN, including the version."/>
+    <parameter name="memorySize" description="The amount of memory that your function has access to."/>
+    <parameter name="publish" description="Set to true to publish the first version of the function during creation."/>
+    <parameter name="role" description="The Amazon Resource Name (ARN) of the function's execution role."/>
+    <parameter name="runtime" description="The identifier of the function's runtime."/>
+    <parameter name="tags" description="A list of tags to apply to the function."/>
+    <parameter name="timeout" description="The amount of time that Lambda allows a function to run before stopping
+        it (max value is 900 seconds, default 3 seconds)."/>
+    <!-- TracingConfig parameter -->
+    <parameter name="mode" description="The tracing mode."/>
+    <!-- VpcConfig parameters -->
+    <parameter name="securityGroupIds" description="A list of VPC security group IDs. It's an array of strings."/>
+    <parameter name="subnetIds" description="A list of VPC subnet IDs."/>
+    <sequence>
+        <property name="payloadFunctionName" expression="$func:functionName"/>
+        <property name="payloadDescription" expression="$func:functionDescription"/>
+        <property name="uri.var.apiVersion" expression="$func:apiVersionCreateFunction"/>
+        <property name="payloadS3Bucket" expression="$func:s3Bucket"/>
+        <property name="payloadS3Key" expression="$func:s3Key"/>
+        <property name="payloadS3ObjectVersion" expression="$func:s3ObjectVersion"/>
+        <property name="payloadZipFile" expression="$func:zipFile"/>
+        <property name="payloadTargetArn" expression="$func:targetArn"/>
+        <property name="payloadEnvironmentVariables" expression="$func:environmentVariables"/>
+        <property name="payloadHandler" expression="$func:handler"/>
+        <property name="payloadKmsKeyArn" expression="$func:kmsKeyArn"/>
+        <property name="payloadLayers" expression="$func:layers"/>
+        <property name="payloadMemorySize" expression="$func:memorySize"/>
+        <property name="payloadPublish" expression="$func:publish"/>
+        <property name="payloadRole" expression="$func:role"/>
+        <property name="payloadRuntime" expression="$func:runtime"/>
+        <property name="payloadTags" expression="$func:tags"/>
+        <property name="payloadTimeout" expression="$func:timeout"/>
+        <property name="payloadMode" expression="$func:mode"/>
+        <property name="payloadSecurityGroupIds" expression="$func:securityGroupIds"/>
+        <property name="payloadSubnetIds" expression="$func:subnetIds"/>
+        <property name="httpMethod" value="POST"/>
+        <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion, '/functions')"/>
+        <class name="org.wso2.carbon.esb.connector.auth.AmazonLambdaAuthConnector"/>
+        <header name="Authorization" scope="transport" expression="$ctx:authorizationHeader"/>
+        <header name="X-Amz-Date" scope="transport" expression="$ctx:x-amz-date"/>
+        <payloadFactory media-type="json">
+            <format>
+                $1
+            </format>
+            <args>
+                <arg expression="$ctx:requestPayload"/>
+            </args>
+        </payloadFactory>
+        <filter source="$ctx:amazonLambdaBlocking" regex="true">
+            <then>
+                <call blocking="true">
+                    <endpoint>
+                        <http method="POST" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
+                    </endpoint>
+                </call>
+            </then>
+            <else>
+                <call>
+                    <endpoint>
+                        <http method="POST" uri-template="{uri.var.apiUrl}{+uri.var.uriRemainder}"/>
+                    </endpoint>
+                </call>
+            </else>
+        </filter>
+    </sequence>
+</template>

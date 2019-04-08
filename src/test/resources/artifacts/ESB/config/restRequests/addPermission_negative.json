@@ -1,0 +1,12 @@
+{
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "functionName": "",
+  "permissionAction": "%s(permissionAction)",
+  "permissionPrincipal": "%s(permissionPrincipal)",
+  "permissionStatementId": "%s(permissionStatementId)",
+  "apiVersionAddPermission": "%s(apiVersionAddPermission)"
+
+}

@@ -1,0 +1,9 @@
+{
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "functionName": "%s(functionNameOptional)",
+  "qualifier": "%s(qualifier)",
+  "apiVersionGetFunctionConfiguration": "%s(apiVersionGetFunctionConfiguration)"
+}

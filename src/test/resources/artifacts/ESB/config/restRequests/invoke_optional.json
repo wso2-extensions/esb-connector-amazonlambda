@@ -1,0 +1,10 @@
+{
+  "accessKeyId": "%s(accessKeyId)",
+  "secretAccessKey": "%s(secretAccessKey)",
+  "region": "%s(region)",
+  "blocking": "%s(blocking)",
+  "functionName": "%s(functionNameOptional)",
+  "apiVersionInvoke": "%s(apiVersionInvoke)",
+  "x-amz-log-type": "%s(logType)",
+  "payload": "%s(payload)"
+}
