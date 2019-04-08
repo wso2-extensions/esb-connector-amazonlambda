@@ -1,5 +1,5 @@
 # Configuring Amazon Lambda Operations
-[[Signing Up for AWS]](#Signing Up for AWS ) [[Obtaining user credentials]](#obtaining-user-credentials) [[Initializing the Connector]](#initializing-the-Connector)
+[[Signing Up for AWS]](#signing-up-for-aws ) [[Obtaining user credentials]](#obtaining-user-credentials) [[Initializing the Connector]](#initializing-the-Connector)
 
 To use the AmazonLambda service, you must have an AWS account. If you don't already have an account, you are prompted to create one when you sign up. You're not charged for any AWS services that you sign up for unless you use them.
 ## Signing Up for AWS
