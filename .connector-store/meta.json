@@ -6,16 +6,17 @@
     "description": "The AmazonLambda Connector allows you to access the REST API of Amazon Web Service Lambda (AWS Lambda) , which lets you run code without provisioning or managing servers. With Lambda, you can run code for virtually any type of application or backend service - all with zero administration. Just upload your code in one of the languages that AWS Lambda supports (currently Node.js, Java, C#, Go and Python) and Lambda takes care of everything required to run and scale your code with high availability. ",
     "status": "Active",
     "labels": [
-        "Other",
-        "Application"
+        "connector"
     ],
     "releases": [
         {
-            "tagName": "1.0.0",
+            "tagName": "v1.0.0",
             "products": [
                 "EI 7.0.x",
+                "EI 6.4.0",
                 "EI 6.4.0"
-            ]
+            ],
+            "isHidden": false
         }
     ]
 }
