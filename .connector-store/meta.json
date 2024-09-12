@@ -12,11 +12,7 @@
     "releases": [
         {
             "tagName": "1.0.0",
-            "products": [
-                "EI 7.0.x",
-                "EI 6.4.0",
-                "EI 6.4.0"
-            ],
+            "products": [],
             "isHidden": false
         }
     ]
