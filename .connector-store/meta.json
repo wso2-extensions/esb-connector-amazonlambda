@@ -8,7 +8,7 @@
     "mavenArtifactId": "org.wso2.carbon.esb.connector.amazonlambda",
     "description": "The AmazonLambda Connector allows you to access the REST API of Amazon Web Service Lambda (AWS Lambda) , which lets you run code without provisioning or managing servers. With Lambda, you can run code for virtually any type of application or backend service - all with zero administration. Just upload your code in one of the languages that AWS Lambda supports (currently Node.js, Java, C#, Go and Python) and Lambda takes care of everything required to run and scale your code with high availability. ",
     "status": "Active",
-    "connectorRank": 34,
+    "rank": 34,
     "type": "Connector",
     "labels": [
         "AWS",
@@ -105,7 +105,12 @@
                     "isHidden": false
                 }
             ],
-            "connections": [],
+            "connections": [
+                {
+                    "name": "amazonlambda",
+                    "description": "Connection for invoking AWS Lambda functions."
+                }
+            ],
             "isHidden": false
         }
     ]
