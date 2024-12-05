@@ -1,10 +1,15 @@
 {
     "name": "Amazon Lambda",
     "owner": "WSO2",
+    "product": "MI",
     "category": "Developer Tools",
     "documentationUrl": "https://mi.docs.wso2.com/en/latest/reference/connectors/amazonlambda-connector/amazonlambda-connector-overview/",
+    "mavenGroupId": "org.wso2.integration.connector",
+    "mavenArtifactId": "mi-connector-amazonlambda",
     "description": "The AmazonLambda Connector allows you to access the REST API of Amazon Web Service Lambda (AWS Lambda) , which lets you run code without provisioning or managing servers. With Lambda, you can run code for virtually any type of application or backend service - all with zero administration. Just upload your code in one of the languages that AWS Lambda supports (currently Node.js, Java, C#, Go and Python) and Lambda takes care of everything required to run and scale your code with high availability. ",
     "status": "Active",
+    "rank": 34,
+    "type": "Connector",
     "labels": [
         "AWS",
         "serverless"
@@ -17,6 +22,94 @@
                 "MI 4.2.0",
                 "MI 4.1.0",
                 "MI 4.0.0"
+            ],
+            "operations": [
+                {
+                    "name": "getAccountSettings",
+                    "description": "Gets the settings of an account.",
+                    "isHidden": false
+                },
+                {
+                    "name": "createAlias",
+                    "description": "Create an alias for a lambda function version.",
+                    "isHidden": false
+                },
+                {
+                    "name": "deleteAlias",
+                    "description": "Deletes a Lambda function alias.",
+                    "isHidden": false
+                },
+                {
+                    "name": "getAlias",
+                    "description": "Returns details about a Lambda function alias.",
+                    "isHidden": false
+                },
+                {
+                    "name": "updateAlias",
+                    "description": "Updates the configuration of a Lambda function alias.",
+                    "isHidden": false
+                },
+                {
+                    "name": "init",
+                    "description": "Config operations with common parameters.",
+                    "isHidden": false
+                },
+                {
+                    "name": "addPermission",
+                    "description": "Grants an AWS service or another account permission to use a function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "createFunction",
+                    "description": "Creates a lambda function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "deleteFunction",
+                    "description": "Deletes a Lambda function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "getFunction",
+                    "description": "Returns information about function or function version.",
+                    "isHidden": false
+                },
+                {
+                    "name": "getFunctionConfiguration",
+                    "description": "Returns the version-specific settings of a lambda function or version.",
+                    "isHidden": false
+                },
+                {
+                    "name": "invoke",
+                    "description": "Invokes a lambda function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "listFunctions",
+                    "description": "Returns a list of Lambda functions.",
+                    "isHidden": false
+                },
+                {
+                    "name": "removePermission",
+                    "description": "Removes function use permission from an AWS service or another account.",
+                    "isHidden": false
+                },
+                {
+                    "name": "addLayerVersionPermission",
+                    "description": "Adds permission to the resource-based policy of a version of an AWS Lambda layer.",
+                    "isHidden": false
+                },
+                {
+                    "name": "removeLayerVersionPermission",
+                    "description": "Removes a statement from the permissions policy for a version of an AWS Lambda layer.",
+                    "isHidden": false
+                }
+            ],
+            "connections": [
+                {
+                    "name": "amazonlambda",
+                    "description": "Connection for invoking AWS Lambda functions."
+                }
             ],
             "isHidden": false
         }
