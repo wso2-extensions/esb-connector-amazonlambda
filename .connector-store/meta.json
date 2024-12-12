@@ -16,6 +16,104 @@
     ],
     "releases": [
         {
+            "tagName": "v1.0.1",
+            "products": [
+                "MI 4.3.0",
+                "MI 4.2.0",
+                "MI 4.1.0",
+                "MI 4.0.0"
+            ],
+            "operations": [
+                {
+                    "name": "getAccountSettings",
+                    "description": "Gets the settings of an account.",
+                    "isHidden": false
+                },
+                {
+                    "name": "createAlias",
+                    "description": "Create an alias for a lambda function version.",
+                    "isHidden": false
+                },
+                {
+                    "name": "deleteAlias",
+                    "description": "Deletes a Lambda function alias.",
+                    "isHidden": false
+                },
+                {
+                    "name": "getAlias",
+                    "description": "Returns details about a Lambda function alias.",
+                    "isHidden": false
+                },
+                {
+                    "name": "updateAlias",
+                    "description": "Updates the configuration of a Lambda function alias.",
+                    "isHidden": false
+                },
+                {
+                    "name": "init",
+                    "description": "Config operations with common parameters.",
+                    "isHidden": false
+                },
+                {
+                    "name": "addPermission",
+                    "description": "Grants an AWS service or another account permission to use a function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "createFunction",
+                    "description": "Creates a lambda function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "deleteFunction",
+                    "description": "Deletes a Lambda function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "getFunction",
+                    "description": "Returns information about function or function version.",
+                    "isHidden": false
+                },
+                {
+                    "name": "getFunctionConfiguration",
+                    "description": "Returns the version-specific settings of a lambda function or version.",
+                    "isHidden": false
+                },
+                {
+                    "name": "invoke",
+                    "description": "Invokes a lambda function.",
+                    "isHidden": false
+                },
+                {
+                    "name": "listFunctions",
+                    "description": "Returns a list of Lambda functions.",
+                    "isHidden": false
+                },
+                {
+                    "name": "removePermission",
+                    "description": "Removes function use permission from an AWS service or another account.",
+                    "isHidden": false
+                },
+                {
+                    "name": "addLayerVersionPermission",
+                    "description": "Adds permission to the resource-based policy of a version of an AWS Lambda layer.",
+                    "isHidden": false
+                },
+                {
+                    "name": "removeLayerVersionPermission",
+                    "description": "Removes a statement from the permissions policy for a version of an AWS Lambda layer.",
+                    "isHidden": false
+                }
+            ],
+            "connections": [
+                {
+                    "name": "amazonlambda",
+                    "description": "Connection for invoking AWS Lambda functions."
+                }
+            ],
+            "isHidden": false
+        },
+        {
             "tagName": "1.0.0",
             "products": [
                 "MI 4.3.0",
