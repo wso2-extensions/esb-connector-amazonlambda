@@ -25,5 +25,6 @@
         <dependency component="layer"/>
         <description>WSO2 AmazonLambda connector library</description>
     </component>
+    <displayName>Amazon Lambda</displayName>
     <icon>icon/icon-small.gif</icon>
 </connector>
