@@ -105,12 +105,7 @@
                     "isHidden": false
                 }
             ],
-            "connections": [
-                {
-                    "name": "amazonlambda",
-                    "description": "Connection for invoking AWS Lambda functions."
-                }
-            ],
+            "connections": [],
             "isHidden": false
         },
         {
@@ -203,12 +198,7 @@
                     "isHidden": false
                 }
             ],
-            "connections": [
-                {
-                    "name": "amazonlambda",
-                    "description": "Connection for invoking AWS Lambda functions."
-                }
-            ],
+            "connections": [],
             "isHidden": false
         }
     ]
