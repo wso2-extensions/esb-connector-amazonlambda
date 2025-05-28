@@ -29,6 +29,8 @@
         client to pass to the function in the context object."/>
     <!-- Payloads-->
     <parameter name="payload" description="Payloads for the HTTP request."/>
+    <parameter name="responseVariable" description="The name of the variable to which the response should be stored."/>
+    <parameter name="overwriteBody" description="Replace the Message Body in Message Context with the response of the operation."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.apiVersion" expression="$func:apiVersionInvoke"/>

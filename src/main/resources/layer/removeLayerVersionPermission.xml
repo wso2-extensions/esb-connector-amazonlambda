@@ -23,6 +23,8 @@
     <parameter name="layerVersionNumber" description="version number"/>
     <parameter name="layerStatementId" description="The identifier that was specified when the statement was added."/>
     <parameter name="layerRevisionId" description="to update the policy if the revision ID matched the ID specified"/>
+    <parameter name="responseVariable" description="The name of the variable to which the response should be stored."/>
+    <parameter name="overwriteBody" description="Replace the Message Body in Message Context with the response of the operation."/>
     <sequence>
         <property name="uri.var.layerName" expression="$func:layerName"/>
         <property name="uri.var.apiVersion" expression="$func:apiVersionRemoveLayerVersionPermission"/>

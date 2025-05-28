@@ -21,6 +21,7 @@
         <component name="init">
             <file>init.xml</file>
             <description>Config operations with common parameters.</description>
+            <hidden>true</hidden>
         </component>
     </subComponents>
 </component>

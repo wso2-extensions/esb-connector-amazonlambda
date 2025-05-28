@@ -1,0 +1,239 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Output Schema for createFunction Operation",
+  "description": "Output schema for the createFunction operation in the connector.",
+  "properties": {
+    "payload": {
+      "type": "object",
+      "description": "The main response payload from the createFunction operation.",
+      "properties": {
+        "FunctionName": {
+          "type": "string",
+          "description": "The name of the function."
+        },
+        "FunctionArn": {
+          "type": "string",
+          "description": "The function's Amazon Resource Name (ARN)."
+        },
+        "Runtime": {
+          "type": "string",
+          "description": "The identifier of the function's runtime."
+        },
+        "Role": {
+          "type": "string",
+          "description": "The function's execution role."
+        },
+        "Handler": {
+          "type": "string",
+          "description": "The function that Lambda calls to begin executing your function."
+        },
+        "CodeSize": {
+          "type": "integer",
+          "description": "The size of the function's deployment package, in bytes."
+        },
+        "Description": {
+          "type": "string",
+          "description": "The function's description."
+        },
+        "Timeout": {
+          "type": "integer",
+          "description": "The amount of time in seconds that Lambda allows a function to run before stopping it."
+        },
+        "MemorySize": {
+          "type": "integer",
+          "description": "The amount of memory available to the function at runtime."
+        },
+        "LastModified": {
+          "type": "string",
+          "description": "The date and time that the function was last updated."
+        },
+        "CodeSha256": {
+          "type": "string",
+          "description": "The SHA256 hash of the function's deployment package."
+        },
+        "Version": {
+          "type": "string",
+          "description": "The version of the Lambda function."
+        },
+        "RevisionId": {
+          "type": "string",
+          "description": "A unique identifier that changes when you update the function's configuration."
+        },
+        "PackageType": {
+          "type": "string",
+          "description": "The type of deployment package."
+        },
+        "State": {
+          "type": "string",
+          "description": "The current state of the function."
+        },
+        "StateReason": {
+          "type": "string",
+          "description": "The reason for the function's current state."
+        },
+        "StateReasonCode": {
+          "type": "string",
+          "description": "The reason code for the function's current state."
+        },
+        "LastUpdateStatus": {
+          "type": ["string", "null"],
+          "description": "The status of the last update that was performed on the function."
+        },
+        "LastUpdateStatusReason": {
+          "type": ["string", "null"],
+          "description": "The reason for the last update that was performed on the function."
+        },
+        "LastUpdateStatusReasonCode": {
+          "type": ["string", "null"],
+          "description": "The reason code for the last update that was performed on the function."
+        },
+        "TracingConfig": {
+          "type": "object",
+          "description": "The function's AWS X-Ray tracing configuration.",
+          "properties": {
+            "Mode": {
+              "type": "string",
+              "description": "The tracing mode."
+            }
+          }
+        },
+        "VpcConfig": {
+          "type": ["object", "null"],
+          "description": "The function's networking configuration."
+        },
+        "Environment": {
+          "type": ["object", "null"],
+          "description": "The function's environment variables."
+        },
+        "DeadLetterConfig": {
+          "type": ["object", "null"],
+          "description": "The function's dead letter queue."
+        },
+        "KMSKeyArn": {
+          "type": ["string", "null"],
+          "description": "The KMS key that's used to encrypt the function's environment variables."
+        },
+        "MasterArn": {
+          "type": ["string", "null"],
+          "description": "For Lambda@Edge functions, the ARN of the main function."
+        },
+        "Layers": {
+          "type": ["array", "null"],
+          "description": "The function's layers."
+        },
+        "FileSystemConfigs": {
+          "type": ["array", "null"],
+          "description": "Connection settings for an Amazon EFS file system."
+        },
+        "ImageConfigResponse": {
+          "type": ["object", "null"],
+          "description": "The function's image configuration values."
+        },
+        "SigningJobArn": {
+          "type": ["string", "null"],
+          "description": "The ARN of the signing job."
+        },
+        "SigningProfileVersionArn": {
+          "type": ["string", "null"],
+          "description": "The ARN of the signing profile version."
+        },
+        "Architectures": {
+          "type": "array",
+          "description": "The instruction set architecture that the function supports.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "EphemeralStorage": {
+          "type": "object",
+          "description": "The size of the function's /tmp directory in MB.",
+          "properties": {
+            "Size": {
+              "type": "integer",
+              "description": "The size of the function's /tmp directory."
+            }
+          }
+        },
+        "SnapStart": {
+          "type": "object",
+          "description": "Set ApplyOn to PublishedVersions to create a snapshot of the initialized execution environment when you publish a function version.",
+          "properties": {
+            "ApplyOn": {
+              "type": "string",
+              "description": "When the optimization is applied."
+            },
+            "OptimizationStatus": {
+              "type": "string",
+              "description": "The status of the optimization."
+            }
+          }
+        },
+        "RuntimeVersionConfig": {
+          "type": "object",
+          "description": "The ARN of the runtime and any errors that occured.",
+          "properties": {
+            "RuntimeVersionArn": {
+              "type": "string",
+              "description": "The ARN of the runtime version."
+            },
+            "Error": {
+              "type": ["object", "null"],
+              "description": "Error response to GetRuntimeManagementConfig."
+            }
+          }
+        },
+        "LoggingConfig": {
+          "type": "object",
+          "description": "The function's SnapStart setting.",
+          "properties": {
+            "LogFormat": {
+              "type": "string",
+              "description": "The format of the logs."
+            },
+            "ApplicationLogLevel": {
+              "type": ["string", "null"],
+              "description": "Set this property to filter the application logs for your function that Lambda sends to CloudWatch."
+            },
+            "SystemLogLevel": {
+              "type": ["string", "null"],
+              "description": "Set this property to filter the system logs for your function that Lambda sends to CloudWatch."
+            },
+            "LogGroup": {
+              "type": "string",
+              "description": "The name of the Amazon CloudWatch log group the function sends logs to."
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "headers": {
+      "type": "object",
+      "description": "Transport headers returned by the createFunction operation.",
+      "additionalProperties": true
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Metadata about the createFunction operation.",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "description": "HTTP status code of the API response.",
+          "minimum": 100,
+          "maximum": 599
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "statusCode"
+      ]
+    }
+  },
+  "required": [
+    "payload",
+    "headers",
+    "attributes"
+  ],
+  "additionalProperties": false
+}

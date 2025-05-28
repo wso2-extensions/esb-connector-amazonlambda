@@ -1,0 +1,187 @@
+{
+  "connectorName": "amazonlambda",
+  "operationName": "invoke",
+  "title": "Invoke Lambda Function",
+  "help": "<h1>Invoke Lambda Function</h1> <b>The invoke operation invokes a Lambda function.</b><br><br><ul><li><a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html\"> More Help </a></li></ul>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "AWSBasic"
+              ],
+              "defaultType": "connection.AWSBasic",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Function Details",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionName",
+                    "displayName": "Function Name",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The name of the Lambda function"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "apiVersionInvoke",
+                    "displayName": "API Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "2015-03-31",
+                    "required": "true",
+                    "helpTip": "API version for Invoke method"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "qualifier",
+                          "displayName": "Qualifier",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Specify a version or alias to invoke a published version of the function"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Invocation Configuration",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "x-amz-invocation-type",
+                    "displayName": "Invocation Type",
+                    "inputType": "combo",
+                    "comboValues": [
+                      "RequestResponse",
+                      "Event",
+                      "DryRun"
+                    ],
+                    "defaultValue": "RequestResponse",
+                    "required": "false",
+                    "helpTip": "Invocation type: RequestResponse (synchronous), Event (asynchronous), or DryRun (validation only)"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "x-amz-log-type",
+                    "displayName": "Log Type",
+                    "inputType": "combo",
+                    "comboValues": [
+                      "None",
+                      "Tail"
+                    ],
+                    "defaultValue": "None",
+                    "required": "false",
+                    "helpTip": "Set to Tail to include the execution log in the response"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "x-amz-client-context",
+                          "displayName": "Client Context",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context object"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Payload",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "payload",
+                    "displayName": "Payload",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "The JSON that you want to provide to your Lambda function as input"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

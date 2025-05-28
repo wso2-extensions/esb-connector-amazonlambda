@@ -21,6 +21,8 @@
     <parameter name="qualifier" description="version/alias to specify"/>
     <parameter name="apiVersionGetFunctionConfiguration" description="API version used for GetFunctionConfiguration
         method."/>
+    <parameter name="responseVariable" description="The name of the variable to which the response should be stored."/>
+    <parameter name="overwriteBody" description="Replace the Message Body in Message Context with the response of the operation."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:qualifier"/>

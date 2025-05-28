@@ -16,14 +16,16 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<component name="layer" type="synapse/template">
+<component name="layer" type="synapse/template" displayName="Layer">
     <subComponents>
         <component name="addLayerVersionPermission">
             <file>addLayerVersionPermission.xml</file>
+            <displayName>Add Layer Version Permission</displayName>
             <description>Adds permission to the resource-based policy of a version of an AWS Lambda layer.</description>
         </component>
         <component name="removeLayerVersionPermission">
             <file>removeLayerVersionPermission.xml</file>
+            <displayName>Remove Layer Version Permission</displayName>
             <description>Removes a statement from the permissions policy for a version of an AWS Lambda layer.
             </description>
         </component>

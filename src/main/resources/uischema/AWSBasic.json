@@ -1,0 +1,81 @@
+{
+  "connectorName": "amazonlambda",
+  "connectionName": "AWSBasic",
+  "testConnectionEnabled": false,
+  "title": "Amazon Lambda Connection",
+  "help": "<h1>Amazon Lambda Connector</h1> <b>The Amazon Lambda connector allows you to access the Amazon Lambda compute service for running code without provisioning or managing servers.</b> <p>This connector uses AWS Signature Version 4 for authentication. You must provide valid AWS credentials (Access Key ID and Secret Access Key) along with the AWS region where your Lambda functions are deployed.</p> <p><strong>Prerequisites:</strong> Ensure you have an AWS account with appropriate IAM permissions for Lambda operations.</p>",
+  "elements": [
+    {
+      "type": "attribute",
+      "value": {
+        "name": "connectionName",
+        "displayName": "Connection Name",
+        "inputType": "string",
+        "defaultValue": "AMAZON_LAMBDA_CONNECTION_1",
+        "required": "true",
+        "helpTip": "A unique name for this Amazon Lambda connection configuration",
+        "validation": "nameWithoutSpecialCharactors"
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "AWS Configuration",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "region",
+              "displayName": "AWS Region",
+              "inputType": "stringOrExpression",
+              "defaultValue": "us-east-1",
+              "required": "true",
+              "helpTip": "The AWS region where your Lambda functions are deployed (e.g., us-east-1, eu-west-1)"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "accessKeyId",
+              "displayName": "Access Key ID",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "The AWS Access Key ID for authentication. This corresponds to the IAM user or role credentials"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "secretAccessKey",
+              "displayName": "Secret Access Key",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "The AWS Secret Access Key for authentication. Keep this secure and do not expose in logs"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Connection Settings",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "blocking",
+              "displayName": "Blocking Invocation",
+              "inputType": "booleanOrExpression",
+              "defaultValue": "false",
+              "required": "true",
+              "helpTip": "Enable blocking invocations to Amazon Lambda."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

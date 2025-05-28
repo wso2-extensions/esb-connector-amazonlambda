@@ -27,6 +27,8 @@
     <parameter name="layerPrincipal" description="An account ID, or * to grant permission to all AWS accounts."/>
     <parameter name="layerStatementId" description="An identifier that distinguishes the policy from others on the same
         layer version."/>
+    <parameter name="responseVariable" description="The name of the variable to which the response should be stored."/>
+    <parameter name="overwriteBody" description="Replace the Message Body in Message Context with the response of the operation."/>
     <sequence>
         <property name="uri.var.layerName" expression="$func:layerName"/>
         <property name="uri.var.apiVersion" expression="$func:apiVersionAddLayerVersionPermission"/>

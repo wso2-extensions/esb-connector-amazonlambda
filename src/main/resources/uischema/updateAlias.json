@@ -1,0 +1,162 @@
+{
+  "connectorName": "amazonlambda",
+  "operationName": "updateAlias",
+  "title": "Update Alias",
+  "help": "<h1>Update Alias</h1> <b>The updateAlias operation updates the configuration of a Lambda function alias.</b><br><br><ul><li><a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_UpdateAlias.html\"> More Help </a></li></ul>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "AWSBasic"
+              ],
+              "defaultType": "connection.AWSBasic",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Alias Details",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionName",
+                    "displayName": "Function Name",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The name of the Lambda function that the alias invokes"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "aliasName",
+                    "displayName": "Alias Name",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The name of the alias"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "apiVersionUpdateAlias",
+                    "displayName": "API Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "2015-03-31",
+                    "required": "true",
+                    "helpTip": "API version for UpdateAlias method"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Update Configuration",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionVersion",
+                    "displayName": "Function Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "The function version that the alias invokes"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "updatedAliasDescription",
+                          "displayName": "Description",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "The description of the alias"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "aliasRevisionId",
+                          "displayName": "Revision ID",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Only update the alias if the revision ID matches the ID that's specified. Use this to ensure the alias hasn't changed since you last read it"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "updatedAliasAdditionalVersionWeights",
+                          "displayName": "Additional Version Weights",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "The name of second alias, and the percentage of traffic that's routed to it (JSON format)"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

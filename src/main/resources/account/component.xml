@@ -16,10 +16,11 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<component name="account" type="synapse/template">
+<component name="account" type="synapse/template" displayName="Account">
     <subComponents>
         <component name="getAccountSettings">
             <file>getAccountSettings.xml</file>
+            <displayName>Get Account Settings</displayName>
             <description>Gets the settings of an account.</description>
         </component>
     </subComponents>
