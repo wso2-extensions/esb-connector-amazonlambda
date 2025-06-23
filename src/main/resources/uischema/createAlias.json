@@ -1,0 +1,151 @@
+{
+  "connectorName": "amazonlambda",
+  "operationName": "createAlias",
+  "title": "Create Alias",
+  "help": "<h1>Create Alias</h1> <b>The createAlias operation creates an alias for a Lambda function version. Use aliases to provide clients with a function identifier that you can update to invoke a different version.</b><br><br><ul><li><a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_CreateAlias.html\"> More Help </a></li></ul>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "amazonLambda"
+              ],
+              "defaultType": "connection.AWSBasic",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Function Details",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionName",
+                    "displayName": "Function Name",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The name of the Lambda function that the alias invokes"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "apiVersionCreateAlias",
+                    "displayName": "API Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "2015-03-31",
+                    "required": "true",
+                    "helpTip": "API version for CreateAlias method"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Alias Configuration",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "aliasName",
+                    "displayName": "Alias Name",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The name of the alias"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionVersion",
+                    "displayName": "Function Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "$LATEST",
+                    "required": "true",
+                    "helpTip": "The function version that the alias invokes"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "createAliasDescription",
+                          "displayName": "Description",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "The description of the alias"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "aliasAdditionalVersionWeights",
+                          "displayName": "Additional Version Weights",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "The name of second alias, and the percentage of traffic that's routed to it (JSON format)"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

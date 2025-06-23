@@ -18,6 +18,8 @@
   -->
 <template xmlns="http://ws.apache.org/ns/synapse" name="getAccountSettings">
     <parameter name="apiVersionGetAccountSettings" description="API version used for GetAccountSettings method."/>
+    <parameter name="responseVariable" description="The name of the variable to which the response should be stored."/>
+    <parameter name="overwriteBody" description="Replace the Message Body in Message Context with the response of the operation."/>
     <sequence>
         <property name="uri.var.apiVersion" expression="$func:apiVersionGetAccountSettings"/>
         <property name="uri.var.uriRemainder" expression="fn:concat('/', $ctx:uri.var.apiVersion,

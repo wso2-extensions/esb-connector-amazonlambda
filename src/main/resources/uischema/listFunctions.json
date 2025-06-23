@@ -1,0 +1,136 @@
+{
+  "connectorName": "amazonlambda",
+  "operationName": "listFunctions",
+  "title": "List Functions",
+  "help": "<h1>List Functions</h1> <b>The listFunctions operation returns a list of Lambda functions, with the version-specific configuration of each.</b><br><br><ul><li><a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_ListFunctions.html\"> More Help </a></li></ul>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "amazonLambda"
+              ],
+              "defaultType": "connection.AWSBasic",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "List Configuration",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "apiVersionListFunctions",
+                    "displayName": "API Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "2015-03-31",
+                    "required": "true",
+                    "helpTip": "API version for ListFunctions method"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionVersionToBeListed",
+                    "displayName": "Function Version",
+                    "inputType": "combo",
+                    "comboValues": [
+                      "ALL",
+                      "$LATEST"
+                    ],
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "Set to ALL to include entries for all published versions of each function"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "maxItems",
+                          "displayName": "Max Items",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Number of functions to return (1-10000)"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "marker",
+                          "displayName": "Marker",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Pagination token returned by a previous request to retrieve the next page of results"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "masterRegion",
+                          "displayName": "Master Region",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "For Lambda@Edge functions, the AWS Region of the master function (e.g., us-east-1 or ALL)"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

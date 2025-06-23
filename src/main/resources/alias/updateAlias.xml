@@ -28,6 +28,8 @@
         specified."/>
     <parameter name="updatedAliasAdditionalVersionWeights" description="The name of the second alias, and the
         percentage of traffic that's routed to it."/>
+    <parameter name="responseVariable" description="The name of the variable to which the response should be stored."/>
+    <parameter name="overwriteBody" description="Replace the Message Body in Message Context with the response of the operation."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.aliasName" expression="$func:aliasName"/>

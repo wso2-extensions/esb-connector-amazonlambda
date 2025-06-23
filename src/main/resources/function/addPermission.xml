@@ -29,6 +29,8 @@
     <parameter name="sourceAccount" description="The source account."/>
     <parameter name="sourceArn" description="The ARN of the source."/>
     <parameter name="permissionStatementId" description="A unique statement identifier."/>
+    <parameter name="responseVariable" description="The name of the variable to which the response should be stored."/>
+    <parameter name="overwriteBody" description="Replace the Message Body in Message Context with the response of the operation."/>
     <sequence>
         <property name="uri.var.functionName" expression="$func:functionName"/>
         <property name="uri.var.qualifier" expression="$func:permissionQualifier"/>

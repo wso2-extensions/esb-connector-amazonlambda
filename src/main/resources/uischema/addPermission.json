@@ -1,0 +1,203 @@
+{
+  "connectorName": "amazonlambda",
+  "operationName": "addPermission",
+  "title": "Add Permission",
+  "help": "<h1>Add Permission</h1> <b>The addPermission operation grants an AWS service or another account permission to use a function.</b><br><br><ul><li><a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html\"> More Help </a></li></ul>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "amazonLambda"
+              ],
+              "defaultType": "connection.AWSBasic",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Function Details",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionName",
+                    "displayName": "Function Name",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "Name of the Lambda function, version, or alias to which add a new permission"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "apiVersionAddPermission",
+                    "displayName": "API Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "2015-03-31",
+                    "required": "true",
+                    "helpTip": "API version for AddPermission method"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "permissionQualifier",
+                          "displayName": "Qualifier",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Specify a version or alias to apply the permission to the specified function version"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Permission Configuration",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "permissionAction",
+                    "displayName": "Action",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The AWS Lambda action to allow (e.g., lambda:InvokeFunction or lambda:GetFunction)"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "permissionStatementId",
+                    "displayName": "Statement ID",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "A unique statement identifier that differentiates the statement from others in the same policy"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "permissionPrincipal",
+                    "displayName": "Principal",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The AWS service or account that invokes the function (e.g., s3.amazonaws.com)"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "eventSourceToken",
+                          "displayName": "Event Source Token",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "A unique token supplied by the principal invoking the function"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "permissionRevisionId",
+                          "displayName": "Revision ID",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Only update the policy if the revision ID matches the ID specified"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "sourceAccount",
+                          "displayName": "Source Account",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "The source account to limit who can invoke the function through the specified service"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "sourceArn",
+                          "displayName": "Source ARN",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "The ARN of the source to limit who can invoke the function through the specified service"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

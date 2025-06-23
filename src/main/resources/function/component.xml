@@ -16,38 +16,46 @@
   ~ specific language governing permissions and limitations
   ~ under the License.
   -->
-<component name="function" type="synapse/template">
+<component name="function" type="synapse/template" displayName="Function">
     <subComponents>
         <component name="addPermission">
             <file>addPermission.xml</file>
+            <displayName>Add Permission</displayName>
             <description>Grants an AWS service or another account permission to use a function.</description>
         </component>
         <component name="createFunction">
             <file>createFunction.xml</file>
+            <displayName>Create Function</displayName>
             <description>Creates a lambda function.</description>
         </component>
         <component name="deleteFunction">
             <file>deleteFunction.xml</file>
+            <displayName>Delete Function</displayName>
             <description>Deletes a Lambda function.</description>
         </component>
         <component name="getFunction">
             <file>getFunction.xml</file>
+            <displayName>Get Function</displayName>
             <description>Returns information about function or function version.</description>
         </component>
         <component name="getFunctionConfiguration">
             <file>getFunctionConfiguration.xml</file>
+            <displayName>Get Function Configuration</displayName>
             <description>Returns the version-specific settings of a lambda function or version.</description>
         </component>
         <component name="invoke">
             <file>invoke.xml</file>
+            <displayName>Invoke Function</displayName>
             <description>Invokes a lambda function.</description>
         </component>
         <component name="listFunctions">
             <file>listFunctions.xml</file>
+            <displayName>List Functions</displayName>
             <description>Returns a list of Lambda functions.</description>
         </component>
         <component name="removePermission">
             <file>removePermission.xml</file>
+            <displayName>Remove Permission</displayName>
             <description>Removes function use permission from an AWS service or another account.</description>
         </component>
     </subComponents>

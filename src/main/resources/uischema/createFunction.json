@@ -1,0 +1,345 @@
+{
+  "connectorName": "amazonlambda",
+  "operationName": "createFunction",
+  "title": "Create Function",
+  "help": "<h1>Create Function</h1> <b>The createFunction operation creates a new Lambda function.</b><br><br><ul><li><a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_CreateFunction.html\"> More Help </a></li></ul>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Connection",
+              "inputType": "connection",
+              "allowedConnectionTypes": [
+                "amazonLambda"
+              ],
+              "defaultType": "connection.AWSBasic",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "Connection to be used"
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Function Details",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionName",
+                    "displayName": "Function Name",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The name of the Lambda function"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "functionDescription",
+                    "displayName": "Description",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "A description of the function"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "apiVersionCreateFunction",
+                    "displayName": "API Version",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "2015-03-31",
+                    "required": "true",
+                    "helpTip": "API version for CreateFunction method"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "handler",
+                    "displayName": "Handler",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The name of the method within your code that Lambda calls to execute your function"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "role",
+                    "displayName": "Execution Role ARN",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "true",
+                    "helpTip": "The Amazon Resource Name (ARN) of the function's execution role"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "runtime",
+                    "displayName": "Runtime",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "python3.9",
+                    "required": "true",
+                    "helpTip": "The runtime version for the function"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Code Configuration",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "s3Bucket",
+                    "displayName": "S3 Bucket",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "An Amazon S3 bucket name in the same region as your function"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "s3Key",
+                    "displayName": "S3 Key",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "The Amazon S3 key of the deployment package"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "s3ObjectVersion",
+                          "displayName": "S3 Object Version",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "For versioned objects, the version of the deployment package object to use"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "zipFile",
+                          "displayName": "Zip File",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "The base64-encoded contents of zip file containing your deployment package"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Function Configuration",
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "memorySize",
+                    "displayName": "Memory Size (MB)",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "The amount of memory that your function has access to. Must be a multiple of 64 MB"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "timeout",
+                    "displayName": "Timeout (seconds)",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "The amount of time that Lambda allows a function to run before stopping it (max 900 seconds)"
+                  }
+                },
+                {
+                  "type": "attributeGroup",
+                  "value": {
+                    "groupName": "Advanced",
+                    "elements": [
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "publish",
+                          "displayName": "Publish",
+                          "inputType": "checkbox",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Set to true to publish the first version of the function during creation"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "environmentVariables",
+                          "displayName": "Environment Variables",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "Environment variable key-value pairs in JSON format"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "layers",
+                          "displayName": "Layers",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "A list of function layers to add to the function's execution environment"
+                        }
+                      },
+                      {
+                        "type": "attribute",
+                        "value": {
+                          "name": "tags",
+                          "displayName": "Tags",
+                          "inputType": "stringOrExpression",
+                          "defaultValue": "",
+                          "required": "false",
+                          "helpTip": "A list of tags (key-value pairs) to apply to the function in JSON format"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "attributeGroup",
+            "value": {
+              "groupName": "Security & Network",
+              "isCollapsed": true,
+              "elements": [
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "kmsKeyArn",
+                    "displayName": "KMS Key ARN",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "The ARN of the KMS key used to encrypt your function's environment variables"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "securityGroupIds",
+                    "displayName": "Security Group IDs",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "A list of VPC security group IDs (comma-separated)"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "subnetIds",
+                    "displayName": "Subnet IDs",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "A list of VPC subnet IDs (comma-separated)"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "targetArn",
+                    "displayName": "Dead Letter Queue ARN",
+                    "inputType": "stringOrExpression",
+                    "defaultValue": "",
+                    "required": "false",
+                    "helpTip": "The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic"
+                  }
+                },
+                {
+                  "type": "attribute",
+                  "value": {
+                    "name": "mode",
+                    "displayName": "Tracing Mode",
+                    "inputType": "combo",
+                    "comboValues": [
+                      "Active",
+                      "PassThrough"
+                    ],
+                    "defaultValue": "PassThrough",
+                    "required": "false",
+                    "helpTip": "Set to Active to sample and trace a subset of incoming requests with AWS X-Ray"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Output Variable Name",
+              "inputType": "string",
+              "deriveResponseVariable": "true",
+              "required": "true",
+              "helpTip": "Name of the variable to which the output of the operation should be assigned"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "false",
+              "helpTip": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable).",
+              "required": "false"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

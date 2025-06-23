@@ -1,0 +1,164 @@
+{
+  "connectorName": "amazonlambda",
+  "operationName": "addLayerVersionPermission",
+  "title": "Add Layer Version Permission",
+  "help": "<h1>Add Layer Version Permission</h1> <p>This operation adds a permission to a layer version. It allows you to grant access to a specific layer version for other AWS accounts or organizations. The policy is associated with a specific version of the layer, which is identified by the layer name and version number.</p> <p><strong>Use case:</strong> Use this operation when you need to share a layer version with other AWS accounts or when building applications that use layers across multiple accounts in an organization.</p>",
+  "elements": [
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "General",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "configRef",
+              "displayName": "Amazon Lambda Configuration",
+              "inputType": "string",
+              "allowedConnectionTypes": ["amazonLambda"],
+              "defaultType": "connection",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "Select the Amazon Lambda connection configuration to use for this operation"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Layer Permission Details",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "layerName",
+              "displayName": "Layer Name",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "The name or Amazon Resource Name (ARN) of the layer. For example: my-layer or arn:aws:lambda:us-east-1:123456789012:layer:my-layer"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "layerVersionNumber",
+              "displayName": "Version Number",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "The version number of the layer. Each layer can have multiple versions, and permissions are granted per version"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "layerStatementId",
+              "displayName": "Statement ID",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "An identifier that distinguishes the policy from others on the same layer version. Must be unique within the layer version"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "layerPrincipal",
+              "displayName": "Principal",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "true",
+              "helpTip": "An account ID, or * to grant permission to all AWS accounts. For example: 123456789012 or *"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "layerAction",
+              "displayName": "Action",
+              "inputType": "stringOrExpression",
+              "defaultValue": "lambda:GetLayerVersion",
+              "required": "true",
+              "helpTip": "The API action that grants access to the layer. Common values: lambda:GetLayerVersion"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Advanced Settings",
+        "isCollapsible": true,
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "layerOrganizationId",
+              "displayName": "Organization ID",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "false",
+              "helpTip": "The organization ID (optional). Use this to restrict access to accounts within a specific AWS organization"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "layerRevisionId",
+              "displayName": "Revision ID",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "false",
+              "helpTip": "Only update the policy if the revision ID matches the ID that's specified. Use this to ensure that the policy hasn't changed since you last read it"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "apiVersionAddLayerVersionPermission",
+              "displayName": "API Version",
+              "inputType": "stringOrExpression",
+              "defaultValue": "2015-03-31",
+              "required": "false",
+              "helpTip": "API version used for AddLayerVersionPermission method"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "attributeGroup",
+      "value": {
+        "groupName": "Output",
+        "elements": [
+          {
+            "type": "attribute",
+            "value": {
+              "name": "responseVariable",
+              "displayName": "Response Variable",
+              "inputType": "stringOrExpression",
+              "defaultValue": "",
+              "required": "false",
+              "helpTip": "The name of the variable to store the response. If not specified, the response will be stored in the message body"
+            }
+          },
+          {
+            "type": "attribute",
+            "value": {
+              "name": "overwriteBody",
+              "displayName": "Overwrite Message Body",
+              "inputType": "checkbox",
+              "defaultValue": "true",
+              "required": "false",
+              "helpTip": "Whether to replace the message body with the response from this operation"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
