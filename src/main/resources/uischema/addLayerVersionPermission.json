@@ -15,7 +15,7 @@
               "name": "configRef",
               "displayName": "Amazon Lambda Configuration",
               "inputType": "string",
-              "allowedConnectionTypes": ["AWSBasic"],
+              "allowedConnectionTypes": ["amazonLambda"],
               "defaultType": "connection",
               "defaultValue": "",
               "required": "true",

@@ -1,6 +1,6 @@
 {
   "connectorName": "amazonlambda",
-  "connectionName": "AWSBasic",
+  "connectionName": "amazonLambda",
   "testConnectionEnabled": false,
   "title": "Amazon Lambda Connection",
   "help": "<h1>Amazon Lambda Connector</h1> <b>The Amazon Lambda connector allows you to access the Amazon Lambda compute service for running code without provisioning or managing servers.</b> <p>This connector uses AWS Signature Version 4 for authentication. You must provide valid AWS credentials (Access Key ID and Secret Access Key) along with the AWS region where your Lambda functions are deployed.</p> <p><strong>Prerequisites:</strong> Ensure you have an AWS account with appropriate IAM permissions for Lambda operations.</p>",

@@ -16,7 +16,7 @@
               "displayName": "Connection",
               "inputType": "connection",
               "allowedConnectionTypes": [
-                "AWSBasic"
+                "amazonLambda"
               ],
               "defaultType": "connection.AWSBasic",
               "defaultValue": "",

@@ -16,7 +16,7 @@
               "displayName": "Connection",
               "inputType": "connection",
               "allowedConnectionTypes": [
-                "AWSBasic"
+                "amazonLambda"
               ],
               "defaultType": "connection.AWSBasic",
               "defaultValue": "",
@@ -89,30 +89,7 @@
                   "value": {
                     "name": "runtime",
                     "displayName": "Runtime",
-                    "inputType": "combo",
-                    "comboValues": [
-                      "nodejs",
-                      "nodejs4.3",
-                      "nodejs6.10",
-                      "nodejs8.10",
-                      "nodejs10.x",
-                      "nodejs12.x",
-                      "nodejs14.x",
-                      "java8",
-                      "java11",
-                      "python2.7",
-                      "python3.6",
-                      "python3.7",
-                      "python3.8",
-                      "python3.9",
-                      "dotnetcore1.0",
-                      "dotnetcore2.0",
-                      "dotnetcore2.1",
-                      "dotnetcore3.1",
-                      "go1.x",
-                      "ruby2.5",
-                      "ruby2.7"
-                    ],
+                    "inputType": "stringOrExpression",
                     "defaultValue": "python3.9",
                     "required": "true",
                     "helpTip": "The runtime version for the function"
