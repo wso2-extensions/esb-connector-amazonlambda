@@ -16,116 +16,11 @@
     ],
     "releases": [
         {
-            "tagName": "v2.0.1",
+            "tagName": "v2.0.2",
             "products": [
                 "MI 4.4.0"
             ],
             "operations": [
-                {
-                    "name": "addLayerVersionPermission",
-                    "description": "Add Layer Version Permission",
-                    "params": [
-                        {
-                            "name": "layerName",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "The name or Amazon Resource Name (ARN) of the layer. For example: my-layer or arn:aws:lambda:us-east-1:123456789012:layer:my-layer"
-                        },
-                        {
-                            "name": "layerVersionNumber",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "The version number of the layer. Each layer can have multiple versions, and permissions are granted per version"
-                        },
-                        {
-                            "name": "layerStatementId",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "An identifier that distinguishes the policy from others on the same layer version. Must be unique within the layer version"
-                        },
-                        {
-                            "name": "layerPrincipal",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "An account ID, or * to grant permission to all AWS accounts. For example: 123456789012 or *"
-                        },
-                        {
-                            "name": "layerAction",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "lambda:GetLayerVersion",
-                            "description": "The API action that grants access to the layer. Common values: lambda:GetLayerVersion"
-                        },
-                        {
-                            "name": "layerOrganizationId",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "The organization ID (optional). Use this to restrict access to accounts within a specific AWS organization"
-                        },
-                        {
-                            "name": "layerRevisionId",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Only update the policy if the revision ID matches the ID that's specified. Use this to ensure that the policy hasn't changed since you last read it"
-                        },
-                        {
-                            "name": "apiVersionAddLayerVersionPermission",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "2015-03-31",
-                            "description": "API version used for AddLayerVersionPermission method"
-                        },
-                        {
-                            "name": "responseVariable",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "The name of the variable to store the response. If not specified, the response will be stored in the message body"
-                        },
-                        {
-                            "name": "overwriteBody",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "true",
-                            "description": "Whether to replace the message body with the response from this operation"
-                        }
-                    ],
-                    "isHidden": false
-                },
-                {
-                    "name": "getAccountSettings",
-                    "description": "Get Account Settings",
-                    "params": [
-                        {
-                            "name": "apiVersionGetAccountSettings",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "2016-08-19",
-                            "description": "API version for GetAccountSettings method"
-                        },
-                        {
-                            "name": "responseVariable",
-                            "type": "string",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Name of the variable to which the output of the operation should be assigned"
-                        },
-                        {
-                            "name": "overwriteBody",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
-                        }
-                    ],
-                    "isHidden": false
-                },
                 {
                     "name": "removeLayerVersionPermission",
                     "description": "Remove Layer Version Permission",
@@ -183,118 +78,6 @@
                     "isHidden": false
                 },
                 {
-                    "name": "removePermission",
-                    "description": "Remove Permission",
-                    "params": [
-                        {
-                            "name": "functionName",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Name of the Lambda function"
-                        },
-                        {
-                            "name": "apiVersionRemovePermission",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "2015-03-31",
-                            "description": "API version for RemovePermission method"
-                        },
-                        {
-                            "name": "permissionQualifier",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Specify a version or alias to remove permission from a published version of the function"
-                        },
-                        {
-                            "name": "permissionStatementId",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Statement ID of the permission to remove"
-                        },
-                        {
-                            "name": "permissionRevisionId",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Only update the policy if the revision ID matches the ID specified. Use this to avoid modifying a policy that has changed since you last read it"
-                        },
-                        {
-                            "name": "responseVariable",
-                            "type": "string",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Name of the variable to which the output of the operation should be assigned"
-                        },
-                        {
-                            "name": "overwriteBody",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
-                        }
-                    ],
-                    "isHidden": false
-                },
-                {
-                    "name": "listFunctions",
-                    "description": "List Functions",
-                    "params": [
-                        {
-                            "name": "apiVersionListFunctions",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "2015-03-31",
-                            "description": "API version for ListFunctions method"
-                        },
-                        {
-                            "name": "functionVersionToBeListed",
-                            "type": "combo",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Set to ALL to include entries for all published versions of each function"
-                        },
-                        {
-                            "name": "maxItems",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Number of functions to return (1-10000)"
-                        },
-                        {
-                            "name": "marker",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Pagination token returned by a previous request to retrieve the next page of results"
-                        },
-                        {
-                            "name": "masterRegion",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "For Lambda@Edge functions, the AWS Region of the master function (e.g., us-east-1 or ALL)"
-                        },
-                        {
-                            "name": "responseVariable",
-                            "type": "string",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Name of the variable to which the output of the operation should be assigned"
-                        },
-                        {
-                            "name": "overwriteBody",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
-                        }
-                    ],
-                    "isHidden": false
-                },
-                {
                     "name": "deleteFunction",
                     "description": "Delete Function",
                     "params": [
@@ -337,8 +120,8 @@
                     "isHidden": false
                 },
                 {
-                    "name": "getFunctionConfiguration",
-                    "description": "Get Function Configuration",
+                    "name": "invoke",
+                    "description": "Invoke Lambda Function",
                     "params": [
                         {
                             "name": "functionName",
@@ -348,18 +131,46 @@
                             "description": "The name of the Lambda function"
                         },
                         {
-                            "name": "apiVersionGetFunctionConfiguration",
+                            "name": "apiVersionInvoke",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "2015-03-31",
-                            "description": "API version for GetFunctionConfiguration method"
+                            "description": "API version for Invoke method"
                         },
                         {
                             "name": "qualifier",
                             "type": "stringOrExpression",
                             "required": false,
                             "defaultValue": "",
-                            "description": "Specify a version or alias to get configuration of a specific version"
+                            "description": "Specify a version or alias to invoke a published version of the function"
+                        },
+                        {
+                            "name": "x-amz-invocation-type",
+                            "type": "combo",
+                            "required": false,
+                            "defaultValue": "RequestResponse",
+                            "description": "Invocation type: RequestResponse (synchronous), Event (asynchronous), or DryRun (validation only) Supported values: RequestResponse, Event, DryRun"
+                        },
+                        {
+                            "name": "x-amz-log-type",
+                            "type": "combo",
+                            "required": false,
+                            "defaultValue": "None",
+                            "description": "Set to Tail to include the execution log in the response Supported values: None, Tail"
+                        },
+                        {
+                            "name": "x-amz-client-context",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context object"
+                        },
+                        {
+                            "name": "payload",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The JSON that you want to provide to your Lambda function as input"
                         },
                         {
                             "name": "responseVariable",
@@ -402,111 +213,6 @@
                             "required": false,
                             "defaultValue": "",
                             "description": "Specify a version or alias to get information about a specific version"
-                        },
-                        {
-                            "name": "responseVariable",
-                            "type": "string",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Name of the variable to which the output of the operation should be assigned"
-                        },
-                        {
-                            "name": "overwriteBody",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
-                        }
-                    ],
-                    "isHidden": false
-                },
-                {
-                    "name": "createAlias",
-                    "description": "Create Alias",
-                    "params": [
-                        {
-                            "name": "functionName",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "The name of the Lambda function that the alias invokes"
-                        },
-                        {
-                            "name": "apiVersionCreateAlias",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "2015-03-31",
-                            "description": "API version for CreateAlias method"
-                        },
-                        {
-                            "name": "aliasName",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "The name of the alias"
-                        },
-                        {
-                            "name": "functionVersion",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "$LATEST",
-                            "description": "The function version that the alias invokes"
-                        },
-                        {
-                            "name": "createAliasDescription",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "The description of the alias"
-                        },
-                        {
-                            "name": "aliasAdditionalVersionWeights",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "The name of second alias, and the percentage of traffic that's routed to it (JSON format)"
-                        },
-                        {
-                            "name": "responseVariable",
-                            "type": "string",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "Name of the variable to which the output of the operation should be assigned"
-                        },
-                        {
-                            "name": "overwriteBody",
-                            "type": "checkbox",
-                            "required": false,
-                            "defaultValue": "false",
-                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
-                        }
-                    ],
-                    "isHidden": false
-                },
-                {
-                    "name": "getAlias",
-                    "description": "Get Alias",
-                    "params": [
-                        {
-                            "name": "functionName",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "The name of the Lambda function that the alias invokes"
-                        },
-                        {
-                            "name": "aliasName",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "The name of the alias"
-                        },
-                        {
-                            "name": "apiVersionGetAlias",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "2015-03-31",
-                            "description": "API version for GetAlias method"
                         },
                         {
                             "name": "responseVariable",
@@ -617,6 +323,286 @@
                     "isHidden": false
                 },
                 {
+                    "name": "getAlias",
+                    "description": "Get Alias",
+                    "params": [
+                        {
+                            "name": "functionName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The name of the Lambda function that the alias invokes"
+                        },
+                        {
+                            "name": "aliasName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The name of the alias"
+                        },
+                        {
+                            "name": "apiVersionGetAlias",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "2015-03-31",
+                            "description": "API version for GetAlias method"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "deleteAlias",
+                    "description": "Delete Alias",
+                    "params": [
+                        {
+                            "name": "functionName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The name of the Lambda function that the alias invokes"
+                        },
+                        {
+                            "name": "aliasName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The name of the alias to delete"
+                        },
+                        {
+                            "name": "apiVersionDeleteAlias",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "2015-03-31",
+                            "description": "API version for DeleteAlias method"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "addLayerVersionPermission",
+                    "description": "Add Layer Version Permission",
+                    "params": [
+                        {
+                            "name": "layerName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The name or Amazon Resource Name (ARN) of the layer. For example: my-layer or arn:aws:lambda:us-east-1:123456789012:layer:my-layer"
+                        },
+                        {
+                            "name": "layerVersionNumber",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The version number of the layer. Each layer can have multiple versions, and permissions are granted per version"
+                        },
+                        {
+                            "name": "layerStatementId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "An identifier that distinguishes the policy from others on the same layer version. Must be unique within the layer version"
+                        },
+                        {
+                            "name": "layerPrincipal",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "An account ID, or * to grant permission to all AWS accounts. For example: 123456789012 or *"
+                        },
+                        {
+                            "name": "layerAction",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "lambda:GetLayerVersion",
+                            "description": "The API action that grants access to the layer. Common values: lambda:GetLayerVersion"
+                        },
+                        {
+                            "name": "layerOrganizationId",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The organization ID (optional). Use this to restrict access to accounts within a specific AWS organization"
+                        },
+                        {
+                            "name": "layerRevisionId",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Only update the policy if the revision ID matches the ID that's specified. Use this to ensure that the policy hasn't changed since you last read it"
+                        },
+                        {
+                            "name": "apiVersionAddLayerVersionPermission",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "2015-03-31",
+                            "description": "API version used for AddLayerVersionPermission method"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The name of the variable to store the response. If not specified, the response will be stored in the message body"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "true",
+                            "description": "Whether to replace the message body with the response from this operation"
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "createAlias",
+                    "description": "Create Alias",
+                    "params": [
+                        {
+                            "name": "functionName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The name of the Lambda function that the alias invokes"
+                        },
+                        {
+                            "name": "apiVersionCreateAlias",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "2015-03-31",
+                            "description": "API version for CreateAlias method"
+                        },
+                        {
+                            "name": "aliasName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "The name of the alias"
+                        },
+                        {
+                            "name": "functionVersion",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "$LATEST",
+                            "description": "The function version that the alias invokes"
+                        },
+                        {
+                            "name": "createAliasDescription",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The description of the alias"
+                        },
+                        {
+                            "name": "aliasAdditionalVersionWeights",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "The name of second alias, and the percentage of traffic that's routed to it (JSON format)"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "removePermission",
+                    "description": "Remove Permission",
+                    "params": [
+                        {
+                            "name": "functionName",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the Lambda function"
+                        },
+                        {
+                            "name": "apiVersionRemovePermission",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "2015-03-31",
+                            "description": "API version for RemovePermission method"
+                        },
+                        {
+                            "name": "permissionQualifier",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Specify a version or alias to remove permission from a published version of the function"
+                        },
+                        {
+                            "name": "permissionStatementId",
+                            "type": "stringOrExpression",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Statement ID of the permission to remove"
+                        },
+                        {
+                            "name": "permissionRevisionId",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Only update the policy if the revision ID matches the ID specified. Use this to avoid modifying a policy that has changed since you last read it"
+                        },
+                        {
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
                     "name": "updateAlias",
                     "description": "Update Alias",
                     "params": [
@@ -687,29 +673,29 @@
                     "isHidden": false
                 },
                 {
-                    "name": "deleteAlias",
-                    "description": "Delete Alias",
+                    "name": "getFunctionConfiguration",
+                    "description": "Get Function Configuration",
                     "params": [
                         {
                             "name": "functionName",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "",
-                            "description": "The name of the Lambda function that the alias invokes"
+                            "description": "The name of the Lambda function"
                         },
                         {
-                            "name": "aliasName",
-                            "type": "stringOrExpression",
-                            "required": true,
-                            "defaultValue": "",
-                            "description": "The name of the alias to delete"
-                        },
-                        {
-                            "name": "apiVersionDeleteAlias",
+                            "name": "apiVersionGetFunctionConfiguration",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "2015-03-31",
-                            "description": "API version for DeleteAlias method"
+                            "description": "API version for GetFunctionConfiguration method"
+                        },
+                        {
+                            "name": "qualifier",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "Specify a version or alias to get configuration of a specific version"
                         },
                         {
                             "name": "responseVariable",
@@ -877,7 +863,7 @@
                             "type": "combo",
                             "required": false,
                             "defaultValue": "PassThrough",
-                            "description": "Set to Active to sample and trace a subset of incoming requests with AWS X-Ray"
+                            "description": "Set to Active to sample and trace a subset of incoming requests with AWS X-Ray Supported values: Active, PassThrough"
                         },
                         {
                             "name": "responseVariable",
@@ -897,57 +883,71 @@
                     "isHidden": false
                 },
                 {
-                    "name": "invoke",
-                    "description": "Invoke Lambda Function",
+                    "name": "getAccountSettings",
+                    "description": "Get Account Settings",
                     "params": [
                         {
-                            "name": "functionName",
+                            "name": "apiVersionGetAccountSettings",
                             "type": "stringOrExpression",
                             "required": true,
-                            "defaultValue": "",
-                            "description": "The name of the Lambda function"
+                            "defaultValue": "2016-08-19",
+                            "description": "API version for GetAccountSettings method"
                         },
                         {
-                            "name": "apiVersionInvoke",
+                            "name": "responseVariable",
+                            "type": "string",
+                            "required": true,
+                            "defaultValue": "",
+                            "description": "Name of the variable to which the output of the operation should be assigned"
+                        },
+                        {
+                            "name": "overwriteBody",
+                            "type": "checkbox",
+                            "required": false,
+                            "defaultValue": "false",
+                            "description": "Replace the Message Body in Message Context with the output of the operation (This will remove the payload from the above variable)."
+                        }
+                    ],
+                    "isHidden": false
+                },
+                {
+                    "name": "listFunctions",
+                    "description": "List Functions",
+                    "params": [
+                        {
+                            "name": "apiVersionListFunctions",
                             "type": "stringOrExpression",
                             "required": true,
                             "defaultValue": "2015-03-31",
-                            "description": "API version for Invoke method"
+                            "description": "API version for ListFunctions method"
                         },
                         {
-                            "name": "qualifier",
-                            "type": "stringOrExpression",
-                            "required": false,
-                            "defaultValue": "",
-                            "description": "Specify a version or alias to invoke a published version of the function"
-                        },
-                        {
-                            "name": "x-amz-invocation-type",
+                            "name": "functionVersionToBeListed",
                             "type": "combo",
                             "required": false,
-                            "defaultValue": "RequestResponse",
-                            "description": "Invocation type: RequestResponse (synchronous), Event (asynchronous), or DryRun (validation only)"
+                            "defaultValue": "",
+                            "description": "Set to ALL to include entries for all published versions of each function Supported values: ALL, $LATEST"
                         },
                         {
-                            "name": "x-amz-log-type",
-                            "type": "combo",
-                            "required": false,
-                            "defaultValue": "None",
-                            "description": "Set to Tail to include the execution log in the response"
-                        },
-                        {
-                            "name": "x-amz-client-context",
+                            "name": "maxItems",
                             "type": "stringOrExpression",
                             "required": false,
                             "defaultValue": "",
-                            "description": "Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context object"
+                            "description": "Number of functions to return (1-10000)"
                         },
                         {
-                            "name": "payload",
+                            "name": "marker",
                             "type": "stringOrExpression",
                             "required": false,
                             "defaultValue": "",
-                            "description": "The JSON that you want to provide to your Lambda function as input"
+                            "description": "Pagination token returned by a previous request to retrieve the next page of results"
+                        },
+                        {
+                            "name": "masterRegion",
+                            "type": "stringOrExpression",
+                            "required": false,
+                            "defaultValue": "",
+                            "description": "For Lambda@Edge functions, the AWS Region of the master function (e.g., us-east-1 or ALL)"
                         },
                         {
                             "name": "responseVariable",
